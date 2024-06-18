@@ -1,0 +1,29 @@
+* {
+  direction: rtl;
+}
+table * {
+  text-align: center !important;
+}
+
+
+
+table {
+  border-radius: 5px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #b4e4ff;
+}
+
+tr:hover {
+  background-color: #eaeaea;
+}

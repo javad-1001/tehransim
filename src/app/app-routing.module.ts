@@ -4,12 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { GurdGuard } from './gurd.guard';
 
-
 import { BusinessMainComponent } from './components/business-main/business-main.component';
 
-
 import { BusinessDetailComponent } from './components/business-detail/business-detail.component';
-
 
 import { BusinessChatComponent } from './components/business-chat/business-chat.component';
 
@@ -17,43 +14,36 @@ import { DiarMainComponent } from './components/diar-main/diar-main.component';
 
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
-
-
-
 import { SupportComponent } from './components/support/support.component';
 
 import { HomeComponent } from './components/home/home.component';
 
-
-
 import { GuidePagesComponent } from './components/guide-pages/guide-pages.component';
-
-
 
 import { NewsComponent } from './components/news/news.component';
 
-
+import { SearchComponent } from './components/search/search.component';
 
 
 const routes: Routes = [
+  { path: '', redirectTo: 'dyar/search', pathMatch: 'full' },
 
-  { path: '', redirectTo: 'dyar/home', pathMatch: 'full' },
-
-  { path: 'dyar', redirectTo: 'dyar/home', pathMatch: 'full' },
-
+  { path: 'dyar', redirectTo: 'dyar/search', pathMatch: 'full' },
 
   {
-    path: 'dyar', component: LandingPageComponent, children: [
-
-      { path: 'search', component: BusinessMainComponent },
+    path: 'dyar',
+    component: LandingPageComponent,
+    children: [
+      // { path: 'search', component: BusinessMainComponent },
 
       { path: 'search/:tiType', component: BusinessMainComponent },
 
-
       { path: 'home', component: HomeComponent },
 
+      { path: 'search', component: SearchComponent},
+
       { path: 'bookmarks', component: BusinessMainComponent },
-      
+
       { path: 'business-bookmarks', component: BusinessMainComponent },
 
       { path: 'recent-visits', component: BusinessMainComponent },
@@ -62,9 +52,10 @@ const routes: Routes = [
 
       { path: 'chat', component: BusinessChatComponent },
 
-
-
-      { path: 'ads/:iAdvertising/:id/:type', component: BusinessDetailComponent },
+      {
+        path: 'ads/:iAdvertising/:id/:type',
+        component: BusinessDetailComponent,
+      },
 
       // { path: 'adsDetail/:iAdvertising/:id/:type', component: MyadsDetailComponent },
 
@@ -74,34 +65,24 @@ const routes: Routes = [
 
       { path: 'BusinessDetail-myads', component: BusinessDetailComponent },
 
-
       { path: 'dyar', component: DiarMainComponent },
 
       { path: 'support', component: SupportComponent },
-     
+
       { path: 'about', component: GuidePagesComponent },
-      
+
       { path: 'general', component: GuidePagesComponent },
 
       { path: 'news', component: NewsComponent },
-      
-      { path: 'News/:id', component: NewsComponent },
-      
-    ]
-  },
 
+      { path: 'News/:id', component: NewsComponent },
+    ],
+  },
 ];
 
 @NgModule({
+  imports: [RouterModule.forRoot(routes)],
 
-  imports: [
-
-    RouterModule.forRoot(routes),
-
-  ],
-
-  exports: [RouterModule]
-
+  exports: [RouterModule],
 })
-
-export class AppRoutingModule { }
+export class AppRoutingModule {}

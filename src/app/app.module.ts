@@ -61,6 +61,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { GuidePagesComponent } from './components/guide-pages/guide-pages.component';
 import { NewsComponent } from './components/news/news.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 
@@ -84,6 +85,7 @@ import { NewsComponent } from './components/news/news.component';
     HomeComponent,
     GuidePagesComponent,
     NewsComponent,
+    SearchComponent,
     // CarouselHolderComponent
   ],
   imports: [
