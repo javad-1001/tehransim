@@ -1,0 +1,368 @@
+<div class="login-page w-100" *ngIf="!isDesktop">
+    <img src="../../../assets/imgs/Shahrnik_Logo_Public_new.png" alt="شهرنیک">
+    <h4 class="d-flex align-items-center"><i class="material-icons bg-info circel p-1 pointer d-flex "
+            (click)="openGuid()">question_mark</i><span>
+            {{App_Title}}
+        </span> </h4>
+    <ng-container *ngIf="!codeSent">
+        <form [formGroup]="reqModel" class="form " (ngSubmit)="register(registerForm)"
+            autocomplete="off">
+            <h3>ثبت نام در سامانه</h3>
+
+
+            <div class=" CustomInput mb-2">
+                <input (change)="mobile($event.targrt.value)" style="text-align: left;" formControlName="strMobile" required
+                    class="form-control">
+                <span class="">موبایل</span>
+            </div>
+
+            <div class=" selectBox  mb-2">
+                <select class="form-control" name="" id="" formControlName="tiSex">
+                    <option value=1>آقا </option>
+                    <option value=2>خانم </option>
+
+                </select>
+                <span class="">جنسیت </span>
+            </div>
+
+            <div class=" CustomInput mb-2">
+                <input style="text-align: left;" (change)="name(model.strMobile)" formControlName="strName"
+                    required class="form-control">
+                <span class="">نام </span>
+            </div>
+            <div class=" CustomInput mb-2">
+                <input style="text-align: left;" (change)="family(model.strMobile)" formControlName="strFamily"
+                    required class="form-control">
+                <span class="">نام خانوادگی</span>
+            </div>
+            <div class=" CustomInput mb-2">
+                <input type="password" style="text-align: left;" (change)="pass(model.strPassword)" formControlName="strPassword"
+                    required class="form-control">
+                <span class="">رمز عبور </span>
+            </div>
+
+            <div class="navtab">
+                <ul class="nav nav-tabs justify-content-between" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+                            type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">بر اساس
+                            لیست</button>
+                    </li>
+                    <span style="padding:0 15px;" class="central">یا</span>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                            type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">بر اساس
+                            نقشه</button>
+                    </li>
+    
+                </ul>
+                <div class="tab-content py-2 pb-0" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+                        tabindex="0">
+                        <div class="row my-2 gx-2">
+                            <div class=" col-6 selectBox  ">
+                                <select class="form-control" (change)="changeCity($event)" formControlName="staticCodeState">
+                                    <option value=1>انتخاب کنید </option>
+                                    <option *ngFor="let item of states" value="{{item.strState}}">{{item.strStateName}}
+                                    </option>
+                                </select>
+                                <span class="">استان </span>
+                            </div>
+    
+                            <div class=" col-6 selectBox  ">
+                                <select class="form-control" (change)="delete_map()" formControlName="strStaticCityCode">
+                                    <option value=1>انتخاب کنید </option>
+                                    <option *ngFor="let item of city" value="{{item.CityCode}}">{{item.strCityName}}
+                                    </option>
+                                </select>
+                                <span class="">شهر </span>
+                            </div>
+                        </div>
+    
+    
+                    </div>
+                    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+                        tabindex="0">
+                        <div class="d-flex central align-items-center">
+                            <button type="button" class="locbtn" (click)="openMap()">  انتخاب موقعیت  </button>
+                            <span *ngIf="cityTxt" style="border-radius: 25px;" class="m-1 p-2 bg-gray">{{cityTxt}} </span>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+
+       
+
+
+
+            <!-- <div class="input-group">
+                <input type="text" name="mobile" id="mobilestr" [(ngModel)]="model.strMobile" required
+                    autocomplete="false" (change)="mobile(model.strMobile)">
+                <label for="loginUser">شماره موبایل</label>
+            </div>
+
+            <div class="input-group mb-3" style="direction: rtl;">
+                <label for="loginUser">جنسیت</label>
+
+                <select class="form-select" name="sex" id="sex" [(ngModel)]="model.tiSex" required>
+                    <option value="1">آقا</option>
+                    <option value="2">خانم</option>
+                </select>
+
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="name" id="name" [(ngModel)]="model.strName" required autocomplete="false"
+                    (change)="name(model.strName)">
+                <label for="loginUser">نام</label>
+            </div>
+            <div class="input-group">
+                <input type="text" name="family" id="family" [(ngModel)]="model.strFamily" required autocomplete="false"
+                    (change)="family(model.strFamily)">
+                <label for="loginUser">نام خانوادگی</label>
+            </div>
+            <div class="input-group">
+                <input type="password" name="loginPassword" id="loginPassword" [(ngModel)]="model.strPassword" required
+                    autocomplete="false" (change)="pass(model.strPassword)">
+                <label for="loginPassword">رمز عبور</label>
+            </div>
+            <div class="input-group mb-3" style="direction: rtl;">
+                <label for="loginUser">استان</label>
+
+                <select class="form-select" name="staticCodeState" id="showstate" (change)="changeCity($event)"
+                    [(ngModel)]="model.staticCodeState">
+                    <option value="option1">استان</option>
+                    <option *ngFor="let item of states" value="{{item.strState}}">{{item.strStateName}}
+                    </option>
+                </select>
+
+            </div>
+            <div class="input-group mb-3" style="direction: rtl;">
+                <label for="loginUser">شهر</label>
+                <select [(ngModel)]="model.strStaticCityCode" class="form-select" name="strStaticCityCode" id=""
+                    (change)="delete_map()">
+                    <option value="-1">شهر</option>
+                    <option *ngFor="let item of city" value="{{item.CityCode}}">{{item.strCityName}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3" style="direction: rtl;display: none;">
+                <p class="m-0">یا بر اساس نقشه</p>
+            </div> -->
+
+
+
+            <button type="submit" class="submit-btn">ثبت نام در شهرنیک</button>
+
+            <button type="button" class="moi-btn btn-warning mt-2" (click)="logIn_BySSO()"> ثبت نام از طریق پنجره
+                ملی وزارت کشور </button>
+
+            <div class="forgot-pw" routerLink="/">
+                <span>ورود </span>
+            </div>
+
+        </form>
+    </ng-container>
+    <ng-container *ngIf="codeSent">
+        <form #checkOTP="ngForm" class="form" (ngSubmit)="checkOtp(model.strMobile, model.otp)" autocomplete="off">
+            <div class="input-group">
+                <input type="text" name="otp" id="otp" placeholder="_ _ _ _ _" [(ngModel)]="model.otp" required>
+                <label for="otp">کد ارسالی</label>
+            </div>
+            <button type="submit" class="submit-btn">بررسی کد اعتبارسنجی</button>
+        </form>
+    </ng-container>
+    <div class="footer ">
+        <a style="text-decoration: none;" href="https://rayanandisheh.com" target="_blank">
+            <div style="font-weight: 500; color: #000;">طراحی و توسعه</div>
+            <div style="font-weight: 700; color:#cf9f00">شرکت رایان اندیشه نصر</div>
+            <div style="font-weight: 700; color:#1e5feb">نسخه {{version}}</div>
+        </a>
+    </div>
+</div>
+<div class="bg-login" *ngIf="isDesktop">
+    <ng-container *ngIf="!codeSent">
+        <form [formGroup]="reqModel" class="form position-fixed pos shadow index" (ngSubmit)="register(registerForm)"
+            autocomplete="off">
+            <h3>ثبت نام در سامانه</h3>
+
+
+            <div class=" CustomInput mb-2">
+                <input (change)="mobile($event.targrt.value)" style="text-align: left;" formControlName="strMobile" required
+                    class="form-control">
+                <span class="">موبایل</span>
+            </div>
+
+            <div class=" selectBox  mb-2">
+                <select class="form-control" name="" id="" formControlName="tiSex">
+                    <option value=1>آقا </option>
+                    <option value=2>خانم </option>
+
+                </select>
+                <span class="">جنسیت </span>
+            </div>
+
+            <div class=" CustomInput mb-2">
+                <input style="text-align: left;" (change)="name(model.strMobile)" formControlName="strName"
+                    required class="form-control">
+                <span class="">نام </span>
+            </div>
+            <div class=" CustomInput mb-2">
+                <input style="text-align: left;" (change)="family(model.strMobile)" formControlName="strFamily"
+                    required class="form-control">
+                <span class="">نام خانوادگی</span>
+            </div>
+            <div class=" CustomInput mb-2">
+                <input type="password" style="text-align: left;" (change)="pass(model.strPassword)" formControlName="strPassword"
+                    required class="form-control">
+                <span class="">رمز عبور </span>
+            </div>
+
+            <div class="navtab">
+                <ul class="nav nav-tabs justify-content-between" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+                            type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">بر اساس
+                            لیست</button>
+                    </li>
+                    <span style="padding:0 15px;" class="central">یا</span>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                            type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">بر اساس
+                            نقشه</button>
+                    </li>
+    
+                </ul>
+                <div class="tab-content py-2 pb-0" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+                        tabindex="0">
+                        <div class="row my-2 gx-2">
+                            <div class=" col-6 selectBox  ">
+                                <select class="form-control" (change)="changeCity($event)" formControlName="staticCodeState">
+                                    <option value=1>انتخاب کنید </option>
+                                    <option *ngFor="let item of states" value="{{item.strState}}">{{item.strStateName}}
+                                    </option>
+                                </select>
+                                <span class="">استان </span>
+                            </div>
+    
+                            <div class=" col-6 selectBox  ">
+                                <select class="form-control" (change)="delete_map()" formControlName="strStaticCityCode">
+                                    <option value=1>انتخاب کنید </option>
+                                    <option *ngFor="let item of city" value="{{item.CityCode}}">{{item.strCityName}}
+                                    </option>
+                                </select>
+                                <span class="">شهر </span>
+                            </div>
+                        </div>
+    
+    
+                    </div>
+                    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+                        tabindex="0">
+                        <div class="d-flex central align-items-center">
+                            <button type="button" class="locbtn" (click)="openMap()">  انتخاب موقعیت  </button>
+                            <span *ngIf="cityTxt" style="border-radius: 25px;" class="m-1 p-2 bg-gray">{{cityTxt}} </span>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+
+       
+
+
+
+            <!-- <div class="input-group">
+                <input type="text" name="mobile" id="mobilestr" [(ngModel)]="model.strMobile" required
+                    autocomplete="false" (change)="mobile(model.strMobile)">
+                <label for="loginUser">شماره موبایل</label>
+            </div>
+
+            <div class="input-group mb-3" style="direction: rtl;">
+                <label for="loginUser">جنسیت</label>
+
+                <select class="form-select" name="sex" id="sex" [(ngModel)]="model.tiSex" required>
+                    <option value="1">آقا</option>
+                    <option value="2">خانم</option>
+                </select>
+
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="name" id="name" [(ngModel)]="model.strName" required autocomplete="false"
+                    (change)="name(model.strName)">
+                <label for="loginUser">نام</label>
+            </div>
+            <div class="input-group">
+                <input type="text" name="family" id="family" [(ngModel)]="model.strFamily" required autocomplete="false"
+                    (change)="family(model.strFamily)">
+                <label for="loginUser">نام خانوادگی</label>
+            </div>
+            <div class="input-group">
+                <input type="password" name="loginPassword" id="loginPassword" [(ngModel)]="model.strPassword" required
+                    autocomplete="false" (change)="pass(model.strPassword)">
+                <label for="loginPassword">رمز عبور</label>
+            </div>
+            <div class="input-group mb-3" style="direction: rtl;">
+                <label for="loginUser">استان</label>
+
+                <select class="form-select" name="staticCodeState" id="showstate" (change)="changeCity($event)"
+                    [(ngModel)]="model.staticCodeState">
+                    <option value="option1">استان</option>
+                    <option *ngFor="let item of states" value="{{item.strState}}">{{item.strStateName}}
+                    </option>
+                </select>
+
+            </div>
+            <div class="input-group mb-3" style="direction: rtl;">
+                <label for="loginUser">شهر</label>
+                <select [(ngModel)]="model.strStaticCityCode" class="form-select" name="strStaticCityCode" id=""
+                    (change)="delete_map()">
+                    <option value="-1">شهر</option>
+                    <option *ngFor="let item of city" value="{{item.CityCode}}">{{item.strCityName}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3" style="direction: rtl;display: none;">
+                <p class="m-0">یا بر اساس نقشه</p>
+            </div> -->
+
+
+
+            <button type="submit" class="submit-btn">ثبت نام در شهرنیک</button>
+
+            <button type="button" class="moi-btn btn-warning mt-2" (click)="logIn_BySSO()"> ثبت نام از طریق پنجره
+                ملی وزارت کشور </button>
+
+            <div class="forgot-pw" routerLink="/">
+                <span>ورود </span>
+            </div>
+
+        </form>
+    </ng-container>
+    <ng-container *ngIf="codeSent">
+        <form #checkOTP="ngForm" class="position-fixed pos shadow my-3 mx-3 p-3"
+            (ngSubmit)="checkOtp(model.strMobile, model.otp)" autocomplete="off">
+            <label for="otp " class="text-end w-100 ">کد ارسالی</label>
+            <div class="input-group mb-3">
+                <input class="form-control" type="text" name="otp" id="otp" placeholder="_ _ _ _ _"
+                    [(ngModel)]="model.otp" required>
+            </div>
+            <button type="submit" class="submit-btn">بررسی کد اعتبارسنجی</button>
+        </form>
+    </ng-container>
+    <div class="footer position-fixed pos-footer">
+        <a style="text-decoration: none;" href="https://rayanandisheh.com" target="_blank">
+
+            <div style="font-weight: 700; color:#414141" class="f18">
+                طراحی و توسعه شرکت رایان اندیشه نصر
+            </div>
+            <div style="font-weight: 700; color:#1e5feb" class="f16">نسخه {{version |faNum}}</div>
+        </a>
+        <!-- <i class="material-icons bg-info circel p-1" (click)="openGuid()">question_mark</i> -->
+    </div>
+</div>

@@ -1,0 +1,129 @@
+<div class="login-page" *ngIf="!isDesktop">
+    <img src="../../../assets/imgs/Shahrnik_Logo_Public_new.png" alt="شهرنیک">
+    <h4>{{App_Title}}
+    </h4>
+
+    <ng-container *ngIf="!codeSent">
+        <form #loginForm="ngForm" class="form" (ngSubmit)="login()" autocomplete="off">
+            <h3>ورود به سامانه</h3>
+            <div class="input-group">
+                <input type="text" name="loginUser" id="loginUser" [(ngModel)]="model.strMobile" required>
+                <label for="loginUser">شماره موبایل</label>
+            </div>
+            <div class="input-group">
+                <input type="password" name="loginPassword" id="loginPassword" [(ngModel)]="model.strPassword" required>
+                <label for="loginPassword">رمز عبور</label>
+            </div>
+            <button type="submit" class="submit-btn">ورود به سامانه</button>
+
+            <button type="submit" class="submit-btn"> ورود از طریق پنجره ملی وزارت کشور </button>
+            
+    
+
+            <div class="forgot-pw" routerLink="/register">
+                <span>ثبت نام </span>
+            </div>
+            <div class="forgot-pw" (click)="forgotPw(model.strMobile)">
+                <span>رمز عبور را فراموش کرده ام </span>
+            </div>
+        </form>
+    </ng-container>
+    <ng-container *ngIf="codeSent">
+        <form #checkOTP="ngForm" class="form" (ngSubmit)="checkOtp(model.strMobile, model.otp)" autocomplete="off">
+            <div class="input-group">
+                <input type="text" name="otp" id="otp" placeholder="_ _ _ _ _" [(ngModel)]="model.otp" required>
+                <label for="otp">کد ارسالی</label>
+            </div>
+            <button type="submit" class="submit-btn">بررسی کد اعتبارسنجی</button>
+        </form>
+    </ng-container>
+    <!-- <div class="enamad">
+
+        <a referrerpolicy="origin" target="_blank"
+            href="https://trustseal.enamad.ir/?id=342904&amp;Code=ZpzSz5XEmvsfE8orCCPf"><img referrerpolicy="origin"
+                src="https://Trustseal.eNamad.ir/logo.aspx?id=342904&amp;Code=ZpzSz5XEmvsfE8orCCPf" alt=""
+                style="cursor:pointer" id="ZpzSz5XEmvsfE8orCCPf"></a>
+    </div> -->
+
+    <div class="footer">
+        <a style="text-decoration: none;" href="https://rayanandisheh.com" target="_blank">
+            <div style="font-weight: 500; color: #000;">طراحی و توسعه</div>
+            <div style="font-weight: 700; color:#cf9f00">شرکت رایان اندیشه نصر </div>
+            <div style="font-weight: 700; color:#1e5feb">نسخه {{version}}</div>
+        </a>
+    </div>
+</div>
+<div class="bg-login " *ngIf="isDesktop">
+
+    <ng-container *ngIf="!codeSent">
+
+        <form #loginForm="ngForm" class="form position-fixed pos shadow" (ngSubmit)="login()">
+
+            <h3>ورود به سامانه</h3>
+
+            <div class="dir">
+
+                <label for="exampleInputEmail1" class="form-label text-end">شماره موبایل</label>
+
+                <input class="form-control" type="text" name="loginUser" id="loginUser"  [(ngModel)]="model.strMobile">
+
+            </div>
+
+            <div class="mb-3 dir">
+                
+                <label for="exampleInputEmail1" class="form-label text-end">رمز عبور</label>
+
+                <input class="form-control" type="password" name="loginPassword" id="loginPassword" [(ngModel)]="model.strPassword">
+
+            </div>
+
+            <button type="submit" class="submit-btn">ورود به سامانه</button>
+
+            <button type="button" class="moi-btn btn-warning mt-2" (click)="logIn_BySSO()"> ورود از طریق پنجره ملی وزارت کشور </button>
+
+            <div class="forgot-pw" routerLink="/register">
+
+                <span>ثبت نام </span>
+                
+            </div>
+
+            <div class="forgot-pw" (click)="forgotPw(model.strMobile)">
+
+                <span>رمز عبور را فراموش کرده ام </span>
+
+            </div>
+
+            <!-- <div class="enamad">
+
+                <a referrerpolicy="origin" target="_blank"
+                    href="https://trustseal.enamad.ir/?id=342904&amp;Code=ZpzSz5XEmvsfE8orCCPf"><img referrerpolicy="origin"
+                        src="https://Trustseal.eNamad.ir/logo.aspx?id=342904&amp;Code=ZpzSz5XEmvsfE8orCCPf" alt=""
+                        style="cursor:pointer" id="ZpzSz5XEmvsfE8orCCPf"></a>
+            </div> -->
+        
+
+        </form>
+
+    </ng-container>
+
+
+
+    <ng-container *ngIf="codeSent">
+        <form #checkOTP="ngForm" class="position-fixed pos shadow my-3 mx-3 p-3" (ngSubmit)="checkOtp(model.strMobile, model.otp)" autocomplete="off">
+            <label for="otp " class="text-end w-100 ">کد ارسالی</label>
+            <div class="input-group mb-3">
+                <input class="form-control" type="text" name="otp" id="otp" placeholder="_ _ _ _ _" [(ngModel)]="model.otp" required>
+            </div>
+            <button type="submit" class="submit-btn">بررسی کد اعتبارسنجی</button>
+        </form>
+    </ng-container>
+
+
+    <div class="footer position-fixed pos-footer">
+        <a style="text-decoration: none;" href="https://rayanandisheh.com" target="_blank">
+
+            <div style="font-weight: 700; color:#4d4d4d" class="f18">طراحی و توسعه شرکت رایان اندیشه نصر </div>
+            <div style="font-weight: 700; color:#1e5feb" class="f16">نسخه {{version |faNum}}</div>
+        </a>
+    </div>
+</div>

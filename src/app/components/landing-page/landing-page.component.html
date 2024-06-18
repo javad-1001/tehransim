@@ -1,0 +1,283 @@
+<!-- header -->
+
+<header class="border-2 border-bottom border-gray p-1">
+
+    <div class="app-header row flex-row-reverse justify-content-between gx-2 px-2 p-1">
+
+        <div class="d-flex justify-content-start align-items-center flex-row-reverse col-11 col-md-5">
+
+            <div class="app-logo col-12 col-md-6 pointer" (click)="changeRoute('home')">
+
+                <img class="w-100 h-100" src="../../../assets/imgs/Shahrnik_Logo_Public_new.png" alt="">
+
+            </div>
+
+            <div class="p-0">
+
+                <div class=" h-100 central ">
+                
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="app-header-buttons col-1 col-md-4 d-flex flex-row-reverse justify-content-end align-items-center">
+
+        
+
+            <div class="my-diar p-1 rounded-md dropdown">
+
+                <!-- dropdown-toggle -->
+
+                <button class="d-flex align-items-center w-100 text-primary justify-content-between " type="button"
+                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+
+                    <mat-icon>menu</mat-icon>
+
+                </button>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+
+                    <ng-container *ngIf="!isLogin">
+
+                        <li class="dropdown-login">
+
+                            <a (click)="login('home')" class="dropdown-item"> ورود
+
+                                <mat-icon class="text-muted"> login </mat-icon>
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-new-ads d-none" *ngIf="!isLogin && ability?.bADS">
+
+                            <a (click)="login('new')" routerLink="/dyar/new" class="dropdown-item">
+
+                                ثبت آگهی
+
+                                <mat-icon class="text-muted"> add_box </mat-icon>
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-new-ads d-none" *ngIf="isLogin && ability?.bADS">
+
+                            <a routerLink="/dyar/new" class="dropdown-item">
+
+                                ثبت آگهی
+
+                                <mat-icon class="text-muted"> add_box </mat-icon>
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-chat d-none" *ngIf="ability?.bChat">
+
+                            <a (click)="changeRoute('chat')" class="dropdown-item">
+
+                                چت
+
+                                <mat-icon class="text-muted"> forum </mat-icon>
+
+                            </a>
+
+                        </li>
+
+
+                    </ng-container>
+
+                    <ng-container *ngIf="isLogin">
+
+                        <li>
+                            <a (click)="changeRoute('profile')" class="dropdown-item">
+
+                                {{ diar_UserInfo.strFullName }}
+
+                                <mat-icon class="text-success"> how_to_reg </mat-icon>
+
+                            </a>
+                        </li>
+
+                        <li class="dropdown-new-ads d-none" *ngIf="!isLogin && ability?.bADS">
+
+                            <a (click)="login('new')" routerLink="/dyar/new" class="dropdown-item">
+
+                                ثبت آگهی
+
+                                <mat-icon class="text-muted"> add_box </mat-icon>
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-new-ads d-none" *ngIf="isLogin && ability?.bADS">
+
+                            <a routerLink="/dyar/new" class="dropdown-item">
+
+                                ثبت آگهی
+
+                                <mat-icon class="text-muted"> add_box </mat-icon>
+
+                            </a>
+
+                        </li>
+
+                        <li class="dropdown-chat d-none" *ngIf="ability?.bChat">
+
+                            <a (click)="changeRoute('chat')" class="dropdown-item">
+
+                                چت
+
+                                <mat-icon class="text-muted"> forum </mat-icon>
+
+                            </a>
+
+                        </li>
+
+                        <li *ngIf="ability?.bResume">
+
+                            <a (click)="changeRoute('WorkProfile')" class="dropdown-item">
+
+                                معرفی کسب و کار شما
+
+                                <mat-icon class="text-muted"> badge </mat-icon>
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a (click)="changeRoute('myads')" class="dropdown-item"> مدیریت آگهی ها
+
+                                <mat-icon class="text-muted"> manage_history </mat-icon>
+
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a (click)="changeRoute('recent-visits')" class="dropdown-item">
+
+                                آگهی های بازدید شده
+
+                                <mat-icon class="text-muted"> history </mat-icon>
+
+                            </a>
+
+                        </li>
+                        <li *ngIf="ability?.bResume">
+                            <a (click)="changeRoute('business-recent-visits')" class="dropdown-item">
+
+                                کسب و کار های بازدید شده
+
+                                <mat-icon class="text-muted"> history </mat-icon>
+
+                            </a>
+
+                        </li>
+
+                        <li>
+                            <a (click)="changeRoute('bookmarks')" class="dropdown-item">
+
+                                آگهی های نشان شده
+
+                                <mat-icon class="text-muted"> bookmark </mat-icon>
+                            </a>
+
+                        </li>
+
+                        <li *ngIf="ability?.bResume">
+                            <a (click)="changeRoute('business-bookmarks')" class="dropdown-item">
+
+                                کسب و کار های نشان شده
+
+                                <mat-icon class="text-muted"> bookmark </mat-icon>
+                            </a>
+
+                        </li>
+
+                        <li>
+                            <a (click)="changeRoute('support')" class="dropdown-item">
+
+                                پشتیبانی
+
+                                <mat-icon class="text-muted"> contact_support </mat-icon>
+
+                            </a>
+
+                        </li>
+                        <!-- <li>
+                            <a (click)="changeRoute('support')" class="dropdown-item">
+
+                                پشتیبانی
+
+                                <mat-icon class="text-muted"> contact_support </mat-icon>
+
+                            </a>
+
+                        </li> -->
+
+                        <!-- <li> 
+                            <a class="dropdown-item"> یادداشت ها 
+                                
+                                <mat-icon class="text-muted"> edit_note </mat-icon>
+                            </a>
+                        
+                        </li> -->
+
+                    </ng-container>
+
+                    <li>
+
+                        <a (click)="openAbout()" class="dropdown-item"> درباره دیار
+
+                            <mat-icon class="text-muted"> info </mat-icon>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+                        <a (click)="openAdd()" class="dropdown-item">
+
+                            قوانین و مقررات
+
+                            <mat-icon class="text-muted"> gavel </mat-icon>
+
+                        </a>
+                    </li>
+
+                    <ng-container *ngIf="isLogin">
+
+                        <li>
+                            <a (click)="logOut()" class="dropdown-item"> خروج
+
+                                <mat-icon class="text-muted"> logout </mat-icon>
+                            </a>
+
+                        </li>
+
+                    </ng-container>
+
+
+                </ul>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</header>
+
+<main dir="rtl" class="p-0">
+
+    <router-outlet></router-outlet>
+
+</main>

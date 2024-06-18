@@ -1,0 +1,141 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="mails_list">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2 class="m-0">
+                            پشتیبانی
+                        </h2>
+                        <p>{{helpTxt}}</p>
+                    </div>
+                    <div class="d-flex header_image">
+                        <img width="200" src="../../../assets/imgs/نامه نگاری.png" alt="">
+                    </div>
+                </div>
+            </div>
+            
+            <div *ngIf="showPosts" class="central w-100">
+
+                <button (click)="changeMode()" class="btn btn-secondary central p-1 px-3 m-2 rounded"> 
+                    <mat-icon>add</mat-icon>
+                    تیکت جدید 
+                </button>
+
+            </div>
+
+            <div *ngIf="!showPosts" class="central w-100">
+                <button (click)="changeMode()" class="btn btn-danger p-1 m-2 rounded">بازگشت</button>
+            </div>
+            <div *ngIf="showPosts">
+                <div (click)="openTiket(item)" class="tiket_box" *ngFor="let item of posts">
+                    <div class="central justify-content-start">
+                        <p class="m-0">تاریخ :</p>
+                        <span class="mx-1">{{item.strDate }} - {{item.strTime }}</span>
+                    </div>
+                    <div class="central justify-content-start">
+                        <p class="m-0">موضوع :</p>
+                        <span class="mx-1">{{item.strTiketSubject_strComment}}</span>
+                    </div>
+                    <div class=" justify-content-start">
+                        <p class="m-0">شرح :</p>
+                        <span class="mx-1">{{item.strDetail}}</span>
+                    </div>
+                    <div class="central  justify-content-end">
+                        <div class="central p-2  tiket_box_status">
+                            <p class="m-0">وضعیت :</p>
+                            <span class="mx-1">{{item.strTiketStatus_strComment}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div *ngIf="!showPosts">
+                <div class="container  justify-content-center">
+                    <div class="write_mail">
+
+                        <form [formGroup]="reqModel" class="modal-body">
+                            <h2> اطلاعات خود را وارد کنید </h2>
+                            <ng-container>
+                                <div class="form-group has-icon">
+                                    <span class="form-control-icon">
+                                        <mat-icon class="mat-18">category</mat-icon>
+                                    </span>
+                                    <select class="w-100 mb-3" formControlName="tiTiketSubject">
+                                        <option value="-1"> * موضوع </option>
+                                        <option *ngFor="let item of groups" value={{item.tiTiketSubject}}>
+                                            {{item.strComment}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group has-icon">
+                                    <span class="form-control-icon">
+                                        <mat-icon class="mat-18">description</mat-icon>
+                                    </span>
+                                    <textarea style="height: 150px;" type="text" class="w-100 mb-3 form-control"
+                                        formControlName="strDetail" placeholder="* توضیحات"></textarea>
+                                </div>
+
+                                <div class="d-flex justify-content-end btns-container w-100 my-2">
+                                    <button type="submit" (click)="submitPost()"
+                                        class="loc_btn btn btn-primary w-100 central px-4">ثبت</button>
+                                </div>
+                            </ng-container>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+
+<div class="modal  fade dir " id="gallery" tabindex="4" role="dialog" aria-hidden="true">
+    <div style="width:90%;" class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-gray-soft">
+            <div class="modal-header d-flex justify-content-between central">
+                <button (click)="deletePost(pastData.iTiket)" class="btn btn-danger">حذف تیکت</button>
+                <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="w-100">
+                    <div class="w-100 d-flex justify-content-start mb-2">
+                        <div class="main_pm">
+                            <div class="central justify-content-start">
+                                <p class="m-0">موضوع :</p>
+                                <span class="mx-1">{{pastData?.strTiketSubject_strComment}}</span>
+                            </div>
+                            <div class=" justify-content-start">
+                                <p class="m-0">شرح :</p>
+                                <span>{{pastData?.strDetail}}</span>
+                            </div>
+                            <div class="central justify-content-start">
+                                <span class="tiket_pm_date">{{pastData?.strTime}} - {{pastData?.strDate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-100 d-flex justify-content-end mb-2"
+                        [ngClass]="{'userpm_box': item.strSupportResponse == ''}" *ngFor="let item of answers">
+                        <div class="org_pm" [ngClass]="{'user_pm': item.strCitizenAnswer == ''}">
+                            <p class="mb-1" *ngIf="item.strSupportResponse !==''">{{item.strSupportResponse}}</p>
+                            <p class="mb-1" *ngIf="item.strCitizenAnswer !==''">{{item.strCitizenAnswer}}</p>
+                            <span class="tiket_pm_date">{{item.strTime}} - {{item.strDate}}</span>
+                        </div>
+                    </div>
+                    <div *ngIf="pastData?.tiTiketSubject" class="central" [formGroup]="reqModel">
+                        <input formControlName="strCitizenAnswer" type="text" class="mb-2 form-control"
+                            placeholder="متن پیام...">
+
+                        <button (click)="sendText(pastData)" class="mb-2 d-flex btn btn-primary">
+                            <mat-icon class="mx-2" style="rotate:180deg;">send</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer  d-flex justify-content-start">
+            </div>
+        </div>
+    </div>
+</div>

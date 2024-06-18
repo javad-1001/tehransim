@@ -1,0 +1,44 @@
+
+
+.navbar .navbar-collapse a {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.56) !important;
+    border-radius: 6px;
+}
+
+.submit-adv.btn-danger {
+    background-color: #b02a37;
+    border-color: #a52834;
+}
+
+.button-category .btn-outline-danger {
+    color: #b02a37;
+    border-color: #b02a37;
+}
+
+.button-category .btn-outline-danger:hover {
+    color: white;
+    background-color: #b02a37;
+}
+
+
+.category li a {
+    color: rgba(0, 0, 0, 0.56);
+    font-size: 14px;
+}
+
+
+
+@media screen and (min-width: 1500px) {
+    #right-column.col-md-3 {
+        width: 20% !important;
+    }
+}
+
+
+
+@media screen and (max-width: 992px) {
+    .navbar-brand {
+        border-left: 0 !important;
+    }
+}

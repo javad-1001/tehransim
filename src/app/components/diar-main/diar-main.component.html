@@ -1,0 +1,249 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm sticky-top" style="z-index: 1000;">
+    <div class="container-fluid d-flex align-items-baseline justify-content-between">
+      <a class="navbar-brand pe-md-4 pe-0 border-end" href="#">
+        <img src="images/divar-icon.svg" width="48">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse d-lg-flex align-items-lg-baseline" id="navbarSupportedContent">
+      
+
+        <ul class="navbar-nav">
+          <li class="nav-item me-0 me-lg-4">
+            <a class="nav-link active" aria-current="page" href="#">
+              <i class="far fa-user me-0 me-md-2"></i>
+              دیوار من
+            </a>
+          </li>
+
+          <li class="nav-item me-0 me-lg-4">
+            <a class="nav-link active" aria-current="page" href="#">
+              <i class="far fa-comment me-0 me-md-2"></i>
+              چت
+            </a>
+          </li>
+
+          <li class="nav-item me-0 me-lg-4">
+            <a class="nav-link active" aria-current="page" href="#">
+                انتخاب شهر
+            </a>
+          </li>
+
+          <li (click)="openDetail(1)" class="nav-item">
+              ثبت آگهی
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-xl my-3" style="max-width: 1500px;">
+    <div class="row position-relative">
+
+      <div class="col-md-3 d-none d-md-block" id="right-column">
+
+        <div class="price-container border-bottom py-3 mx-4">
+          <a href="#price-inputs" data-bs-toggle="collapse"
+            class="text-reset text-decoration-none d-flex gap-3 align-items-center">
+            <i class="fas fa-chevron-down text-muted"></i>
+            قیمت
+          </a>
+
+          <div id="price-inputs" class="collapse mt-3">
+
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">حداقل</small>
+              <div class="col-8">
+                <select class="form-select" placeholder="حداقل این قیمت">
+                  <option value="selected">انتخاب</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <i class="fas fa-ellipsis-v ms-3 my-1 text-muted" style="font-size: .75rem;"></i>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">حداکثر</small>
+              <div class="col-8">
+                <select class="form-select" placeholder="حداکثر این قیمت">
+                  <option value="selected">انتخاب</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="price-container border-bottom py-3 mx-4">
+          <a href="#price-inputs" data-bs-toggle="collapse"
+            class="text-reset text-decoration-none d-flex gap-3 align-items-center">
+            <i class="fas fa-chevron-down text-muted"></i>
+            قیمت
+          </a>
+
+          <div id="price-inputs" class="collapse mt-3">
+
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">حداقل</small>
+              <div class="col-8">
+                <select class="form-select" placeholder="حداقل این قیمت">
+                  <option value="selected">انتخاب</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <i class="fas fa-ellipsis-v ms-3 my-1 text-muted" style="font-size: .75rem;"></i>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">حداکثر</small>
+              <div class="col-8">
+                <select class="form-select" placeholder="حداکثر این قیمت">
+                  <option value="selected">انتخاب</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="price-container border-bottom py-3 mx-4">
+          <a href="#price-inputs" data-bs-toggle="collapse"
+            class="text-reset text-decoration-none d-flex gap-3 align-items-center">
+            <i class="fas fa-chevron-down text-muted"></i>
+            قیمت
+          </a>
+
+          <div id="price-inputs" class="collapse mt-3">
+
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">حداقل</small>
+              <div class="col-8">
+                <select class="form-select" placeholder="حداقل این قیمت">
+                  <option value="selected">انتخاب</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <i class="fas fa-ellipsis-v ms-3 my-1 text-muted" style="font-size: .75rem;"></i>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted">حداکثر</small>
+              <div class="col-8">
+                <select class="form-select" placeholder="حداکثر این قیمت">
+                  <option value="selected">انتخاب</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="the-footer mx-4 py-3">
+
+          <ul class="fast-links list-unstyled d-flex gap-4 flex-wrap justify-content-between">
+            <li><small><a href="#" class="text-reset text-decoration-none">دریافت برنامه</a></small></li>
+            <li><small><a href="#" class="text-reset text-decoration-none">پشتیبانی</a></small></li>
+          </ul>
+
+          <div class="social-media mt-3 d-flex align-items-center justify-content-evenly">
+            <a href="#" class="text-reset">
+              <i class="fab fa-linkedin"></i>
+            </a>
+
+            <a href="#" class="text-reset">
+              <i class="fab fa-instagram"></i>
+            </a>
+
+            <a href="#" class="text-reset">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="col-md-9  end-0">
+
+        <div class="advertisment">
+          <div class="row g-3">
+            <div class="col-xxl-4 col-lg-6">
+              <a href="#"
+                class="advertisment-post border rounded p-3 d-flex align-items-start justify-content-between text-reset text-decoration-none">
+                <div class="advertisment-post-caption w-100 d-flex flex-column justify-content-between"
+                  style="height: 150px;">
+
+                  <h6 class="">پلی ۴ اسلیم ۱ ترا</h6>
+
+                  <div class="advertisment-post-caption-bottom d-flex flex-column justify-content-end">
+                    <small>۱۰,۰۰۰,۰۰۰ تومان</small>
+                    <div
+                      class="advertisment-post-caption-bottom-time d-flex justify-content-between align-items-center">
+                      <small class="pt-1 m-0" style="font-size: 12px;">دقایقی پیش</small>
+                      <i class="far fa-comment me-2"></i>
+                    </div>
+                  </div>
+                </div>
+                <img src="images/QY-N73TZ.jpg" alt="" style="width: 150px; height: 150px; object-fit: cover;"
+                  class="rounded">
+              </a>
+            </div>
+
+            <div class="col-xxl-4 col-lg-6">
+              <a href="#"
+                class="advertisment-post border rounded p-3 d-flex align-items-start justify-content-between text-reset text-decoration-none">
+                <div class="advertisment-post-caption w-100 d-flex flex-column justify-content-between"
+                  style="height: 150px;">
+
+                  <h6 class="">پلی ۴ اسلیم ۱ ترا</h6>
+
+                  <div class="advertisment-post-caption-bottom d-flex flex-column justify-content-end">
+                    <small>۱۰,۰۰۰,۰۰۰ تومان</small>
+                    <div
+                      class="advertisment-post-caption-bottom-time d-flex justify-content-between align-items-center">
+                      <small class="pt-1 m-0" style="font-size: 12px;">دقایقی پیش</small>
+                      <i class="far fa-comment me-2"></i>
+                    </div>
+                  </div>
+                </div>
+                <img src="images/QY-N73TZ.jpg" alt="" style="width: 150px; height: 150px; object-fit: cover;"
+                  class="rounded">
+              </a>
+            </div>
+
+            <div class="col-xxl-4 col-lg-6">
+              <a href="#"
+                class="advertisment-post border rounded p-3 d-flex align-items-start justify-content-between text-reset text-decoration-none">
+                <div class="advertisment-post-caption w-100 d-flex flex-column justify-content-between"
+                  style="height: 150px;">
+
+                  <h6 class="">پلی ۴ اسلیم ۱ ترا</h6>
+
+                  <div class="advertisment-post-caption-bottom d-flex flex-column justify-content-end">
+                    <small>۱۰,۰۰۰,۰۰۰ تومان</small>
+                    <div
+                      class="advertisment-post-caption-bottom-time d-flex justify-content-between align-items-center">
+                      <small class="pt-1 m-0" style="font-size: 12px;">دقایقی پیش</small>
+                      <i class="far fa-comment me-2"></i>
+                    </div>
+                  </div>
+                </div>
+                <img src="images/QY-N73TZ.jpg" alt="" style="width: 150px; height: 150px; object-fit: cover;"
+                  class="rounded">
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+  </div>

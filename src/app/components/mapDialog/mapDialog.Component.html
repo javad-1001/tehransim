@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-between  dir" style="font-family: vazirmatn;">
+
+    <div>
+        <div class="pointer" style="display: inline-flex;">
+
+            <mat-icon (click)="closeModal()">close</mat-icon>
+
+        </div>
+    </div>
+
+</div>
+
+<mat-divider></mat-divider>
+
+<mat-dialog-content style="max-height: 95vh !important;">
+
+    <div id="test" style="width: 95%; height: 85vh;" class="mx-auto">
+
+        <div class="position-absolute" id="map_tooltip" data-bs-html="true" >
+
+
+        </div>
+
+    </div>
+
+    <!-- <mat-icon class="fa fa-map-marker position-absolute " style="top: 50%; left: 49.5%;" id="myDiv"> location_on</mat-icon> -->
+
+
+    <button class="btn btn-info position-absolute" style="bottom: 50px ; left: 46.5%;" *ngIf="showButton" (click)="closeModal()">تاييد موقعيت</button>
+
+
+</mat-dialog-content>

@@ -1,0 +1,482 @@
+<section class="searchbar">
+
+
+    <form #form="ngForm" (ngSubmit)="searchIn_advertisements(form)" class="search_box row">
+
+        <div class="col-md-5">
+
+            <select type="text" [ngModel]="-1" name="tiType">
+
+                <option value="-1">همه دسته بندی ها</option>
+
+                <option *ngIf="ability?.bSamsari" value="0"> سمساری </option>
+
+                <option *ngIf="ability?.bSupportServices" value="1"> همیاری شهروندی </option>
+
+                <option *ngIf="ability?.bEmployment" value="2"> استخدام و کاریابی </option>
+
+                <option *ngIf="ability?.bResume" value="3"> کسب و کارها </option>
+
+                <option *ngIf="ability?.bRealstate" value="4"> املاک </option>
+
+                <option *ngIf="ability?.bCar" value="5"> خودرو </option>
+
+            </select>
+
+            <!-- <mat-icon>toc</mat-icon> -->
+
+        </div>
+
+        <div class="col-md-6">
+
+            <input placeholder="جستجو در تمام آگهی ها..." type="text" ngModel name="strSearchContent">
+
+        </div>
+
+        <div class="col-md-1 p-0">
+
+            <button class="w-100" type="submit">
+
+                <mat-icon>search</mat-icon>
+
+            </button>
+
+        </div>
+
+    </form>
+    <img src="../../../assets/basic/Search-bar.png" alt="">
+
+
+</section>
+
+<section class="category">
+    <div class="container">
+        <div *ngIf="ability?.bRealstate" (click)="openSearch(4)">
+            <img src="../../../assets/imgs/cat1.png" alt="">
+            <span>
+                املاک
+            </span>
+        </div>
+        <div *ngIf="ability?.bCar" (click)="openSearch(5)">
+            <img src="../../../assets/imgs/cat2.png" alt="">
+            <span>
+                خودرو
+            </span>
+        </div>
+        <div *ngIf="ability?.bSamsari" (click)="openSearch(0)">
+            <img src="../../../assets/imgs/cat3.png" alt="">
+            <span>
+                سمساری
+            </span>
+        </div>
+        <div *ngIf="ability?.bSupportServices" (click)="openSearch(1)">
+            <img src="../../../assets/imgs/cat4.png" alt="">
+            <span>
+                همیاری شهروند
+            </span>
+        </div>
+        <div *ngIf="ability?.bEmployment" (click)="openSearch(2)">
+            <img src="../../../assets/imgs/cat5.png" alt="">
+            <span>
+                کاریابی و استخدام
+            </span>
+        </div>
+        <div *ngIf="ability?.bResume" (click)="openSearch(3)">
+            <img src="../../../assets/imgs/cat6.png" alt="">
+            <span>
+                کسب و کار ها
+            </span>
+        </div>
+
+
+    </div>
+</section>
+
+<section class="container">
+    <div class="central sec_title my-5">
+        <!-- <i class="fa fa-bullhorn" aria-hidden="true"></i> -->
+        <img src="../../../assets/imgs/megaphone 2.png" alt="">
+        <h3>
+            آگهی‌های ویژه
+        </h3>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-2 col-lg-3 col-md-6 col-12 my-2" *ngFor="let item of sliderVIP">
+
+            <div class="p-2 h-100">
+
+                <div (click)="openDetail(item,i)" class="adds_box h-100">
+                    <div class="img_box">
+
+                        <span>{{item.strType | faNum}}</span>
+                        <P>{{item.strTitle | faNum}}</P>
+
+                        <img *ngIf="item.strImage" src="data:image/png;base64,{{item.strImage}}" alt="">
+
+                        <img *ngIf="!item.strImage" src="../../../assets/imgs/Shahrnik_Logo_Public_new.png" alt="">
+
+                    </div>
+
+                    <div class="detail_box w-100  ">
+
+                        <div>
+
+                            <h3 class="text-primary fw-bold mx-0">
+
+                                {{subString_Title(item.strTitle,38) | faNum }}
+
+                            </h3>
+
+                        </div>
+
+                        <div class="central w-100  justify-content-start">
+
+
+                        </div>
+
+                        <div class="d-flex justify-content-between w-100 ">
+
+                            <div class="w-100 d-flex flex-column">
+
+
+                                <div class="text-muted d-flex justify-content-between align-items-center">
+
+                                    <div class="">
+
+                                        <span class="text-muted" style="font-size: 13px;">{{item.strPublishTime|
+                                            faNum}}</span>
+
+                                    </div>
+
+                                    <div
+                                        class="ads-badge rounded d-flex justify-content-center align-items-center text-muted">
+
+                                        <ng-container>
+
+                                            <small class="fw-bold mx-1">{{item.iView | faNum}}</small>
+
+                                            <mat-icon>visibility</mat-icon>
+
+                                        </ng-container>
+
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div [innerHTML]="getSafeHtml(htmlContent)" class="central ads_box container my-5">
+</div>
+
+<section class="city_selected pb-5">
+    <div class="container pt-1">
+        <div class="central sec_title my-4">
+            <img src="../../../assets/imgs/building (1) 1.png" alt="">
+            <h3 class="text-main">
+                در چه شهری مستقر هستید ؟
+            </h3>
+        </div>
+        <owl-carousel-o [options]="carouselOptions4city">
+            <ng-template *ngFor="let item of cities" carouselSlide>
+
+                <div class="p-2 pointer">
+
+                    <div (click)="openSearch(-1,item)" class="city_box">
+                        <div class="img_box_city">
+
+                            <img *ngIf="item.strImage" src="data:image/png;base64,{{item.strImage}}" alt="">
+
+                            <img *ngIf="!item.strImage" src="../../../assets/imgs/Shahrnik_Logo_Public_new.png" alt="">
+
+                        </div>
+
+                        <div class="city_box bg-whithe central w-100">
+
+                            <div>
+
+                                <h3 class="text-primary  fw-bold py-2 m-0"> {{item.strCityName | faNum}}</h3>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <!-- list bookmark && list recent visits -->
+
+
+                </div>
+
+            </ng-template>
+        </owl-carousel-o>
+
+    </div>
+</section>
+
+<section class="container mb-5">
+    <div class="central sec_title my-5">
+        <img src="../../../assets/imgs/megaphone 2.png" alt="">
+        <h3>
+            جدیدترین آگهی ها
+        </h3>
+    </div>
+    
+    <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-6 col-12 my-2" *ngFor="let item of sliderNEW">
+
+            <div class="d-flex justify-content-center ">
+                <div class="card p-3 bg-white"><i class="fa fa-apple"></i>
+                    <div class="about-product text-center mt-2"><img src="https://i.imgur.com/3VTaSeb.png" class="w-100">
+                        <div>
+                            <h4>Believing is seeing</h4>
+                            <h6 class="mt-0 text-black-50">Apple pro display XDR</h6>
+                        </div>
+                    </div>
+                    <div class="stats mt-2">
+                        <div class="d-flex justify-content-between p-price"><span>Pro Display XDR</span><span>$5,999</span></div>
+                        <div class="d-flex justify-content-between p-price"><span>Pro stand</span><span>$999</span></div>
+                        <div class="d-flex justify-content-between p-price"><span>Vesa Mount Adapter</span><span>$199</span></div>
+                    </div>
+                    <div class="d-flex justify-content-between total font-weight-bold mt-4"><span>Total</span><span>$7,197.00</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="central">
+
+        <button class="btn btn-primary btn-title text-primary" (click)="openSearch(-1)">مشاهده همه آگهی‌ها</button>
+
+    </div>
+
+</section>
+
+<section class="about  container">
+    <div>
+        <h2>همیاری شهروندی</h2>
+        <p style="line-height: 30px;font-size: 15px;">
+            <strong> « دیار »  </strong> به عنوان یک پلتفرم فعال در حوزه همیاری و تعامل، تمرکز خود را بر روی ایجاد ارتباطات مثبت و رفع مشکلات
+            روزمره هموطنان قرار می‌دهد. این فضای تعاملی و همکاری، همواره در دسترسی هموطنان و پارسی‌زبانان قرار می‌گیرد،
+            تا
+            آنها بتوانند در محیطی امن و پویا به اشتراک گذاری دانش، تجارب و نیازهای خود بپردازند.
+        </p>
+        <button (click)="openSearch(1)" class="btn btn-secondary px-5 text-main">مشاهده بیشتر</button>
+    </div>
+</section>
+
+<div [innerHTML]="getSafeHtml(htmlContentNd)" class="central ads_box container my-5">
+</div>
+
+<section class="business">
+    <div class="container  py-2">
+        <div class="central sec_title my-3">
+            <img src="../../../assets/imgs//briefcase (1) 1.png" alt="">
+            <h3 class="text-main">
+                کسب و کار خود را در دیار ثبت کنید!
+            </h3>
+        </div>
+        <p style="line-height: 30px;font-size: 15px;" class="text-main my-5">
+            با گسترش جمعیت ایرانیان و فارسی زبانان در سراسر جهان، اهمیت معرفی و حمایت از کسب و کارها به شدت احساس
+            می‌شود. "دیار" به عنوان یک پلتفرم در راستای ارتقای کسب و کارهای ایرانی، فرصتی فراهم می‌کند تا آنها در هر
+            شهری که فعالیت دارند، به جامعه فارسی زبانان معرفی شوند و از حمایت هموطنانشان در این راه بهره‌مند گردند. این
+            اقدامات علاوه بر کمک به رفع مشکلات روزمره استفاده کنندگان، باعث رشد و توسعه پایدار این جامعه خواهد شد و به
+            ایجاد ارتباطات مثبت و همکاری‌های مفید بین هموطنان ایرانی در سراسر جهان کمک خواهدکرد.
+        </p>
+        <div class="central my-3">
+            <button (click)="reDirect('WorkProfile')" class="btn btn-primary btn-title px-5 text-primary"> معرفی کسب و
+                کار خود </button>
+        </div>
+    </div>
+</section>
+
+<section class="container ">
+    <div class="central sec_title my-5">
+        <img src="../../../assets/imgs/megaphone 2.png" alt="">
+        <h3>
+            اخبار
+        </h3>
+    </div>
+    <owl-carousel-o [options]="carouselOptions4News">
+
+        <ng-template *ngFor="let item of news" carouselSlide>
+
+            <div class="p-2 h-100">
+
+                <div class="adds_box h-100" [routerLink]="['/dyar/News/',item.iJournal]">
+
+                    <div class="img_box">
+
+                        <img *ngIf="item.strImage" src="data:image/png;base64,{{item.strImage}}" alt="">
+
+                        <img *ngIf="!item.strImage" src="../../../assets/imgs/no-image-available-icon-6.png" alt="">
+
+                    </div>
+
+                    <div class="detail_box w-100 h-100">
+
+                        <div>
+
+                            <h3 class="text-primary fw-bold mx-0"> {{item.strTitle | faNum}}</h3>
+
+                        </div>
+
+                        <div class="central w-100  justify-content-start">
+
+                        </div>
+
+                        <div class="d-flex justify-content-between w-100 ">
+
+                            <div class="w-100 d-flex flex-column">
+
+                                <div class="text-muted d-flex justify-content-between align-items-center">
+
+                                    <div class="">
+
+                                        <span class="text-muted" style="font-size: 13px;">{{item.strDateTime|faNum}}</span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </ng-template>
+
+    </owl-carousel-o>
+
+    <div class="central">
+
+        <button (click)="reDirect('news')" class="btn btn-primary btn-title my-3 text-primary">مشاهده بیشتر </button>
+
+    </div>
+
+</section>
+
+<footer>
+    <div class="px-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="links">
+                    <h3><img src="../../../assets/imgs/Shahrnik_Logo_Public_new.png" alt=""> دیار</h3>
+                    <p class="text-white py-1">« دیار » یک پلتفرم چند رسانه ای برای تمامی ایرانیان و پارسی زبانان خارج
+                        از ایران است. این پلتفرم برای دسترسی به اطلاعات ضروری و مفید در هر یک از شهرهای مهاجر پذیر و
+                        همچنین توسعه روابط اجتماعی و اقتصادی مابین ایرانیان و پارسی زبانان طراحی و پیاده سازی شده است.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 social">
+                <div>
+                    <h3>ما را در شبکه‌های اجتماعی دنبال کنید :</h3>
+                </div>
+                <div class="social1 ">
+                    <a href=""><img src="../../../assets/imgs/telegram (1).png" alt=""></a>
+                    <a href=""><img src="../../../assets/imgs/instagram (1).png" alt=""></a>
+                    <a href=""><img src="../../../assets/imgs/whatsapp (1) 1.png" alt=""></a>
+                </div>
+                <div class="social2 ">
+                    <a href=""><img src="../../../assets/imgs/youtube 1.png" alt=""></a>
+                    <a href=""><img src="../../../assets/imgs/linkedin (1) 1.png" alt=""></a>
+                    <a href=""><img src="../../../assets/imgs/facebook.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-md-4 linkdownload border-0">
+                <div>
+                    <h3>از طریق لینک زیر به اپلیکیشن دیار دسترسی داشته باشید :</h3>
+                    <div class="linkdownload1">
+                        <a href="">
+                            <h4>دانلود در Google Play<img src="../../../assets/imgs/google-play 1.png" alt=""></h4>
+
+                        </a>
+                    </div>
+
+                    <div class="linkdownload2">
+
+                        <a href="">
+                            <h4>دانلود در App Store<img src="../../../assets/imgs/apple 1.png" alt=""></h4>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<section class="central flex-column signature">
+
+    <div>
+
+        <a href="http://www.geoxity.co/" target="_blank">
+
+            <img src="../../../assets/imgs/geoxity_logo.png" height="15" alt="">
+
+        </a>
+        
+    </div>
+
+    <div class="my-1">
+
+        <a target="_blank">
+
+            <span>
+
+                Email: Info@geoxity.co
+
+            </span>
+
+
+        </a>
+
+    </div>
+
+    <div>
+
+        <span>
+
+            All Rights Reserved,Powered by 
+                
+            <a href="http://www.geoxity.co/" class="text-primary" style="text-decoration: underline!important;" target="_blank">
+
+                Geoxity
+
+            </a>
+            
+            - 2024 &#xa9;
+
+        </span>
+
+    </div>
+
+</section>

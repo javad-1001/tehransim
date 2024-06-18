@@ -1,0 +1,1225 @@
+<!-- <div class="card-view col-12   d-flex justify-content-center mx-auto" style="direction: rtl;" *ngIf="showSlide">
+    <div id="carouselExampleControlsNoTouching" class="carousel slide w-100" data-bs-touch="false"
+        data-bs-interval="false">
+        <div class="carousel-inner ">
+            <div class="carousel-item " *ngFor="let item of slider;let i = index" [ngClass]="{'active': i == 0}">
+                <a href="{{item.strURL}}" target="_blank" (click)="addVisit(item.iAds)">
+                    <img src="data:image/png;base64,{{item.strImage}}" class="d-block w-100 h-slider mx-auto" alt="..."
+                        title="{{item.strTitle}}">
+                </a>
+            </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-secondary rounded-circle" aria-hidden="true"></span>
+            <span class="visually-hidden ">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-secondary rounded-circle" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+    </div>
+</div> -->
+
+
+
+<!-- Desktop View -->
+
+<div class="desktop container mt-4">
+
+    <div class="row g-3">
+        <div class="col-md-6" *ngIf="ability.bZistyar" (click)="changeRoute('/shahrnik/zistYar',ability.bZistyar)">
+
+            <div style="background-color: #ffdca9;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/zistyar.png">
+
+                </div>
+
+                <div class="title-Container">
+
+
+                    <p>زیست یار </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6 " *ngIf="ability.bMunicipalityAnd137"
+            (click)="changeRoute('/shahrnik/mayor137',ability.bMunicipalityAnd137)">
+
+            <div style="background-color: #ecf9ff;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/ارتباط مردمی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p *ngIf="!Info.bVillage">
+                        شهرداری و سامانه 137
+                    </p>
+                    <p *ngIf="Info.bVillage">
+                        دهیاری و روستا
+                    </p>
+                    <!-- <small>(ثبت گزارش مشکلات شهری)</small> -->
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " *ngIf="ability.bEverythingAboutMe"
+            (click)="changeRoute('/shahrnik/howamido',ability.bEverythingAboutMe)">
+
+            <div style="background-color: #FFE1E1;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/favoriteplace-ai.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        همه چیز درباره من
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " *ngIf="ability.bIAmMayor " (click)="changeRoute('/shahrnik/',false )">
+
+            <div style="background-color: #fdf7c3;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/پرسش های عمومی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        من هم شهردارم
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6 " *ngIf="ability.bPeysepar"
+            (click)="changeRoute('/shahrnik/Transportation',ability.bPeysepar)">
+
+            <div style="background-color: #faebe0;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/حمل و نقل عمومی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p> حمل و نقل عمومی</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " *ngIf="ability.bMyCars" (click)="changeRoute('/shahrnik/myVehicles',ability.bMyCars)">
+
+            <div style="background-color: #f8c4b4;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/my vehicles.jpg">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>خودرو ها و موتور های من</p>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3" *ngIf="ability.bMyPOI" (click)="changeRoute('/shahrnik/allplaces',ability.bMyPOI)">
+
+            <div style="background-color: #fdf7c3;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/مکان های مورد علاقه.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>مکان های مورد علاقه</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " *ngIf="ability.bForms" (click)="changeRoute('/shahrnik/organization',ability.bForms)">
+
+            <div style="background-color: #ffdca9;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/دولت الکترونیک.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>میز خدمت </p>
+
+                    <!-- <small>(خدمات غیر حضوری)</small> -->
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " *ngIf="ability.bPurchaseDiscount"
+            (click)="changeRoute('/shahrnik/shoppingoffers',ability.bPurchaseDiscount)">
+
+            <div style="background-color: #e3dffd;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/تخفیف دونی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        خرید ها و تخفیف ها
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " *ngIf="ability.bNeighborCraftsman"
+            (click)="changeRoute('/shahrnik/neighbors',ability.bNeighborCraftsman)">
+
+            <div style="background-color: #f8c4b4;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/neighbor.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        همسایه ها
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- <div class="col-md-3 "  *ngIf="ability.bBusiness" (click)="changeRoute('/home',ability.bBusiness)">
+
+            <div style="background-color: #f8c4b4;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/neighbor.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                         کسب و کار
+                    </p>
+                </div>
+
+            </div>
+
+        </div> -->
+        <div class="col-md-3 " *ngIf="ability.bNeighborCraftsman"
+            (click)="changeRoute('/home',ability.bNeighborCraftsman)">
+
+            <div style="background-color: #f8c4b4;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/neighbor.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        کسب و کار
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " *ngIf="ability.bWhatIsGoing"
+            (click)="changeRoute('/shahrnik/whatsupincity',ability.bWhatIsGoing)">
+
+            <div style="background-color: #dfe8cc;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/incity-ai.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p *ngIf="!Info.bVillage">
+                        چه خبر تو شهر ؟
+                    </p>
+
+                    <p *ngIf="Info.bVillage">
+                        چه خبر تو روستا ؟
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6 " *ngIf="ability.bTourism" (click)="changeRoute('/shahrnik/Tourism',ability.bTourism)">
+
+            <div style="background-color: #ecf9ff;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/گردشگری.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>سیر و سیاحت</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " *ngIf="ability.bGeneralinfTraining"
+            (click)="changeRoute('/shahrnik/generalduc',ability.bGeneralinfTraining)">
+
+            <div style="background-color: #fdf7c3;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/general.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        اطلاعات عمومی و آموزش
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-3 " *ngIf="ability.bRealestateUrban" routerLink="/shahrnik/bill">
+
+            <div style="background-color: #ffdca9;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/استعلام وضعیت ملک.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        املاک و شهرسازی
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- <div class="col-md-3 ">
+
+            <div class="box p-3">
+
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/دیدار.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>سامانه دیدار</p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3 " (click)="changeRoute('/shahrnik/education',ability.bEducational)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/آموزش شهروند.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>آموزش شهروندی</p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3 " (click)="changeRoute('/shahrnik/essential-Phones',ability.bEssentialPhones)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/تلفن های ضروری.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>تلفن های ضروری</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3" (click)="changeRoute('/shahrnik/emergency',ability.bEmergency)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/اورژانس.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>اورژانس و درمان</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " (click)="changeRoute('/shahrnik/Tourism',ability.bTourism)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/گردشگری.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>سیر و سیاحت</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " (click)="changeRoute('/shahrnik/discount',ability.bDiscount)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/تخفیف دونی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>تخفیف دونی</p>
+
+                    <small>تخفیفات هوشمند مخصوص شما</small>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3 " (click)="changeRoute('/shahrnik/draw',ability.bLottery)">
+
+            <div class="box p-3">
+
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/نتایج قرعه کشی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>نتایج قرعه کشی</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " (click)="changeRoute('/shahrnik/Golrizon',ability.bSocialSupport)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/گلریزون.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>گلریزون</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " (click)="changeRoute('/shahrnik/news',ability.bNews)">
+
+            <div class="box p-3">
+
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/اخبار.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>اخبار</p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " (click)="changeRoute('/shahrnik/cartable',ability.cartable)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/کارتابل.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>کارتابل</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " (click)="changeRoute('/shahrnik/organization',ability.bForms)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/دولت الکترونیک.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>دولت الکترونیک</p>
+
+                    <small>(خدمات غیر حضوری)</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " (click)="changeRoute('/shahrnik/chat',ability.bMC)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/ارتباط مستقیم با مدیران.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>ارتباط با مدیران</p>
+
+                    <small>(ارتباط مستقیم)</small>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " (click)="changeRoute('/shahrnik/Citizenship-Credit',true)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/اعتبار شهروندی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>اعتبار شهروندی</p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " routerLink="/shahrnik/bill">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/استعلام وضعیت ملک.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>استعلام وضعیت ملک</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3" (click)="changeRoute('/shahrnik/allplaces',true)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/مکان های مورد علاقه.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>مکان های مورد علاقه</p>
+                    تست
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " (click)="changeRoute('/shahrnik/faq',ability.bFAQ)">
+
+            <div class="box p-3 ">
+
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/پرسش های عمومی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p> پرسش های عمومی</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " (click)="changeRoute('/shahrnik/Transportation',ability.bPeysepar)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/حمل و نقل عمومی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p> حمل و نقل عمومی</p>
+
+                </div>
+
+            </div>
+
+        </div> -->
+
+    </div>
+</div>
+
+
+<!-- Mobile View -->
+
+<div class="mobile d-none container mt-4">
+
+    <div class="row g-3">
+
+        <div class="col-md-6 " *ngIf="ability.bMunicipalityAnd137"
+            (click)="changeRoute('/shahrnik/mayor137',ability.bMunicipalityAnd137)">
+
+            <div style="background-color: #ecf9ff;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/ارتباط مردمی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        ارتباط با شهرداری و 137
+                    </p>
+                    <!-- <small>(ثبت گزارش مشکلات شهری)</small> -->
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6 " *ngIf="ability.bEverythingAboutMe"
+            (click)="changeRoute('/shahrnik/howamido',ability.bEverythingAboutMe)">
+
+            <div style="background-color: #FFE1E1;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/favoriteplace-ai.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        همه چیز درباره من
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6" *ngIf="ability.bZistyar" (click)="changeRoute('/shahrnik/zistYar',ability.bZistyar)">
+
+            <div style="background-color: #ffdca9;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/zistyar.png">
+
+                </div>
+
+                <div class="title-Container">
+
+
+                    <p>زیست یار </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6 " *ngIf="ability.bIAmMayor " (click)="changeRoute('/shahrnik/',false )">
+
+            <div style="background-color: #fdf7c3;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/پرسش های عمومی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        من هم شهردارم
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-6" *ngIf="ability.bMyPOI" (click)="changeRoute('/shahrnik/allplaces',ability.bMyPOI)">
+
+            <div style="background-color: #fdf7c3;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/مکان های مورد علاقه.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>مکان های مورد علاقه</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " *ngIf="ability.bMyCars" (click)="changeRoute('/shahrnik/myVehicles',ability.bMyCars)">
+
+            <div style="background-color: #f8c4b4;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/my vehicles.jpg">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>خودرو ها و موتور های من</p>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6 " *ngIf="ability.bPeysepar"
+            (click)="changeRoute('/shahrnik/Transportation',ability.bPeysepar)">
+
+            <div style="background-color: #faebe0;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/حمل و نقل عمومی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p> حمل و نقل عمومی</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " *ngIf="ability.bForms" (click)="changeRoute('/shahrnik/organization',ability.bForms)">
+
+            <div style="background-color: #ffdca9;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/دولت الکترونیک.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p> میز خدمت</p>
+
+                    <!-- <small>(خدمات غیر حضوری)</small> -->
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " *ngIf="ability.bWhatIsGoing"
+            (click)="changeRoute('/shahrnik/whatsupincity',ability.bWhatIsGoing)">
+
+            <div style="background-color: #dfe8cc;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/incity-ai.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        چه خبر تو شهر ؟
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " *ngIf="ability.bNeighborCraftsman"
+            (click)="changeRoute('/shahrnik/neighbors',ability.bNeighborCraftsman)">
+
+            <div style="background-color: #f8c4b4;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/neighbor.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        همسایه و حمایت مردمی
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " *ngIf="ability.bPurchaseDiscount"
+            (click)="changeRoute('/shahrnik/shoppingoffers',ability.bPurchaseDiscount)">
+
+            <div style="background-color: #e3dffd;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/تخفیف دونی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        خرید ها و تخفیف ها
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " *ngIf="ability.bTourism" (click)="changeRoute('/shahrnik/Tourism',ability.bTourism)">
+
+            <div style="background-color: #ecf9ff;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/گردشگری.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>سیر و سیاحت</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " *ngIf="ability.bGeneralinfTraining"
+            (click)="changeRoute('/shahrnik/generalduc',ability.bGeneralinfTraining)">
+
+            <div style="background-color: #FFE1E1;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/general.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        اطلاعات عمومی و آموزش
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " *ngIf="ability.bRealestateUrban" routerLink="/shahrnik/bill">
+
+            <div style="background-color: #fdf7c3;" class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/استعلام وضعیت ملک.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>
+                        املاک و شهرسازی
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- 
+        <div class="col-md-3 " (click)="changeRoute('/shahrnik/news',ability.bNews)">
+
+            <div class="box p-3">
+
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/اخبار.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>اخبار</p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " (click)="changeRoute('/shahrnik/cartable',ability.cartable)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/کارتابل.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>کارتابل</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-6 " (click)="changeRoute('/shahrnik/chat',ability.bMC)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/ارتباط مستقیم با مدیران.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>ارتباط با مدیران</p>
+
+                    <small>(ارتباط مستقیم)</small>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " (click)="changeRoute('/shahrnik/Citizenship-Credit',true)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/اعتبار شهروندی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>اعتبار شهروندی</p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " routerLink="/shahrnik/bill">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/استعلام وضعیت ملک.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>استعلام وضعیت ملک</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6 " (click)="changeRoute('/shahrnik/Transportation',ability.bPeysepar)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/حمل و نقل عمومی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p> حمل و نقل عمومی</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3" (click)="changeRoute('/shahrnik/favorite-places',true)">
+
+            <div class="box p-3">
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/مکان های مورد علاقه.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p>مکان های مورد علاقه</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 " (click)="changeRoute('/shahrnik/faq',ability.bFAQ)">
+
+            <div class="box p-3 ">
+
+
+                <div class="image-Container">
+
+                    <img src="../../../assets/imgs/پرسش های عمومی.png">
+
+                </div>
+
+                <div class="title-Container">
+
+                    <p> پرسش های عمومی</p>
+
+                </div>
+
+            </div>
+
+        </div> -->
+
+
+
+    </div>
+</div>
+
+<div class="sos-Container">
+
+    <p>SOS</p>
+
+</div>
+<div class="help-Container">
+
+    <i (click)="openGuid(31)" class="fa fa-question-circle-o px-2 pointer" aria-hidden="true"></i>
+
+</div>

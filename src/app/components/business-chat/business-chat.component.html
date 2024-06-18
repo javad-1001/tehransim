@@ -1,0 +1,253 @@
+<div *ngIf="showChats">
+    <div class="container">
+        <h3>
+            گفتگو ها
+        </h3>
+        <div (click)="openChat(item)" *ngFor="let item of chats">
+            <div class="chat_contact">
+                <div>
+                    <div>
+                        <img *ngIf="item.strAvatar" src="data:image/png;base64,{{item.strAvatar}}" alt="">
+                        <img *ngIf="!item.strAvatar" src="../../../assets/imgs/Shahrnik_Logo_Public_new.png" alt="">
+                    </div>
+                    <p>{{item.strNikName}}</p>
+                </div>
+                <div class="chat_date">{{item.strFullDate | faNum}}</div>
+                <div class="chat_seen" *ngIf="item.iNotSeenMessages !== 0">{{item.iNotSeenMessages | faNum}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="chat_page" *ngIf="!showChats">
+    <div class="chat_contact px-2 bg-White container">
+        <div>
+            <div>
+                <img *ngIf="userInfo.strAvatar" src="data:image/png;base64,{{userInfo.strAvatar}}" alt="">
+                <img *ngIf="!userInfo.strAvatar" src="../../../assets/imgs/Shahrnik_Logo_Public_new.png" alt="">
+            </div>
+            <p>{{userInfo.strNikName}}</p>
+        </div>
+    </div>
+    <div>
+        <div *ngFor="let pm of PMs">
+            <div class="pm_box">
+                {{pm.strMessage}}
+            </div>
+        </div>
+    </div>
+    <div class="bg-White send_box w-100">
+        send
+    </div>
+</div> -->
+<div class="chat_page" *ngIf="!showChats">
+
+    <main class="content">
+        <div class="container p-0">
+            <div class="card">
+                <div class="row g-0">
+                    <div class="col-12 col-lg-12">
+
+                        <div class="py-2 px-4 border-bottom central justify-content-between">
+                            <div class="d-flex align-items-center py-1">
+                                <div class="position-relative">
+                                    <img *ngIf="userInfo.strAvatar" src="data:image/png;base64,{{userInfo.strAvatar}}"
+                                        class="rounded-circle mr-1" width="40" height="40">
+                                    <img *ngIf="!userInfo.strAvatar"
+                                        src="../../../assets/imgs/Shahrnik_Logo_Public_new.png"
+                                        class="rounded-circle mr-1" width="40" height="40">
+                                </div>
+                                <div class="flex-grow-1 pl-3">
+                                    <strong class="mx-2">{{userInfo.strNikName}}</strong>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary central" (click)="goChat()"><mat-icon>arrow_back</mat-icon></button>
+                        </div>
+
+                        <div class="position-relative">
+                            <div id="chatbox" class="chat-messages p-4">
+                                <div *ngFor="let pm of PMs">
+                                    <div class="w-100"
+                                        [ngClass]="pm.iUserManager_User_Receivier !== Info.Id ? 'pm_box_sender' : 'pm_box_recive' ">
+                                        <div class="pm_box">
+                                            <audio *ngIf="pm.iMesType == 3" [src]="base64ToAudioUrl(pm.strImageOrWave)"
+                                                controls></audio>
+                                            <img *ngIf="pm.iMesType == 2" (click)="openMapInNewTab(pm.fLat, pm.fLon)"
+                                                src="../../../assets/imgs/map-chat.jpg" alt="">
+                                            <img *ngIf="pm.iMesType == 1"
+                                                src="data:image/png;base64,{{pm.strImageOrWave}}" alt="">
+                                            <p>{{pm.strMessage}}</p>
+                                            <!-- <p>{{pm.iMesType}}</p> -->
+                                            <div class="central pm_footer justify-content-between">
+                                                <span>
+                                                    {{pm.strFullDate | faNum}}
+                                                </span>
+                                                <div *ngIf="pm.iUserManager_User_Receivier !== Info.Id" class="svgbox">
+                                                    <svg *ngIf="pm.bReached_2Adience" width="64px" height="64px"
+                                                        viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                            stroke-linejoin="round"></g>
+                                                        <g id="SVGRepo_iconCarrier">
+                                                            <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="#000000"
+                                                                stroke-width="2" stroke-linecap="round"
+                                                                stroke-linejoin="round"></path>
+                                                        </g>
+                                                    </svg>
+                                                    <svg *ngIf="pm.bViewByAdience" width="64px" height="64px"
+                                                        viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                            stroke-linejoin="round"></g>
+                                                        <g id="SVGRepo_iconCarrier">
+                                                            <path
+                                                                d="M1.5 12.5L5.57574 16.5757C5.81005 16.8101 6.18995 16.8101 6.42426 16.5757L9 14"
+                                                                stroke="#0033ff" stroke-width="1.5"
+                                                                stroke-linecap="round"></path>
+                                                            <path d="M16 7L12 11" stroke="#0033ff" stroke-width="1.5"
+                                                                stroke-linecap="round"></path>
+                                                            <path
+                                                                d="M7 12L11.5757 16.5757C11.8101 16.8101 12.1899 16.8101 12.4243 16.5757L22 7"
+                                                                stroke="#0033ff" stroke-width="1.5"
+                                                                stroke-linecap="round"></path>
+                                                        </g>
+                                                    </svg>
+                                                    <svg *ngIf="!pm.bViewByAdience && !pm.bReached_2Adience"
+                                                        width="64px" height="64px" viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                            stroke-linejoin="round"></g>
+                                                        <g id="SVGRepo_iconCarrier">
+                                                            <path
+                                                                d="M1.5 12.5L5.57574 16.5757C5.81005 16.8101 6.18995 16.8101 6.42426 16.5757L9 14"
+                                                                stroke="#000000" stroke-width="1.5"
+                                                                stroke-linecap="round"></path>
+                                                            <path d="M16 7L12 11" stroke="#000000" stroke-width="1.5"
+                                                                stroke-linecap="round"></path>
+                                                            <path
+                                                                d="M7 12L11.5757 16.5757C11.8101 16.8101 12.1899 16.8101 12.4243 16.5757L22 7"
+                                                                stroke="#000000" stroke-width="1.5"
+                                                                stroke-linecap="round"></path>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="flex-grow-0 py-3 px-4 border-top">
+                            <div [formGroup]="pmSender" class="input-group">
+
+                                <button (click)="map()" *ngIf="!showSend" class="d-flex btn btn-primary">
+                                    <mat-icon>location_on</mat-icon>
+                                </button>
+                                <button (click)="openPicModal()" *ngIf="!showSend" class="d-flex btn btn-primary">
+                                    <mat-icon>attachment</mat-icon>
+                                </button>
+                                <button *ngIf="!showSend" class="d-flex btn btn-primary">
+                                    <mat-icon>keyboard_voice</mat-icon>
+                                </button>
+
+
+                                <button type="submit" (click)="sendText(0)" *ngIf="showSend" class="d-flex btn btn-primary">
+                                    <mat-icon style="rotate:180deg;">send</mat-icon>
+                                </button>
+
+                                <input formControlName="strMessage" (keyup)="checkInput($event.target.value)"
+                                    type="text" class="form-control" placeholder="متن پیام...">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+<div class="modal  fade dir " id="Modal" tabindex="4" role="dialog" aria-hidden="true">
+
+    <div style="width:90%;" class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content bg-gray-soft">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                </div>
+
+                <div class="modal-body d-flex flex-column align-items-center">
+                    <div class="central flex-column" [formGroup]="pmSender">
+                        <label *ngIf="!showSend" for="letterPic" class="mb-2 d-flex btn btn-primary custom-file-upload">
+                            انتخاب تصویر <mat-icon class="mx-2">attachment</mat-icon>
+                        </label>
+
+                        <input accept="image/*" type="file" id="letterPic" name="letterPic"
+                            (change)="onPicSelected($event)" style="display: none;">
+
+                        <img *ngIf="selectedPic" src="data:image/png;base64,{{selectedPic}}" class="mb-2 sending_pic"
+                            alt="">
+
+                        <input *ngIf="selectedPic" formControlName="strMessage" type="text" class="mb-2 form-control"
+                            placeholder="متن پیام...">
+
+                        <button (click)="sendText(1)" *ngIf="selectedPic" class="mb-2 d-flex btn btn-primary">
+                            ارسال <mat-icon class="mx-2" style="rotate:180deg;">send</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer d-flex justify-content-center  align-items-center ">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="modal  fade dir " id="Modal" tabindex="4" role="dialog" aria-hidden="true">
+
+    <div style="width:90%;" class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content bg-gray-soft">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                </div>
+
+                <div class="modal-body d-flex flex-column align-items-center">
+
+                </div>
+
+
+                <div class="modal-footer d-flex justify-content-center  align-items-center ">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

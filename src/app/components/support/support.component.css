@@ -1,0 +1,63 @@
+.tiket_box {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.tiket_box span {
+  color: navy;
+  font-weight: bold;
+}
+
+.tiket_box_status {
+  background-color: var(--divar);
+  border-radius: 15px;
+}
+
+.org_pm {
+  width: max-content;
+  max-width: 90%;
+  background-color: #8ceba3;
+  display: flex;
+  border-radius: 4px;
+  padding: 5px;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.main_pm {
+  width: 100%;
+  max-width: 100%;
+  background-color: #ebd98c;
+  display: flex;
+  border-radius: 4px;
+  padding: 5px;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.user_pm {
+  width: max-content;
+  max-width: 90%;
+  background-color: #c8d6ef;
+  display: flex;
+  border-radius: 4px;
+  padding: 5px;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.tiket_pm_date {
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.modal-body P{
+    word-wrap:break-word;
+    text-align: inherit;
+}
+.userpm_box {
+  justify-content: flex-start !important;
+}
+
+

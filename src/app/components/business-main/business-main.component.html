@@ -1,0 +1,1508 @@
+<main class="container p-2">
+
+    <div class="row">
+
+        <form #form="ngForm" (ngSubmit)="searchIn_advertisements(form)"
+            class="row align-items-center gx-0 gx-md-2 px-2 px-md-0 gy-3 gy-md-0 w-100 h-100">
+
+            <div class="position-relative col-12 col-md-3">
+
+                <div class="form-group has-icon">
+
+                    <span class="form-control-icon">
+
+                        <mat-icon class="mat-18">category</mat-icon>
+
+                    </span>
+
+                    <select class="w-100 " type="text" [ngModel]="-2" name="tiType">
+
+                        <option value="-1">همه دسته بندی ها</option>
+
+                        <option *ngIf="ability?.bSamsari" value="0"> سمساری </option>
+
+                        <option *ngIf="ability?.bSupportServices" value="1"> همیاری شهروندی </option>
+
+                        <option *ngIf="ability?.bEmployment" value="2"> استخدام و کاریابی </option>
+
+                        <option *ngIf="ability?.bResume" value="3"> کسب و کارها </option>
+
+                        <option *ngIf="ability?.bRealstate" value="4"> املاک </option>
+
+                        <option *ngIf="ability?.bCar" value="5"> خودرو </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="position-relative col-12 col-md-5">
+
+                <div class="form-group has-icon">
+
+                    <span class="form-control-icon">
+
+                        <mat-icon class="mat-18">manage_search</mat-icon>
+
+                    </span>
+
+                    <input ngModel name="strSearchContent" class="form-control" type="text"
+                        placeholder="جستجو در محتوای آگهی ها... ">
+
+                </div>
+
+            </div>
+
+            <div class="col-12 col-md-1">
+
+                <button type="submit" class="search-filter-btn btn btn-primary text-secondary fw-bold w-100"> جستجو
+                </button>
+
+            </div>
+
+        </form>
+
+        <div [innerHTML]="getSafeHtml(htmlContent)" class="central container my-3">
+
+            <!-- <img class="w-100" src="../../../assets/imgs/adverpic.png" alt=""> -->
+
+        </div>
+
+        <div class=" my-2 border_bottom">
+
+            <h2>
+                آگهی های پیشنهادی
+            </h2>
+
+            <owl-carousel-o [options]="carouselOptions">
+                <ng-template *ngFor="let item of likes" carouselSlide>
+
+                    <div class="p-2 h-100">
+
+                        <div (click)="openDetail(item,i)" class="adds_box h-100">
+                            <div class="hover">
+                                <div class="tooltip">{{item.strText1}}</div>
+                                <img *ngIf="item.strImage" src="data:image/png;base64,{{item.strImage}}" alt="">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </ng-template>
+            </owl-carousel-o>
+
+        </div>
+
+        <!-- دسته بندی -->
+
+        <div class="sticky-category col-lg-3">
+
+            <div *ngIf="ability?.bResume" class="pointer business_but">
+                <button (click)="changeRoute('business')" class="rounded"
+                    class="btn btn-secondary mb-2 w-100  central justify-content-start align-items-center">
+
+
+                    <mat-icon [ngClass]="tiType == 3 ? 'isActive mx-1' : 'mx-1' " class=" text-primary mx-1">store
+                    </mat-icon>
+
+                    <p class="m-0" [ngClass]="tiType == 3 ? 'isActive fw-bold' : '' "> کسب و کارها </p>
+
+
+                </button>
+            </div>
+            <div *ngIf="ability?.bResume" class="pointer business_but">
+                <button (click)="changeRoute('RealstateMap')" class="rounded"
+                    class="btn btn-secondary mb-2 w-100  central justify-content-start align-items-center">
+
+                    <mat-icon [ngClass]="tiType == 3 ? 'isActive mx-1' : 'mx-1' " class="mx-1 text-primary ">pin_drop
+                    </mat-icon>
+
+                    <p class="m-0" [ngClass]="tiType == 3 ? 'isActive fw-bold' : '' "> املاک بر حسب نقشه </p>
+
+                </button>
+            </div>
+
+            <ul class="side_box list-unstyled pt-0">
+
+                <li class="mb-1 mt-0">
+
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+                        
+                        w-100 d-flex justify-content-between" data-bs-toggle="collapse" data-bs-target="#home-collapse"
+                        aria-expanded="true">
+
+                        دسته بندی
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+
+
+                    <div *ngIf="this.filterModel.get('tiType')?.value.toString() as tiType" class="collapse show"
+                        id="home-collapse">
+
+                        <!-- منوی دسته بندی -->
+
+
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+
+                            <!-- همه -->
+
+                            <li class="pointer">
+
+                                <a (click)="getAllPosts(-1)" class="link-dark rounded">
+
+                                    <mat-icon [ngClass]="tiType == -1 ? 'isActive mx-1' : 'mx-1' ">category</mat-icon>
+
+                                    <p [ngClass]="tiType == -1 ? 'isActive fw-bold' : '' "> همه دسته بندی ها </p>
+
+                                </a>
+
+                            </li>
+
+                            <!-- املاک -->
+
+                            <li *ngIf="ability?.bRealstate" class="pointer">
+
+                                <a (click)="getAllPosts(4)" class="link-dark rounded">
+
+                                    <mat-icon [ngClass]="tiType == 4 ? 'isActive mx-1' : 'mx-1' ">home_work</mat-icon>
+
+                                    <p [ngClass]="tiType == 4 ? 'isActive fw-bold' : '' "> املاک </p>
+
+                                </a>
+
+                            </li>
+
+                            <!-- سمساری -->
+
+                            <li *ngIf="ability?.bSamsari" class="pointer">
+
+                                <a (click)="getAllPosts(0)" class="link-dark rounded">
+
+                                    <mat-icon [ngClass]="tiType == 0 ? 'isActive mx-1' : 'mx-1' ">chair_alt</mat-icon>
+
+                                    <p [ngClass]="tiType == 0 ? 'isActive fw-bold' : '' "> سمساری</p>
+
+                                </a>
+
+                            </li>
+
+                            <!-- همیاری شهروندی -->
+
+                            <li *ngIf="ability?.bSupportServices" class="pointer">
+
+                                <a (click)="getAllPosts(1)" class="link-dark rounded">
+
+                                    <mat-icon [ngClass]="tiType == 1 ? 'isActive mx-1' : 'mx-1' ">diversity_1</mat-icon>
+
+                                    <p [ngClass]="tiType == 1 ? 'isActive fw-bold' : '' "> همیاری شهروندی</p>
+
+                                </a>
+
+                            </li>
+
+                            <!-- استخدام و کاریابی -->
+
+                            <li *ngIf="ability?.bEmployment" class="pointer">
+
+                                <a (click)="getAllPosts(2)" class="link-dark rounded">
+
+                                    <mat-icon [ngClass]="tiType == 2 ? 'isActive mx-1' : 'mx-1' ">business_center
+                                    </mat-icon>
+
+                                    <p [ngClass]="tiType == 2 ? 'isActive fw-bold' : '' "> استخدام و کاریابی</p>
+
+                                </a>
+
+                            </li>
+
+                            <!--   خودرو  -->
+
+                            <li *ngIf="ability?.bCar" class="pointer">
+
+                                <a (click)="getAllPosts(5)" class="link-dark rounded">
+
+                                    <mat-icon [ngClass]="tiType == 5 ? 'isActive mx-1' : 'mx-1' ">directions_car
+                                    </mat-icon>
+
+                                    <p [ngClass]="tiType == 5 ? 'isActive fw-bold' : '' "> خودرو</p>
+
+                                </a>
+
+                            </li>
+
+                            <!--  کسب و کارها -->
+
+
+
+                        </ul>
+
+                    </div>
+
+                </li>
+
+                <li *ngIf="!isBookmark && false" class="mb-1">
+
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                         w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse" aria-expanded="false">
+
+                        شهر
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">apartment</mat-icon>
+
+                                    </span>
+
+                                    <select (change)="getAllPosts(filterModel.get('tiType').value,'isCity')"
+                                        class="w-100" formControlName="strCityCode">
+
+                                        <option value="-1"> همه شهر ها </option>
+
+                                        <option *ngFor="let item of list_City" [value]="item?.CityCode.trim()">
+
+                                            {{item.strCityName}}
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 4" class="mb-1">
+
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse1" aria-expanded="false">
+
+                        گروه
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse1" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">category</mat-icon>
+
+                                    </span>
+
+                                    <select (change)="showSubGroup(filterModel.value.tiType)" class="w-100 "
+                                        formControlName="tiGroup">
+
+                                        <option value="-1"> گروه </option>
+
+                                        <option *ngFor="let item of groups" value={{item.tiRealEstate_Group}}>
+                                            {{item.strComment}}
+                                        </option>
+                                    </select>
+
+                                </div>
+
+
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">subject</mat-icon>
+
+                                    </span>
+
+                                    <select (change)="postBySub()" class="w-100 " formControlName="iSubGroup">
+                                        <option value="-1"> * زیر گروه </option>
+                                        <option *ngFor="let item of subGroups" [value]="item.iRealEstate_SubGroup">
+                                            {{item.strComment}}
+                                        </option>
+                                    </select>
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 0" class="mb-1">
+
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse7" aria-expanded="false">
+
+                        گروه
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse7" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">category</mat-icon>
+
+                                    </span>
+
+                                    <select (change)="showSubGroup(filterModel.value.tiType)" class="w-100 "
+                                        formControlName="tiGroup">
+
+                                        <option value="-1"> گروه </option>
+
+                                        <option *ngFor="let item of groupsSamsari" value={{item.iSamsari_Group}}>
+                                            {{item.strComment}}
+                                        </option>
+                                    </select>
+
+                                </div>
+
+
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">subject</mat-icon>
+
+                                    </span>
+
+                                    <select (change)="postBySub()" class="w-100 " formControlName="iSubGroup">
+                                        <option value="-1"> زیر گروه </option>
+                                        <option *ngFor="let item of subGroupsSamsari" [value]="item.iSamsari_SubGroup">
+                                            {{item.strComment}}
+                                        </option>
+                                    </select>
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 2" class="mb-1">
+
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse9" aria-expanded="false">
+
+                        گروه
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse9" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">category</mat-icon>
+
+
+                                    </span>
+
+                                    <select (change)="showSubGroup(filterModel.value.tiType)" class="w-100 "
+                                        formControlName="tiGroup">
+
+                                        <option value="-1"> گروه </option>
+
+                                        <option *ngFor="let item of groupsEmploy" value={{item.iResume_Category}}>
+                                            {{item.strComment}}
+                                        </option>
+                                    </select>
+
+                                </div>
+
+
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">subject</mat-icon>
+
+                                    </span>
+
+                                    <select (change)="postBySub()" class="w-100 " formControlName="iSubGroup">
+                                        <option value="-1"> زیر گروه </option>
+                                        <option *ngFor="let item of subGroupsEmploy" [value]="item.iResume_SubCategory">
+                                            {{item.strComment}}
+                                        </option>
+                                    </select>
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 1" class="mb-1">
+
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                         w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse11" aria-expanded="false">
+
+                        شهر مبدا یا مقصد
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse11" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">apartment</mat-icon>
+
+                                    </span>
+
+                                    <select (change)="postBySub()" class="w-100" formControlName="strCity_Source">
+
+                                        <option value="-1">مبدا</option>
+
+                                        <option *ngFor="let item of cityList4Support" [value]="item?.CityCode.trim()">
+
+                                            {{item.strCityName}}
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">apartment</mat-icon>
+
+                                    </span>
+
+                                    <select (change)="postBySub()" class="w-100" formControlName="strCity_Distination">
+
+                                        <option value="-1">مقصد</option>
+
+                                        <option *ngFor="let item of cityList4Support" [value]="item?.CityCode.trim()">
+
+                                            {{item.strCityName}}
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </li>
+
+                <li
+                    *ngIf="!isBookmark && filterModel.value.tiType == 4 || filterModel.value.tiType == 0 || filterModel.value.tiType == 2 || filterModel.value.tiType == 5">
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse2" aria-expanded="false">
+
+                        <span
+                            *ngIf="filterModel.value.tiType == 4 || filterModel.value.tiType == 0 || filterModel.value.tiType == 5">قیمت</span>
+                        <span *ngIf="filterModel.value.tiType == 2">حقوق</span>
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse2" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">attach_money</mat-icon>
+
+                                    </span>
+                                    <input #budget name="budget" (input)="onBudget(1)" class=" w-100 form-control"
+                                        #iMortgage formControlName="iMinPrice"
+                                        [ngStyle]="{ direction: iMortgage.value.trim() == '' ? 'rtl' : 'ltr' }"
+                                        [placeholder]="' حداقل' +' (' + Currency + ')'"
+                                        oninput="this.value=this.value.replace(/[^0-9]/g,'')" type="text">
+
+                                </div>
+
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">attach_money</mat-icon>
+
+                                    </span>
+                                    <input #budgetND name="budgetND" (input)="onBudget(1)" class=" w-100 form-control"
+                                        #iRent formControlName="iMaxPrice"
+                                        [ngStyle]="{ direction: iRent.value.trim() == '' ? 'rtl' : 'ltr' }"
+                                        [placeholder]="' حداکثر' +' (' + Currency + ')'"
+                                        oninput="this.value=this.value.replace(/[^0-9]/g,'')" type="text">
+
+                                </div>
+
+                                <div *ngIf=" filterModel.value.tiType == 0" class="d-flex align-items-center my-1">
+                                    <input (change)="postBySub()" class="mx-2" type="checkbox" formControlName="tiFree"
+                                        [value]="1">
+                                    رایگان
+                                </div>
+
+                                <button class="btn btn-primary" (click)="postBySub()">جستجو</button>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 4">
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse3" aria-expanded="false">
+
+                        وضعیت اثاث
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse3" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+
+                                <div class="check_middle flex-column ">
+                                    <div class="d-flex flex-column justify-content-between w-100 px-2">
+                                        <div class="d-flex my-1"><input (change)="postBySub()" class="mx-1" type="radio"
+                                                formControlName="tiFurnishedStatus" [value]="-1"> همه شرایط </div>
+                                        <div class="d-flex my-1"><input (change)="postBySub()" class="mx-1" type="radio"
+                                                formControlName="tiFurnishedStatus" [value]="0"> خشک</div>
+                                        <div class="d-flex my-1"><input (change)="postBySub()" class="mx-1" type="radio"
+                                                formControlName="tiFurnishedStatus" [value]="1"> مبله</div>
+                                        <div class="d-flex my-1"><input (change)="postBySub()" class="mx-1" type="radio"
+                                                formControlName="tiFurnishedStatus" [value]="2"> تمام مبله</div>
+
+                                    </div>
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 1">
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse13" aria-expanded="false">
+
+                        نوع آگهی
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse13" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+
+                                <div class="check_middle flex-column ">
+                                    <div class="d-flex flex-column justify-content-between w-100 px-2">
+                                        <div class="d-flex my-1"><input (change)="postBySub()" class="mx-1" type="radio"
+                                                formControlName="tiDoer" [value]="-1"> همه موارد</div>
+                                        <div class="d-flex my-1"><input (change)="postBySub()" class="mx-1" type="radio"
+                                                formControlName="tiDoer" [value]="1"> مسافر</div>
+                                        <div class="d-flex my-1"><input (change)="postBySub()" class="mx-1" type="radio"
+                                                formControlName="tiDoer" [value]="0"> متقاضی</div>
+
+                                    </div>
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </li>
+
+                <!-- <li *ngIf="!isBookmark && filterModel.value.tiType == 1">
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse14" aria-expanded="false">
+
+                        اسناد و مدارک
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse14" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+
+                                <div class="check_middle flex-column ">
+                                    <div class="d-flex flex-column justify-content-between w-100 px-2">
+                                        <div class="d-flex my-1"><input (change)="postBySub()" class="mx-1" type="radio"
+                                                formControlName="tiDocuments" [value]="1"> هست </div>
+                                        <div class="d-flex my-1"><input (change)="postBySub()" class="mx-1" type="radio"
+                                                formControlName="tiDocuments" [value]="-1"> نیست</div>
+
+                                    </div>
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </li> -->
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 2">
+
+                    <div [formGroup]="filterModel" class="d-flex align-items-center my-1">
+                        <input (change)="postBySub()" class="mx-2" type="checkbox" formControlName="tiWorkPermit"
+                            [value]="1">
+                        نیاز به مجوز کار
+                    </div>
+
+                    <!-- <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse10" aria-expanded="false">
+
+                        نیاز به مجوز کار
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse10" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+
+                                <div class="check_middle flex-column ">
+                                    <div class="d-flex flex-column justify-content-between w-100 px-2">
+                                        <div class="d-flex my-1"><input (change)="postBySub()" class="mx-1" type="radio"
+                                                formControlName="tiWorkPermit" [value]="-1"> ندارد</div>
+                                        <div class="d-flex my-1"><input (change)="postBySub()" class="mx-1" type="radio"
+                                                formControlName="tiWorkPermit" [value]="1"> دارد</div>
+
+                                    </div>
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div> -->
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 4">
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse4" aria-expanded="false">
+
+                        تعداد اتاق
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse4" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">hotel</mat-icon>
+
+                                    </span>
+                                    <input #budget name="budget" (input)="onBudget(1)" class=" w-100 form-control"
+                                        #iMortgage formControlName="tiMinRooms"
+                                        [ngStyle]="{ direction: iMortgage.value.trim() == '' ? 'rtl' : 'ltr' }"
+                                        [placeholder]="' حداقل'" oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                                        type="text">
+
+                                </div>
+
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">hotel</mat-icon>
+
+                                    </span>
+                                    <input #budgetND name="budgetND" (input)="onBudget(1)" class=" w-100 form-control"
+                                        #iRent formControlName="tiMaxRooms"
+                                        [ngStyle]="{ direction: iRent.value.trim() == '' ? 'rtl' : 'ltr' }"
+                                        [placeholder]="' حداکثر'" oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                                        type="text">
+
+                                </div>
+
+                                <button class="btn btn-primary" (click)="postBySub()">جستجو</button>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 4">
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse5" aria-expanded="false">
+
+                        تاریخ تخلیه از
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse5" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+
+
+                                <div *ngIf="bDateJalali" class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">date_range</mat-icon>
+
+                                    </span>
+
+                                    <ng-persian-datepicker [uiTheme]="'gray'" [timeEnable]="false"
+                                        [dateGregorianFormat]="'YYYY-MM-DD'" [dateFormat]="'jYYYY/jMM/jDD'">
+                                        <input readonly type="text" formControlName="strDischargeDate"
+                                            class="form-control  text-end" placeholder="* تاریخ تخلیه"
+                                            autocomplete="off" initialValue="false" />
+                                    </ng-persian-datepicker>
+
+
+                                </div>
+
+                                <div *ngIf="!bDateJalali" class="form-group has-icon">
+
+                                    <mat-form-field class="w-100">
+                                        <mat-label>* تاریخ تخلیه</mat-label>
+                                        <input readonly matInput [matDatepicker]="picker"
+                                            formControlName="strDischargeDate">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <button class="btn btn-primary" (click)="postBySub()">جستجو</button>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 4">
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse6" aria-expanded="false">
+
+                        امکانات و قوانین
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse6" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+
+                                <div class="check_middle flex-column ">
+                                    <div class="d-flex flex-column justify-content-between w-100 px-2">
+                                        <div class="d-flex align-items-center my-1"><input (change)="postBySub()"
+                                                type="checkbox" formControlName="tiSmoking" [value]="1">
+                                            <mat-icon class="mx-1">smoking_rooms</mat-icon>
+                                            امکان استعمال دخانیات
+                                        </div>
+                                        <div class="d-flex align-items-center my-1"><input (change)="postBySub()"
+                                                type="checkbox" formControlName="tiKeepingPets" [value]="1">
+                                            <mat-icon class="mx-1">pets</mat-icon>
+                                            امکان نگهداری حیوانات
+                                        </div>
+                                        <div class="d-flex align-items-center my-1"><input (change)="postBySub()"
+                                                type="checkbox" formControlName="tiBalcony" [value]="1">
+                                            <mat-icon class="mx-1">balcony</mat-icon>
+                                            دارای بالکن
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 1">
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse15" aria-expanded="false">
+
+                        نوع خدمات
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse15" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+
+                                <div class="check_middle flex-column ">
+                                    <div class="d-flex flex-column justify-content-between w-100 px-2">
+                                        <div class="d-flex align-items-center my-1"><input (change)="postBySub()"
+                                                type="checkbox" formControlName="tiVisibleLoad" [value]="1">
+                                            بار قابل رویت
+                                        </div>
+                                        <div class="d-flex align-items-center my-1"><input (change)="postBySub()"
+                                                type="checkbox" formControlName="tiDocuments" [value]="1">
+                                            اسناد و مدارک
+                                        </div>
+                                        <div class="d-flex align-items-center my-1"><input (change)="postBySub()"
+                                                type="checkbox" formControlName="tiPassengerAssistance" [value]="1">
+                                            همراهی مسافر
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 0" class="mb-1">
+
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse8" aria-expanded="false">
+
+                        وضعیت
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse8" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">category</mat-icon>
+
+                                    </span>
+
+                                    <select class="w-100 " formControlName="tiSamsariCondiation">
+
+                                        <option value="-1"> وضعیت کالا </option>
+
+                                        <option *ngFor="let item of getCondiationList"
+                                            value={{item.tiSamsariCondiation}}>
+                                            {{item.strComment}}
+                                        </option>
+                                    </select>
+
+                                </div>
+
+                                <button class="btn btn-primary" (click)="postBySub()">جستجو</button>
+
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 5">
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                    w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse13" aria-expanded="false">
+
+                        سال ساخت
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse13" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">event</mat-icon>
+
+                                    </span>
+                                    <input #budget name="budget" (input)="onBudget(1)" class=" w-100 form-control"
+                                        #iMortgage formControlName="iSYear"
+                                        [ngStyle]="{ direction: iMortgage.value.trim() == '' ? 'rtl' : 'ltr' }"
+                                        [placeholder]="' از سال'" oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                                        type="text">
+
+                                </div>
+
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">event</mat-icon>
+
+                                    </span>
+                                    <input #budgetND name="budgetND" (input)="onBudget(1)" class=" w-100 form-control"
+                                        #iRent formControlName="iEYear"
+                                        [ngStyle]="{ direction: iRent.value.trim() == '' ? 'rtl' : 'ltr' }"
+                                        [placeholder]="' تا سال'" oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+                                        type="text">
+
+                                </div>
+
+                                <button class="btn btn-primary" (click)="postBySub()">جستجو</button>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 5" class="mb-1">
+
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                         w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse14" aria-expanded="false">
+
+                        برند
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse14" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">menu</mat-icon>
+
+                                    </span>
+
+                                    <select (change)="postBySub()" class="w-100" formControlName="tiCar_Brand">
+
+                                        <option value="-1">برند</option>
+
+                                        <option *ngFor="let item of brand4Car" [value]="item?.tiCar_Brand">
+
+                                            {{item.strComment}}
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 5" class="mb-1">
+
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                         w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse15" aria-expanded="false">
+
+                        کلاس
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse15" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">car_crash</mat-icon>
+
+                                    </span>
+
+                                    <select (change)="postBySub()" class="w-100" formControlName="tiCar_Class">
+
+                                        <option value="-1">کلاس خودرو</option>
+
+                                        <option *ngFor="let item of class4Car" [value]="item?.tiCar_Class">
+
+                                            {{item.strComment}}
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 5" class="mb-1">
+
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                         w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse16" aria-expanded="false">
+
+                        گیربکس
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse16" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">settings_input_composite</mat-icon>
+
+                                    </span>
+
+                                    <select (change)="postBySub()" class="w-100" formControlName="tiCar_GearboxType">
+
+                                        <option value="-1">گیربکس</option>
+
+                                        <option *ngFor="let item of gearbox4Car" [value]="item?.tiCar_GearboxType">
+
+                                            {{item.strComment}}
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </li>
+
+                <li *ngIf="!isBookmark && filterModel.value.tiType == 5" class="mb-1">
+
+                    <button class="central btn btn-toggle align-items-center rounded border border-2
+
+                         w-100 d-flex justify-content-between" data-bs-toggle="collapse"
+                        data-bs-target="#dashboard-collapse17" aria-expanded="false">
+
+                        سوخت
+
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+
+                    </button>
+
+                    <div class="collapse" id="dashboard-collapse17" style="padding-right: 0px!important;">
+
+                        <ul [formGroup]="filterModel" class="btn-toggle-nav list-unstyled fw-normal py-2 small">
+
+                            <li class="position-relative">
+
+                                <div class="form-group has-icon">
+
+                                    <span class="form-control-icon">
+
+                                        <mat-icon class="mat-18">local_gas_station</mat-icon>
+
+                                    </span>
+
+                                    <select (change)="postBySub()" class="w-100" formControlName="tiCar_FuelType">
+
+                                        <option value="-1">سوخت</option>
+
+                                        <option *ngFor="let item of fuel4Car" [value]="item?.tiCar_FuelType">
+
+                                            {{item.strComment}}
+
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </li>
+
+
+
+            </ul>
+
+        </div>
+
+        <!-- لیست آگهی ها -->
+
+        <div class="col-lg-9">
+
+            <div class="row">
+
+                <ng-container *ngIf="posts.length > 0 && ( posts[0]?.strText1 || posts[0]?.strTitle )">
+
+                    <div class="col-lg-6 mb-2" *ngFor="let item of posts;let i = index">
+
+                        <div (click)="openDetail(item,i)" [ngClass]="isBookmark || isRecentVisits ?
+                            
+                            'prodoct_box custom-border pointer' :
+                            
+                            item.bVIP ? 'verified-business prodoct_box custom-border pointer' :
+                            
+                            'prodoct_box pointer' ">
+
+                            <div class="w-100">
+
+                                <div class="py-2">
+
+                                    <h3 class="text-secondary fw-bold mx-0 mb-0">
+
+                                        {{ item.strText1 ? item.strText1 : item.strTitle}}
+
+                                    </h3>
+
+                                </div>
+
+                                <div class="central w-100  justify-content-start">
+
+                                    {{ item.strText2 ? item.strText2 : item.strWeekDays}}
+
+                                </div>
+
+                                <div class="d-flex justify-content-between w-100 ">
+
+                                    <div class="w-100 d-flex flex-column">
+
+                                        <!-- <span> {{ item.strText3 | faNum}}</span> -->
+                                        {{ item.strText3 ? item.strText3 : item.strHoursOperation}}
+
+
+                                        <div class="text-muted d-flex justify-content-between align-items-center">
+
+                                            <div *ngIf="item.strPublishTime" class="">
+
+                                                <span class="text-muted" style="font-size: 13px;">{{item.strPublishTime|
+                                                    faNum}}</span>
+
+                                            </div>
+
+                                            <div
+                                                class="ads-badge rounded d-flex justify-content-center align-items-center text-muted mx-2">
+
+                                                <ng-container *ngIf="!isBookmark && !isRecentVisits">
+
+                                                    <small class="fw-bold">{{item.iView | faNum}}</small>
+
+                                                    <mat-icon class="mx-1">visibility</mat-icon>
+
+                                                </ng-container>
+
+                                                <mat-icon>
+
+                                                    {{
+
+                                                    item.tiType == 0 ? 'chair_alt' :
+
+                                                    item.tiType == 1 ? 'diversity_1' :
+
+                                                    item.tiType == 2 ? 'business_center' :
+
+                                                    item.tiType == 3 ? 'patient_list' :
+
+                                                    item.tiType == 4 ? 'home_work' : 'category'
+
+                                                    }}
+
+                                                </mat-icon>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- <div class="mx-2 central border border-2 border-danger">
+    
+                                        <span>{{item.iView | faNum}}</span>
+    
+                                        <mat-icon>visibility</mat-icon>
+    
+                                    </div> -->
+
+                                </div>
+
+                            </div>
+
+                            <div class="img_box">
+
+                                <img *ngIf="item.strImage" src="data:image/png;base64,{{item.strImage}}" alt="">
+
+                                <img *ngIf="!item.strImage" src="../../../assets/imgs/Shahrnik_Logo_Public_new.png"
+                                    alt="">
+
+                            </div>
+
+                        </div>
+
+                        <!-- list bookmark && list recent visits -->
+
+                        <ng-container *ngIf="isBookmark || isRecentVisits">
+
+                            <div class="ads-bookmark row d-flex justify-content-end gx-0 px-1 gy-2 w-100 border">
+
+                                <div class="col-1 px-1 py-2">
+
+                                    <button (click)="shareVia(item)"
+                                        class="d-flex justify-content-center align-items-center w-100 btn ">
+
+                                        <span class="d-flex">
+                                            <mat-icon> share </mat-icon>
+                                        </span>
+
+                                        <!-- <span class="px-2"> اشتراک گذاری </span> -->
+
+                                    </button>
+
+                                </div>
+
+                                <div class="col-1 px-1 py-2">
+
+                                    <button (click)="bookmarkAds(item,i)"
+                                        class="d-flex justify-content-center align-items-center w-100 btn ">
+
+                                        <ng-container *ngIf="isBookmark">
+
+                                            <span class="d-flex">
+                                                <mat-icon> {{item?.bookMark == 0 ? 'favorite' : 'favorite_border' }}
+                                                </mat-icon>
+                                            </span>
+
+                                            <!-- <span class="px-2"> {{item?.bookMark == 0 ? 'افزودن نشان' : 'حذف نشان' }}
+                                            </span> -->
+
+                                        </ng-container>
+
+                                        <ng-container *ngIf="isRecentVisits">
+
+                                            <span class="d-flex">
+                                                <mat-icon> {{item?.bookMark == 0 ? 'favorite_border' : 'favorite' }}
+                                                </mat-icon>
+                                            </span>
+
+                                            <!-- <span class="px-2"> {{item?.bookMark == 1 ? 'افزودن به نشان ها' :
+
+                                                item?.bookMark == 0 ? 'حذف از نشان ها' : 'افزودن به نشان ها' }}
+                                                
+                                            </span> -->
+
+                                        </ng-container>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="posts.length == 0 && isSearch_done">
+
+                    <div class="no-result-container p-2">
+
+                        <img width="300" src="../../../assets/imgs/no-result.jpg" alt="no-result">
+
+                        <p>
+                            نتیجه ایی
+
+                            <ng-container *ngIf="getStrName('strCategory') as strCategory">
+
+                                <span *ngIf="strCategory != '' "> در دسته بندی <span class="mx-1 fw-bold"> {{
+                                        strCategory }} </span></span>
+
+                            </ng-container>
+
+                            <ng-container
+                                *ngIf="(!isBookmark && !isRecentVisits) && getStrName('strCity')  as strCity ">
+
+                                <span *ngIf="strCity != '' "> در شهر <span class="mx-1 fw-bold"> {{ strCity }}
+                                    </span></span>
+
+                            </ng-container>
+
+                            یافت نشد
+
+                        </p>
+
+                    </div>
+
+                </ng-container>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>

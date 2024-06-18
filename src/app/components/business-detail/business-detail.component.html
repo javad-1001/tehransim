@@ -1,0 +1,1040 @@
+<main class="container">
+
+    <section *ngIf="!isFromAnotherComponent" class="main-container row w-full gx-2 p-2">
+
+        <!-- advertisements information -->
+
+        <div class="col-12 col-md-6 p-2">
+
+            <ng-container *ngIf="isLoading">
+
+                <div class="loader-container">
+
+                    <div class="loader"></div>
+
+                </div>
+
+            </ng-container>
+
+            <div *ngIf="!isLoading" class="w-100 h-100 p-2">
+
+                <span class="code">کد آگهی : {{information_ads.iAdvertising | faNum }} </span> <br>
+
+                
+
+
+                <h2 class="ads-title text-secondary">
+
+                    {{information_ads.strTitle | faNum }} <span class="text-danger" style="font-size: 13px;">(فوری فوری) </span>
+
+                </h2>
+
+                <span class="ads-time text-muted">
+
+                    {{information_ads.strPublishTime | faNum }}
+
+                    <span *ngIf="information_ads.strPublishCity">
+
+                        {{'در ' + information_ads.strPublishCity }}
+
+                    </span>
+
+                </span>
+
+
+                <!-- <div class="ads-warning my-4 d-flex justify-content-start align-items-center  ">
+
+                    <div class="d-flex align-items-center ">
+
+                        <span class="d-flex material-symbols-outlined">
+
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+
+                        </span>
+
+                        <span class="mx-2"> زنگ خطرهای قبل از معامله </span>
+
+                    </div>
+
+                    <span class="d-flex material-symbols-outlined mr-4">
+
+                        <mat-icon class="mat-18  text-muted">chevron_left</mat-icon>
+
+                    </span>
+
+
+
+                </div> -->
+
+                <div class="ads-call mt-3">
+
+                    <button class="btn btn-call central px-4 pointer" (click)="goToSupport()">
+                        <mat-icon>warning</mat-icon>
+                        <span class="mx-2"> گزارش مشکل</span>
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="ads-warning my-4 w-100 d-flex justify-content-start align-items-center  ">
+
+                    <div class="d-flex align-items-center ">
+
+
+
+                        <span class="mx-2">
+                            تا زمانی که از صحت معامله، کالا و یا خدمات اطمینان کامل ندارید وجهی پرداخت نکنید.دیار در
+                            قبال وجوه پرداختی و یا صحت مشخصات آگهی مسئولیتی ندارد.
+                        </span>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+                <div class="ads-operation w-100 d-flex justify-content-between p-2">
+
+                    <div class="buttons-container d-flex">
+
+                        <div class="ads-call">
+
+                            <button class="btn btn-call central px-4 pointer" (click)="show_Warning_Before_Call()"
+                                [disabled]="information_ads?.strMobile">
+                                <mat-icon>call</mat-icon>
+                                <span class="mx-2"> تماس </span>
+                            </button>
+
+
+                        </div>
+
+                        <div class="my-chat btn-secondary central p-1 mx-2 rounded-md">
+
+
+                            <button class="w-100 central border-0" (click)="chatWith_advertiser()">
+
+                                <!-- <mat-icon class="text-primary">forum</mat-icon> -->
+
+                                <svg class="mx-2" width="17" height="18" viewBox="0 0 17 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <rect width="17" height="18" fill="url(#pattern0)" />
+                                    <defs>
+                                        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1"
+                                            height="1">
+                                            <use xlink:href="#image0_110_180"
+                                                transform="matrix(0.00206801 0 0 0.00195312 -0.0294118 0)" />
+                                        </pattern>
+                                        <image id="image0_110_180" width="512" height="512"
+                                            xlink:href="data:image/png;base64,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" />
+                                    </defs>
+                                </svg>
+                                <span class="mx-2 text-main"> چت </span>
+
+                            </button>
+
+                            <!-- <button class="btn btn-outline-dark px-5 pointer" (click)="chatWith_advertiser()"> چت
+                            </button> -->
+
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="ads-share-bookmark d-flex align-items-center justify-content-end w-25">
+
+                        <span class="d-flex mx-2 material-symbols-outlined" (click)="bookmarkAds()">
+
+                            <mat-icon
+                                [ngClass]="information_ads.bookMark == 1 && isLogin ? 'bookmarked pointer' : 'text-muted pointer' ">
+
+                                {{ information_ads.bookMark == 1 && isLogin ? 'favorite' : 'favorite_border' }}
+
+                            </mat-icon>
+
+                        </span>
+
+                        <span class="d-flex material-symbols-outlined" (click)="shareVia()">
+
+                            <mat-icon class="mat-18 text-muted pointer">share</mat-icon>
+
+                        </span>
+
+
+                    </div>
+
+                </div>
+
+                <!-- اطلاعات آگهی گذار -->
+
+                <div [@slideInOut]="information_ads?.strMobile ? 'open' : 'closed'"
+                    class="ads-address-number-show w-100 p-2 mt-2">
+
+                    <div class="d-flex justify-content-between mb-4">
+
+                        <span> شماره موبایل </span>
+
+                        <div class="d-flex align-items-center pointer" (click)="callWith_advertiser()">
+
+                            <span class="mx-2"> {{ information_ads?.strMobile | faNum }} </span>
+
+                            <span class="d-flex material-symbols-outlined">
+
+                                <mat-icon class="mat-18 text-muted">phone_in_talk</mat-icon>
+
+                            </span>
+
+                            <!-- <span class="d-flex material-symbols-outlined">
+
+                                <mat-icon class="mat-18 text-muted">content_copy</mat-icon>
+        
+                            </span> -->
+
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-4">
+
+                        <span> چت </span>
+
+                        <div class="d-flex align-items-center pointer" (click)="chatWith_advertiser()">
+
+                            <!-- <span class="mx-2"> شروع گفتگو </span> -->
+
+                            <span class="d-flex material-symbols-outlined">
+
+                                <mat-icon class="mat-18 text-muted">forum</mat-icon>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="information_ads?.strAddress" class="d-flex justify-content-between mb-4">
+
+                        <span> {{information_ads.strAddress | faNum }} </span>
+
+                        <div class="d-flex align-items-center pointer">
+
+                            <span> </span>
+
+                            <span class="d-flex material-symbols-outlined">
+
+                                <mat-icon class="mat-18 text-muted">home</mat-icon>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div style="background-color: #F0FAFF;" class="rounded-sm p-3 ">
+
+                        <p class="fw-bold"> هشدار </p>
+
+                        <span class="text-muted">
+
+                            لطفاً پیش از انجام معامله
+                            و هر نوع پرداخت وجه،
+                            از صحت کالا یا خدمات ارائه‌شده،
+                            به‌صورت حضوری اطمینان حاصل نمایید.
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="ads-vertical p-4">
+
+                    <div *ngFor="let item of information_ads.lstHorizontalInfo;let i = index;"
+                        [ngClass]=" true ? 'ads-info-' + (i+1) : '' " class="text-center col-4">
+
+                        <span [innerHTML]="getSafeHtml(item.strTitle)" class="text-muted"> {{ item.strTitle || ' ' }}
+                        </span>
+
+                        <span [innerHTML]="getSafeHtml(item.strValue)" class="text-dark fw-bold"> {{ (item.strValue |
+                            faNum) || ' '}} </span>
+
+                    </div>
+
+                </div>
+
+                <ng-container class="ads-horizontal"
+                    *ngFor="let item of information_ads.lstverticalInfo;let i = index;">
+
+                    <div class="ads-horizontal w-100 d-flex justify-content-between mt-2 p-2">
+
+                        <span [innerHTML]="getSafeHtml(item.strTitle)" class="text-muted"> {{ item.strTitle || ' ' }}
+                        </span>
+
+                        <span [innerHTML]="getSafeHtml(item.strValue)" class="text-dark fw-bold"> {{( item.strValue |
+                            faNum ) || ''}} </span>
+
+                    </div>
+
+                    <hr class="ads-divider m-0 w-100">
+
+                </ng-container>
+
+                <div *ngIf="information_ads.strDetail" class="ads-description w-100 mt-3 p-2">
+
+                    <p> توضیحات </p>
+
+                    <span [innerHTML]="(information_ads.strDetail | faNum )"></span>
+
+                </div>
+
+                <!-- <div class="ads-tag-container d-flex flex-wrap w-100 mt-2 p-2">
+
+                    <span class="ads-tag"> تلویزیون هوشمند </span>
+
+                    <span class="ads-tag"> ال جی</span>
+
+                    <span class="ads-tag"> دست دوم </span>
+
+                    <span class="ads-tag"> نمایشگر خانگی </span>
+
+                </div> -->
+
+            </div>
+
+        </div>
+
+        <!-- advertisements gallery -->
+
+        <div class="col-12 h-100 col-md-6 p-2">
+
+            <ng-container *ngIf="isLoading_2">
+
+                <div class="loader-container">
+
+                    <div class="loader"></div>
+
+                </div>
+
+            </ng-container>
+
+            <div *ngIf="!isLoading_2" class="w-100 h-100 p-2">
+
+                <div class="ads-images-container h-65">
+
+                    <div class="ads-images-preview h-75">
+
+                        <div (click)="openGallery(mainImage_ads)" class="w-full h-100 rounded">
+
+                            <img class="w-100 h-100 rounded"
+                                [src]="mainImage_ads.strImage || '../../../assets/imgs/no-image-available-icon-6.png'">
+
+                        </div>
+
+
+                    </div>
+
+                    <div *ngIf="list_AdsImages.length > 1" class="ads-images-all w-full row gx-2 pt-1 h-25">
+
+                        <div *ngFor="let item of list_AdsImagesShown;let i = index" class="ads-image col-4 p-2">
+
+                            <div class="w-full h-100 rounded" (click)="selectedIndex = i;mainImage_ads = item">
+
+                                <img [ngClass]="{'ads-images-active': selectedIndex == i}"
+                                    class="w-100  rounded pointer"
+                                    [src]="item.strImage || '../../../assets/imgs/no-image-available-icon-6.png'">
+
+                            </div>
+
+                        </div>
+                        <div class="aroow_pics">
+                            <mat-icon (click)="openGallery(mainImage_ads)">chevron_right</mat-icon>
+                            <mat-icon class="second_arrow" (click)="openGallery(mainImage_ads)">chevron_left</mat-icon>
+                        </div>
+                    </div>
+
+                    <div class="ads-note my-2 w-full">
+
+                        <textarea id="textArea_" [ngModel]="information_ads?.strUserComment" cols="10" rows="4"
+                            class="form-control mb-1" placeholder="یادداشت شما ..."></textarea>
+
+                        <small class="text-muted">
+                            یادداشت های اختصاصی شما مربوط به آگهی که پس از حذف آگهی حذف خواهند شد.
+                        </small>
+
+                    </div>
+
+                    <div *ngIf="information_ads.fLat !== 0 && information_ads.fLon !==0" id="ads-location"
+                        class="w-100 mt-4" style="max-height: 220px !important;">
+
+                        <div id="test" style="width: 100%; height: 200px;" class="mx-auto root_but">
+
+                            <button (click)="routeToMap(information_ads)" class="btn btn-secondary">
+                                <mat-icon>directions</mat-icon>
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+                    <!-- <div class="ads-report mt-4 d-flex justify-content-between align-items-center  w-100">
+
+                        <div class="d-flex align-items-center ">
+    
+                            <span class="d-flex material-symbols-outlined">
+    
+                                <mat-icon class="mat-18 text-muted">report</mat-icon>
+                                
+                            </span>
+        
+                            <span class="mx-2"> گزارش کلاهبرداری و رفتار مشکوک </span>
+                            
+                        </div>
+    
+                        <span class="d-flex material-symbols-outlined">
+    
+                            <mat-icon class="mat-18 text-muted">chevron_left</mat-icon>
+    
+                        </span>
+    
+                    </div> -->
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div [innerHTML]="getSafeHtml(htmlContent)" class="central ads_box container my-5">
+    </div>
+
+    <section *ngIf="!isFromAnotherComponent && sliderSimilar?.length" class="container">
+
+        <div class="central sec_title my-5">
+
+            <i class="fa fa-bullhorn" aria-hidden="true"></i>
+
+            <h3>
+
+                آگهی‌های مرتبط
+
+            </h3>
+
+        </div>
+
+        <owl-carousel-o [options]="carouselOptions">
+
+            <ng-template *ngFor="let item of sliderSimilar" carouselSlide>
+
+                <div class="p-2 h-100">
+
+                    <div (click)="openDetail(item,i)" class="adds_box h-100">
+
+                        <div class="img_box">
+
+
+                            <span>{{item.strType | faNum}}</span>
+                            <P>{{item.strText4 | faNum}}</P>
+
+                            <img *ngIf="item.strImage" src="data:image/png;base64,{{item.strImage}}" alt="">
+
+                            <img *ngIf="!item.strImage" src="../../../assets/imgs/Shahrnik_Logo_Public_new.png" alt="">
+
+                        </div>
+
+                        <div class="detail_box w-100">
+
+                            <div class="">
+
+                                <h3 class="text-secondary fw-bold mx-0">
+
+                                    {{ subString_Title(item.strText1 | faNum) }}
+
+                                </h3>
+
+                            </div>
+
+                            <div class="d-flex justify-content-between w-100 ">
+
+                                <div class="w-100 d-flex flex-column">
+
+                                    <div class="text-muted d-flex justify-content-between align-items-center">
+
+                                        <div class="">
+
+                                            <span class="text-muted" style="font-size: 13px;">{{item.strPublishTime|
+                                                faNum}}</span>
+
+                                        </div>
+
+                                        <div
+                                            class="ads-badge rounded d-flex justify-content-center align-items-center text-muted">
+
+                                            <ng-container>
+
+                                                <small class="fw-bold mx-1">{{item.iView | faNum}}</small>
+
+                                                <mat-icon>visibility</mat-icon>
+
+                                            </ng-container>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </ng-template>
+
+        </owl-carousel-o>
+
+    </section>
+
+    <!-- sign up or login -->
+
+    <div class="modal fade" id="exampleModal" data-bs-keyboard="false" data-bs-backdrop="static">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h2 *ngIf="!bLoginMode" class="modal-title" id="exampleModalLabel">ثبت نام</h2>
+                    <h2 *ngIf="bLoginMode" class="modal-title" id="exampleModalLabel"> ورود به حساب کاربری </h2>
+
+                    <button type="button" class="btn" (click)="closeSignUp_Modal()">
+
+                        <mat-icon class="mat-18">close</mat-icon>
+
+                    </button>
+
+                </div>
+
+                <form [formGroup]="signUpModel" class="modal-body">
+
+                    <h2> {{!bSendOtp ? ' اطلاعات خود را وارد کنید ' : ' کد تأیید را وارد کنید '}}</h2>
+
+                    <!-- ثبت نام -->
+
+                    <span *ngIf="!bLoginMode">
+
+                        {{!bSendOtp ?
+
+                        ' جهت دسترسی به تمامی امکانات دیار و ثبت آگهی، لازم است که در آن ثبت نام کنید .' :
+
+                        ' کد پیامک شده به شماره ' + (signUpModel.get('strMobile')?.value | faNum ) + ' را وارد کنید '
+
+                        }}
+
+                        <!-- برگشت به فرم ثبت نام -->
+
+                        <span id="changeNumber-btn" class="change-number" *ngIf="bSendOtp && !isFromLoginForm" (click)="bSendOtp = false; bLoginMode = false;
+                        
+                        signUpModel.get('strMobile')?.enable()"> تغییر شماره </span>
+
+                        <!-- برگشت به فرم لاگین -->
+
+                        <span id="changeNumber-btn" class="change-number" *ngIf="bSendOtp && isFromLoginForm" (click)="bLoginMode = true; bSendOtp = false; isFromLoginForm = false;
+                        
+                        signUpModel.get('strMobile')?.enable()"> تغییر شماره </span>
+
+                    </span>
+
+                    <!-- بررسی شماره موبایل -->
+
+                    <span *ngIf="bLoginMode"> لطفا شماره موبایل خود را وارد کنید </span>
+
+                    <div class="form-group has-icon">
+
+                        <span class="form-control-icon">
+
+                            <mat-icon class="mat-18">phone_iphone</mat-icon>
+
+                        </span>
+
+                        <input class="mt-4 w-100 form-control" #strMobile formControlName="strMobile"
+                            [ngStyle]="{ direction: strMobile.value.trim() == '' ? 'rtl' : 'ltr' }"
+                            [placeholder]="strMobile.value.trim() == '' ? ' * شماره موبایل ' : '' "
+                            oninput="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="11" type="text">
+
+                    </div>
+
+                    <div *ngIf="!bSendOtp && bLoginMode" class="d-flex mt-2">
+
+                        <input (change)="checkRules($event)" formControlName="rules" type="checkbox" required>
+                        <label class="px-1">
+                            <a class="pointer" (click)="openAdd()">قوانین و مقررات</a> را مطالعه کرده و با آنها موافقم
+                        </label>
+                    </div>
+
+                    <ng-container *ngIf="!bSendOtp && !bLoginMode">
+
+                        <div class="form-group has-icon">
+
+                            <span class="form-control-icon">
+
+                                <mat-icon class="mat-18"> alternate_email </mat-icon>
+
+                            </span>
+
+                            <input type="text" class="w-100 my-3 form-control" #strEmail
+                                [ngStyle]="{ direction: strEmail.value.trim() == '' ? 'rtl' : 'ltr' }"
+                                [placeholder]="strEmail.value.trim() == '' ? ' ایمیل ' : '' "
+                                formControlName="strEmail">
+
+
+                        </div>
+
+                        <div class="form-group has-icon">
+
+                            <span class="form-control-icon">
+
+                                <mat-icon class="mat-18">badge</mat-icon>
+
+                            </span>
+
+                            <input type="text" class="w-100 my-3 form-control" formControlName="strName"
+                                placeholder="نام">
+
+
+                        </div>
+
+                        <div class="form-group has-icon">
+
+                            <span class="form-control-icon">
+
+                                <mat-icon class="mat-18">badge</mat-icon>
+
+                            </span>
+
+                            <input type="text" class="w-100 my-3 form-control" formControlName="strFamily"
+                                placeholder="* نام خانوادگی">
+
+                        </div>
+
+                        <div class="form-group has-icon">
+
+                            <span class="form-control-icon">
+
+                                <mat-icon class="mat-18">apartment</mat-icon>
+
+                            </span>
+
+                            <select class="w-100 mb-3" formControlName="strCityCode">
+
+                                <option value="-1"> * شهر </option>
+
+                                <option *ngFor="let item of list_City" [value]="item?.CityCode.trim()">
+                                    {{item.strCityName}}</option>
+
+                            </select>
+
+                        </div>
+
+                        <div *ngIf="!bSendOtp && !bLoginMode" class="d-flex">
+
+                            <input (change)="checkRules($event)" formControlName="rules" type="checkbox" required>
+                            <label class="px-1">
+                                <a class="pointer" (click)="openAdd()">قوانین و مقررات</a> را مطالعه کرده و با آنها
+                                موافقم
+                            </label>
+                        </div>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="bSendOtp && !bLoginMode">
+
+                        <div class="form-group has-icon">
+
+                            <span class="form-control-icon">
+
+                                <mat-icon class="mat-18"> sms </mat-icon>
+
+                            </span>
+
+                            <input type="text" class="w-100 my-3 form-control" #strOtp
+                                [ngStyle]="{ direction: strOtp.value.trim() == '' ? 'rtl' : 'ltr' }"
+                                [placeholder]="strOtp.value.trim() == '' ? ' کد تایید ' : '' "
+                                oninput="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="4"
+                                formControlName="strActivateCode">
+
+
+                        </div>
+
+                    </ng-container>
+
+                </form>
+
+                <div class="modal-footer d-flex flex-row-reverse justify-content-start">
+
+                    <button type="button" class="btn btn-primary px-4" (click)="bLoginMode ? login_User() :
+                        
+                        !bSendOtp && !bLoginMode ?  signUp_User() :
+                        
+                        bSendOtp && !bLoginMode ? check_Otp() : '' " [disabled]="((bSendOtp && !bLoginMode) && this.signUpModel.get('strActivateCode')?.value == '') ||
+
+                        ((bSendOtp && !bLoginMode) && this.signUpModel.get('strActivateCode')?.value?.length < 4) ||
+
+                        ((!bSendOtp && bLoginMode) && this.signUpModel.get('strMobile')?.value == '') ||
+
+                        ((!bSendOtp && bLoginMode ) && this.signUpModel.get('strMobile')?.value?.length < 10 ) ||
+
+                        ((!bSendOtp && bLoginMode ) && !rulesRead ) ||
+
+                        (!bSendOtp && !bLoginMode) && !rulesRead">
+
+                        {{!bSendOtp && !bLoginMode ? ' ثبت نام ' : ' تایید '}}
+
+                        <!-- تایید -->
+
+                    </button>
+
+                    <button *ngIf="bSendOtp && !bLoginMode" [disabled]=" otpTimer != 0 " (click)="sendAgain_Otp()"
+                        type="button" class="btn btn-outline-dark px-4">
+
+                        درخواست مجدد
+
+                        <span *ngIf="otpTimer !=0 " class="me-1">{{ otpTimer | faNum }} </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="exampleModal" data-bs-keyboard="false" data-bs-backdrop="static">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h2 *ngIf="!bLoginMode" class="modal-title" id="exampleModalLabel">ثبت نام</h2>
+                    <h2 *ngIf="bLoginMode" class="modal-title" id="exampleModalLabel"> ورود به حساب کاربری </h2>
+
+                    <button type="button" class="btn" (click)="closeSignUp_Modal()">
+
+                        <mat-icon class="mat-18">close</mat-icon>
+
+                    </button>
+
+                </div>
+
+                <form [formGroup]="signUpModel" class="modal-body">
+
+                    <h2> {{!bSendOtp ? ' اطلاعات خود را وارد کنید ' : ' کد تأیید را وارد کنید '}}</h2>
+
+                    <!-- ثبت نام -->
+
+                    <span *ngIf="!bLoginMode">
+
+                        {{!bSendOtp ?
+
+                        ' برای استفاده از تمام امکانات دیار ، لطفاً اطلاعات خود را وارد کنید .' :
+
+                        ' کد پیامک شده به شماره ' + (signUpModel.get('strMobile')?.value | faNum ) + ' را وارد کنید '
+
+                        }}
+
+                        <!-- برگشت به فرم ثبت نام -->
+
+                        <span id="changeNumber-btn" class="change-number" *ngIf="bSendOtp && !isFromLoginForm" (click)="bSendOtp = false; bLoginMode = false;
+                        
+                        signUpModel.get('strMobile')?.enable()"> تغییر شماره </span>
+
+                        <!-- برگشت به فرم لاگین -->
+
+                        <span id="changeNumber-btn" class="change-number" *ngIf="bSendOtp && isFromLoginForm" (click)="bLoginMode = true; bSendOtp = false; isFromLoginForm = false;
+                        
+                        signUpModel.get('strMobile')?.enable()"> تغییر شماره </span>
+
+                    </span>
+
+                    <!-- بررسی شماره موبایل -->
+
+                    <span *ngIf="bLoginMode"> لطفا شماره موبایل خود را وارد کنید </span>
+
+                    <div class="form-group has-icon">
+
+                        <span class="form-control-icon">
+
+                            <mat-icon class="mat-18">phone_iphone</mat-icon>
+
+                        </span>
+
+                        <input class="mt-4 w-100 form-control" #strMobile formControlName="strMobile"
+                            [ngStyle]="{ direction: strMobile.value.trim() == '' ? 'rtl' : 'ltr' }"
+                            [placeholder]="strMobile.value.trim() == '' ? ' * شماره موبایل ' : '' "
+                            oninput="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="11" type="text">
+
+                    </div>
+
+                    <ng-container *ngIf="!bSendOtp && !bLoginMode">
+
+                        <div class="form-group has-icon">
+
+                            <span class="form-control-icon">
+
+                                <mat-icon class="mat-18"> alternate_email </mat-icon>
+
+                            </span>
+
+                            <input type="text" class="w-100 my-3 form-control" #strEmail
+                                [ngStyle]="{ direction: strEmail.value.trim() == '' ? 'rtl' : 'ltr' }"
+                                [placeholder]="strEmail.value.trim() == '' ? ' ایمیل ' : '' "
+                                formControlName="strEmail">
+
+
+                        </div>
+
+                        <div class="form-group has-icon">
+
+                            <span class="form-control-icon">
+
+                                <mat-icon class="mat-18">badge</mat-icon>
+
+                            </span>
+
+                            <input type="text" class="w-100 my-3 form-control" formControlName="strName"
+                                placeholder="نام">
+
+
+                        </div>
+
+                        <div class="form-group has-icon">
+
+                            <span class="form-control-icon">
+
+                                <mat-icon class="mat-18">badge</mat-icon>
+
+                            </span>
+
+                            <input type="text" class="w-100 my-3 form-control" formControlName="strFamily"
+                                placeholder="* نام خانوادگی">
+
+                        </div>
+
+                        <div class="form-group has-icon">
+
+                            <span class="form-control-icon">
+
+                                <mat-icon class="mat-18">apartment</mat-icon>
+
+                            </span>
+
+                            <select class="w-100 mb-3" formControlName="strCityCode">
+
+                                <option value="-1"> * شهر </option>
+
+                                <option *ngFor="let item of list_City" [value]="item?.CityCode.trim()">
+                                    {{item.strCityName}}</option>
+
+                            </select>
+
+                        </div>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="bSendOtp && !bLoginMode">
+
+                        <div class="form-group has-icon">
+
+                            <span class="form-control-icon">
+
+                                <mat-icon class="mat-18"> sms </mat-icon>
+
+                            </span>
+
+                            <input type="text" class="w-100 my-3 form-control" #strOtp
+                                [ngStyle]="{ direction: strOtp.value.trim() == '' ? 'rtl' : 'ltr' }"
+                                [placeholder]="strOtp.value.trim() == '' ? ' کد تایید ' : '' "
+                                oninput="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="4"
+                                formControlName="strActivateCode">
+
+
+                        </div>
+
+                    </ng-container>
+
+                </form>
+
+                <div class="modal-footer d-flex flex-row-reverse justify-content-start">
+
+                    <button type="button" class="btn px-4" (click)="bLoginMode ? login_User() :
+                        
+                        !bSendOtp && !bLoginMode ?  signUp_User() :
+                        
+                        bSendOtp && !bLoginMode ? check_Otp() : '' " [disabled]="((bSendOtp && !bLoginMode) && this.signUpModel.get('strActivateCode')?.value == '') ||
+
+                        ((bSendOtp && !bLoginMode) && this.signUpModel.get('strActivateCode')?.value?.length < 4) ||
+
+                        ((!bSendOtp && bLoginMode) && this.signUpModel.get('strMobile')?.value == '') ||
+
+                        ((!bSendOtp && bLoginMode) && this.signUpModel.get('strMobile')?.value?.length < 10 )">
+
+                        تایید
+
+                    </button>
+
+                    <button *ngIf="bSendOtp && !bLoginMode" [disabled]=" otpTimer != 0 " (click)="sendAgain_Otp()"
+                        type="button" class="btn btn-outline-dark px-4">
+
+                        درخواست مجدد
+
+                        <span *ngIf="otpTimer !=0 " class="me-1">{{ otpTimer | faNum }} </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="imgModal" data-bs-keyboard="false" data-bs-backdrop="static">
+
+        <div style="max-width: inherit !important;width: 90%;" class="modal-dialog modal-dialog-centered">
+
+            <div style="height: 100%;background-color:#000000cf ;" class="modal-content">
+
+                <div class="modal-header border-0">
+
+
+                    <button type="button" class="btn btn-danger central" (click)="closeImgModal()">
+
+                        <mat-icon class="mat-18">close</mat-icon>
+
+                    </button>
+
+                </div>
+
+                <div class="modal-body central">
+                    <img [src]=mainImage_ads alt="">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</main>
+
+<div class="modal fade" id="full-gallery" data-bs-keyboard="false" data-bs-backdrop="static">
+
+    <div [style]="fullscreen_ModalStyle" class="modal-dialog modal-dialog-centered">
+
+        <div style="height: 100%;background-color:#000000cf ;" class="modal-content">
+
+            <div class="modal-header border-0">
+
+                <button type="button" class="btn btn-danger central" (click)="closeImgModal()">
+
+                    <mat-icon class="mat-18">close</mat-icon>
+
+                </button>
+
+            </div>
+
+            <div class="position-relative modal-body central">
+
+                <img  src="{{current_Image?.strImage}}">
+
+
+                <span *ngIf="list_AdsImages?.length > 1" class="album-btn next-btn" (click)="next_Image()">
+
+                    <mat-icon class="mat-18">arrow_forward_ios</mat-icon>
+
+                </span>
+
+                <span *ngIf="list_AdsImages?.length > 1" class="album-btn prev-btn" (click)="prev_Image()">
+
+                    <mat-icon class="mat-18">arrow_back_ios_new</mat-icon>
+
+                </span>
+
+                <div *ngIf="list_AdsImages?.length > 1" class="image-description text-center w-100 p-2">
+
+                    <span>{{current_ImageIndex}} از {{list_AdsImages?.length}}  </span>   
+
+                </div>
+
+                <div *ngIf="current_Image?.strComment?.trim() != '' " class="image-description text-center w-100 p-2">
+
+                    <span id="span" (click)="showComplete_Text()">{{current_Image?.strComment}}</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="alert" data-bs-keyboard="false" data-bs-backdrop="static">
+
+    <div [style]="fullscreen_ModalStyle" class="modal-dialog modal-dialog-centered">
+
+        <div style="height: 100%;background-color:#000000cf ;" class="modal-content">
+
+            <div class="modal-header border-0">
+
+                <button type="button" class="btn btn-danger central" (click)="closeImgModal()">
+
+                    <mat-icon class="mat-18">close</mat-icon>
+
+                </button>
+
+            </div>
+
+
+            <div class="position-relative modal-body central">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal  fade dir " id="openAds" tabindex="4" role="dialog" aria-hidden="true">
+    <div style="width:90%;" class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-gray-soft">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer  d-flex justify-content-start">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

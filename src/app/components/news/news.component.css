@@ -1,0 +1,26 @@
+.newsbox {
+  border-radius: 4px;
+  border: 1px solid #dedede;
+  height: 400px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+.newsbox img {
+  height: 75%;
+}
+
+.newstitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  height: 25%;
+}
+
+.newsboxdetail img {
+  border-radius: 4px;
+  max-height: 700px;
+}
+.newsboxdetail small {
+  color: #777;
+}

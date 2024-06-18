@@ -1,0 +1,225 @@
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h4 {
+    position: absolute;
+    text-align: center;
+    margin-top: -27.5rem;
+    font-family: 'vazirmatn';
+    cursor: default;
+}
+
+h3 {
+    text-align: center;
+    color: #fff;
+    font-family: 'vazirmatn';
+    background-color: #36474f;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: default;
+    font-weight: 400;
+}
+
+img {
+    position: absolute;
+    margin-top: -16rem;
+    width: 100px;
+    border-radius: 20%;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+
+/* .form .input-group {
+    position: relative;
+    margin-top: 1rem;
+}
+
+.form .input-group input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 1px solid rgb(68, 68, 68);
+    outline: none;
+    background-color: transparent;
+    color: inherit;
+    text-align: center;
+}
+
+.form .input-group label {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    padding: 10px 0;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: 0.3s ease-out;
+}
+
+.form .input-group input:focus+label,
+.form .input-group input:valid+label {
+    transform: translateY(-18px);
+    color: #cf9f00;
+    font-size: .9rem;
+} */
+
+.app-label {
+    margin-top: 99%;
+    color: #000;
+    font-size: 1.2em;
+}
+
+.form {
+    position: relative;
+    width: 100%;
+    margin-top: 4rem;
+    max-width: 350px;
+    padding: 30px 40px;
+    background-color: transparent !important;
+    border-radius: 10px;
+    color: #000;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+}
+
+.submit-btn {
+    display: block;
+    border: none;
+    outline: none;
+    background: #86D0EE;
+    color: rgb(43, 43, 43);
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 0 20px 0px rgba(88, 88, 88, 0.2);
+}
+
+.moi-btn {
+    display: block;
+    border: none;
+    outline: none;
+    color: rgb(43, 43, 43);
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 0 20px 0px rgba(88, 88, 88, 0.2);
+}
+
+.submit-btn:hover {
+    box-shadow: 0 0 20px 0px rgba(100, 100, 100, 0.6);
+    transition: all .2s;
+}
+
+.forgot-pw {
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.footer {
+    position: absolute;
+    text-align: center;
+    margin-top: 34rem;
+    cursor: pointer;
+}
+
+
+/* enable absolute positioning */
+
+.inner-addon {
+    position: relative;
+}
+
+
+/* style icon */
+
+.inner-addon .glyphicon {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+}
+
+
+/* align icon */
+
+.left-addon .glyphicon {
+    left: 0px;
+}
+
+.right-addon .glyphicon {
+    right: 0px;
+}
+
+
+/* add padding  */
+
+.left-addon input {
+    padding-left: 30px;
+}
+
+.right-addon input {
+    padding-right: 30px;
+}
+
+.bg-login {
+    /* background-image: url("../../../assets/imgs/Login.png"); */
+    height: 100vh;
+    width: 100%;
+    background-repeat: round;
+    background-size: cover;
+}
+
+.pos {
+    right: 20px;
+    top: 150px;
+    background-color: transparent !important;
+}
+
+.pos-footer {
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.form .input-group {
+    position: relative;
+    margin-top: 1rem;
+}
+
+.form .input-group input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+    margin-bottom: 1px;
+    border: none;
+    border-bottom: 1px solid rgb(68, 68, 68);
+    outline: none;
+    background-color: transparent;
+    color: inherit;
+    text-align: center;
+}
+
+.form .input-group label {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    padding: 10px 0;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: 0.3s ease-out;
+}
+
+.form .input-group input:focus+label,
+.form .input-group input:valid+label {
+    transform: translateY(-18px);
+    color: #cf9f00;
+    font-size: .9rem;
+}

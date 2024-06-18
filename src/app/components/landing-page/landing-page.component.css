@@ -1,0 +1,139 @@
+.app-logo {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  max-width: 58px;
+
+  max-height: 53px;
+}
+
+.app-header-buttons button {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.app-header-buttons button:hover {
+  /* background-color: var(--divar) !important; */
+  color: white;
+  border-radius: 3px;
+  transition: all 0.3s;
+}
+
+.w-30 {
+  width: 30% !important;
+}
+
+.border-right {
+  border-right: 1px solid #dedede;
+}
+
+main {
+  /* header : 77px :  4.813rem */
+  height: calc(100vh - 4.813rem);
+  overflow: auto;
+}
+
+.dropdown-menu {
+  padding: 0;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px hsl(0deg 0% 0% / 0.3),
+    0 15px 30px hsl(0deg 0% 0% / 0.2), 0 20px 40px hsl(0deg 0% 0% / 0.1),
+    0 25px 50px hsl(0deg 0% 0% / 0.1);
+}
+
+.dropdown-menu li {
+  text-align: right;
+
+  border-bottom: 1px solid #dedede;
+
+  cursor: pointer;
+
+  padding: 5px 10px;
+
+  padding-left: 50px;
+}
+
+.dropdown-menu li a {
+  display: flex;
+
+  justify-content: flex-end;
+
+  align-items: center;
+
+  font-size: 15px;
+}
+
+.dropdown-menu li mat-icon {
+  margin: 0 5px;
+
+  padding-left: 10px;
+}
+
+.my-diar button,
+.my-chat button,
+.new-ads button {
+  background-color: transparent;
+}
+
+.new-ads,
+.my-chat {
+  border-radius: 8px;
+}
+
+.new-ads button {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.user_info {
+  border: #4d658d 1px solid;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+
+@media screen and (max-width: 488px) {
+  .new-ads {
+    width: 38% !important;
+  }
+
+  .app-header-buttons .mx-2 {
+    margin: 0 3px !important;
+  }
+
+  .app-header {
+    padding: 0px !important;
+  }
+
+  .category .container div {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width:818px) {
+
+  .my-chat,
+  .new-ads {
+    display: none;
+  }
+
+  .dropdown-chat,
+  .dropdown-new-ads {
+    display: list-item !important;
+  }
+
+  .user_info {
+
+    border: none !important;
+
+    border-radius: 0px !important;
+
+    padding: 0px !important;
+  }
+
+}
