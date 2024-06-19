@@ -35,14 +35,14 @@ export class GuidePagesComponent implements OnInit {
   fetchHTMLFile(mode) {
     if (mode == 1) {
       this.http
-        .get('../../../assets/basic/Dyar_About.html', { responseType: 'text' })
+        .get('../../../assets/basic/tehransim_About.html', { responseType: 'text' })
         .subscribe((data) => {
           this.htmlContent = data;
         });
     }
     if (mode == 2) {
       this.http
-        .get('../../../assets/basic/Dyar_GeneralConditions.html', {
+        .get('../../../assets/basic/tehransim_GeneralConditions.html', {
           responseType: 'text',
         })
         .subscribe((data) => {

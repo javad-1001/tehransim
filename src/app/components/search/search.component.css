@@ -54,23 +54,9 @@ form {
   margin: 10px 0;
 }
 
-/* .main-number input {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
 .modal-body form {
   direction: rtl !important;
 }
-/* 
-#FFB3B3
-#FFDBA4
-#FFE9AE
-#C1EFFF
- */
 
 .main-num {
   display: flex;
@@ -83,3 +69,18 @@ form {
   padding: 18px;
   margin: 3px;
 }
+
+.search-btn button {
+  background-color: #b4e4ff;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  padding: 7px 26px;
+  font-weight: bold;
+}
+/* 
+#FFB3B3
+#FFDBA4
+#FFE9AE
+#C1EFFF
+ */

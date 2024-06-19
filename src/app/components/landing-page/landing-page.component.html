@@ -15,7 +15,7 @@
             <div class="p-0">
 
                 <div class=" h-100 central ">
-                
+
 
 
                 </div>
@@ -26,14 +26,15 @@
 
         <div class="app-header-buttons col-1 col-md-4 d-flex flex-row-reverse justify-content-end align-items-center">
 
-        <div class="site-menu">
-            <ul class="d-flex justify-content-center align-items-center m-0">
-                <li>درباره ما</li>
-                <li>ارتباط با ما</li>
-                <li>جستجو</li>
-                <li>خانه</li>
-            </ul>
-        </div>
+            <div class="site-menu">
+                <ul class="d-flex justify-content-center align-items-center m-0">
+                    <li>درباره ما</li>
+                    <li>ارتباط با ما</li>
+                    <li>اخبار</li>
+                    <li>جستجو</li>
+                    <li>خانه</li>
+                </ul>
+            </div>
 
             <div class="my-diar p-1 rounded-md dropdown">
 
@@ -47,197 +48,6 @@
                 </button>
 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-
-                    <ng-container *ngIf="!isLogin">
-
-                        <li class="dropdown-login">
-
-                            <a (click)="login('home')" class="dropdown-item"> ورود
-
-                                <mat-icon class="text-muted"> login </mat-icon>
-
-                            </a>
-
-                        </li>
-
-                        <li class="dropdown-new-ads d-none" *ngIf="!isLogin && ability?.bADS">
-
-                            <a (click)="login('new')" routerLink="/dyar/new" class="dropdown-item">
-
-                                ثبت آگهی
-
-                                <mat-icon class="text-muted"> add_box </mat-icon>
-
-                            </a>
-
-                        </li>
-
-                        <li class="dropdown-new-ads d-none" *ngIf="isLogin && ability?.bADS">
-
-                            <a routerLink="/dyar/new" class="dropdown-item">
-
-                                ثبت آگهی
-
-                                <mat-icon class="text-muted"> add_box </mat-icon>
-
-                            </a>
-
-                        </li>
-
-                        <li class="dropdown-chat d-none" *ngIf="ability?.bChat">
-
-                            <a (click)="changeRoute('chat')" class="dropdown-item">
-
-                                چت
-
-                                <mat-icon class="text-muted"> forum </mat-icon>
-
-                            </a>
-
-                        </li>
-
-
-                    </ng-container>
-
-                    <ng-container *ngIf="isLogin">
-
-                        <li>
-                            <a (click)="changeRoute('profile')" class="dropdown-item">
-
-                                {{ diar_UserInfo.strFullName }}
-
-                                <mat-icon class="text-success"> how_to_reg </mat-icon>
-
-                            </a>
-                        </li>
-
-                        <li class="dropdown-new-ads d-none" *ngIf="!isLogin && ability?.bADS">
-
-                            <a (click)="login('new')" routerLink="/dyar/new" class="dropdown-item">
-
-                                ثبت آگهی
-
-                                <mat-icon class="text-muted"> add_box </mat-icon>
-
-                            </a>
-
-                        </li>
-
-                        <li class="dropdown-new-ads d-none" *ngIf="isLogin && ability?.bADS">
-
-                            <a routerLink="/dyar/new" class="dropdown-item">
-
-                                ثبت آگهی
-
-                                <mat-icon class="text-muted"> add_box </mat-icon>
-
-                            </a>
-
-                        </li>
-
-                        <li class="dropdown-chat d-none" *ngIf="ability?.bChat">
-
-                            <a (click)="changeRoute('chat')" class="dropdown-item">
-
-                                چت
-
-                                <mat-icon class="text-muted"> forum </mat-icon>
-
-                            </a>
-
-                        </li>
-
-                        <li *ngIf="ability?.bResume">
-
-                            <a (click)="changeRoute('WorkProfile')" class="dropdown-item">
-
-                                معرفی کسب و کار شما
-
-                                <mat-icon class="text-muted"> badge </mat-icon>
-
-                            </a>
-                        </li>
-
-                        <li>
-                            <a (click)="changeRoute('myads')" class="dropdown-item"> مدیریت آگهی ها
-
-                                <mat-icon class="text-muted"> manage_history </mat-icon>
-
-                            </a>
-                        </li>
-
-
-                        <li>
-                            <a (click)="changeRoute('recent-visits')" class="dropdown-item">
-
-                                آگهی های بازدید شده
-
-                                <mat-icon class="text-muted"> history </mat-icon>
-
-                            </a>
-
-                        </li>
-                        <li *ngIf="ability?.bResume">
-                            <a (click)="changeRoute('business-recent-visits')" class="dropdown-item">
-
-                                کسب و کار های بازدید شده
-
-                                <mat-icon class="text-muted"> history </mat-icon>
-
-                            </a>
-
-                        </li>
-
-                        <li>
-                            <a (click)="changeRoute('bookmarks')" class="dropdown-item">
-
-                                آگهی های نشان شده
-
-                                <mat-icon class="text-muted"> bookmark </mat-icon>
-                            </a>
-
-                        </li>
-
-                        <li *ngIf="ability?.bResume">
-                            <a (click)="changeRoute('business-bookmarks')" class="dropdown-item">
-
-                                کسب و کار های نشان شده
-
-                                <mat-icon class="text-muted"> bookmark </mat-icon>
-                            </a>
-
-                        </li>
-
-                        <li>
-                            <a (click)="changeRoute('support')" class="dropdown-item">
-
-                                پشتیبانی
-
-                                <mat-icon class="text-muted"> contact_support </mat-icon>
-
-                            </a>
-
-                        </li>
-                        <!-- <li>
-                            <a (click)="changeRoute('support')" class="dropdown-item">
-
-                                پشتیبانی
-
-                                <mat-icon class="text-muted"> contact_support </mat-icon>
-
-                            </a>
-
-                        </li> -->
-
-                        <!-- <li> 
-                            <a class="dropdown-item"> یادداشت ها 
-                                
-                                <mat-icon class="text-muted"> edit_note </mat-icon>
-                            </a>
-                        
-                        </li> -->
-
-                    </ng-container>
 
                     <li>
 
@@ -287,11 +97,112 @@
 
     <router-outlet></router-outlet>
 
-    <!-- <footer>
-        <div style="background-color: red;" class="w-100">
-    test
+    <footer>
+        <div class="px-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="links">
+                        <h3><img src="../../../assets/imgs/Shahrnik_Logo_Public_new.png" alt=""> تهران سیم</h3>
+                        <p class=" py-1">« تهران سیم » یک پلتفرم چند رسانه ای برای تمامی ایرانیان و پارسی
+                            زبانان خارج
+                            از ایران است. این پلتفرم برای دسترسی به اطلاعات ضروری و مفید در هر یک از شهرهای مهاجر پذیر و
+                            همچنین توسعه روابط اجتماعی و اقتصادی مابین ایرانیان و پارسی زبانان طراحی و پیاده سازی شده
+                            است.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 adresses central justify-content-start">
+                 <div>
+                    <div>
+                        <button>
+                            <mat-icon>location_on</mat-icon>
+                            <span>تهران، بلوار کوهک، مجتمع طوبی 2 ، طبقه چهارم </span>
+                        </button>
+                    </div>
+                    <div>
+                        <button>
+                            <mat-icon>call</mat-icon>
+                            <span> 09121818959</span>
+                        </button>
+                    </div>
+                    <div>
+                        <button>
+                            <mat-icon>call</mat-icon>
+                            <span> 09392584967</span>
+                        </button>
+                    </div>
+                    <div>
+                        <button>
+                            <mat-icon>call</mat-icon>
+                            <span> 02188556699</span>
+                        </button>
+                    </div>
+                    <div>
+                        <button>
+                            <mat-icon>email</mat-icon>
+                            <span> javadbabaei1001@gmail.com</span>
+                        </button>
+                    </div>
+                 
+                 </div>
+                </div>
+
+                <div class="col-md-4 social">
+                    <div class="central ">
+                        <div>
+                            <h3>ما را در شبکه‌های اجتماعی دنبال کنید :</h3>
+                        </div>
+                        <div class="social1 ">
+                            <a href=""><img src="../../../assets/imgs/telegram (1).png" alt=""></a>
+                            <a href=""><img src="../../../assets/imgs/instagram (1).png" alt=""></a>
+                            <a href=""><img src="../../../assets/imgs/whatsapp (1) 1.png" alt=""></a>
+                        </div>
+                    </div>
+
+                    <div class="central enamd">
+                        <img src="../../../assets/imgs/Web-design-enamad.png" alt="">
+                        <img src="../../../assets/imgs/images.png" alt="">
+                    </div>
+
+                    <div class="w-100 central">
+                        <span >
+                            کلیه حقوق مادی و معنوی این وبسایت متعلق به مجموعه تهران سیم میباشد و هرگونه کپی برداری موجب پیگرد قانونی می گردد.
+                        </span>
+                    </div>
+
+
+
+                </div>
+
+            </div>
         </div>
-    </footer> -->
+    </footer>
 
+    <section class="central flex-column signature">
+
+        <div>
+
+
+
+        </div>
+
+        <div class="my-1">
+
+            <a target="_blank">
+
+
+            </a>
+
+        </div>
+
+        <div>
+
+            <span>
+                <a target="_blank" href="https://javad1001.ir/"> طراحی و اجرا جواد بابایی</a>
+            </span>
+
+        </div>
+
+    </section>
 </main>
-

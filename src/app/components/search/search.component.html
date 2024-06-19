@@ -8,27 +8,26 @@
 
                     <ng-container>
 
-                     <div class="central">
-                        <h2> شماره : </h2>
-                        <form [formGroup]="otpForm" class="main-num">
-                            <input type="text" formControlName="digit1" maxlength="1"
-                                (keyup)="onInputKeyUp($event, 0)" />
-                            <input type="text" formControlName="digit2" maxlength="1"
-                                (keyup)="onInputKeyUp($event, 1)" />
-                            <input type="text" formControlName="digit3" maxlength="1"
-                                (keyup)="onInputKeyUp($event, 2)" />
-                            <input type="text" formControlName="digit4" maxlength="1"
-                                (keyup)="onInputKeyUp($event, 3)" />
-                            <input type="text" formControlName="digit5" maxlength="1"
-                                (keyup)="onInputKeyUp($event, 4)" />
-                            <input type="text" formControlName="digit6" maxlength="1"
-                                (keyup)="onInputKeyUp($event, 5)" />
-                            <input type="text" formControlName="digit7" maxlength="1"
-                                (keyup)="onInputKeyUp($event, 6)" />
-                            <!-- Add more inputs if your OTP has more than 4 digits -->
+                        <div class="central">
+                            <h2> شماره : </h2>
+                            <form [formGroup]="otpForm" class="main-num">
+                                <input type="text" formControlName="digit1" maxlength="1"
+                                    (keyup)="onInputKeyUp($event, 0)" />
+                                <input type="text" formControlName="digit2" maxlength="1"
+                                    (keyup)="onInputKeyUp($event, 1)" />
+                                <input type="text" formControlName="digit3" maxlength="1"
+                                    (keyup)="onInputKeyUp($event, 2)" />
+                                <input type="text" formControlName="digit4" maxlength="1"
+                                    (keyup)="onInputKeyUp($event, 3)" />
+                                <input type="text" formControlName="digit5" maxlength="1"
+                                    (keyup)="onInputKeyUp($event, 4)" />
+                                <input type="text" formControlName="digit6" maxlength="1"
+                                    (keyup)="onInputKeyUp($event, 5)" />
+                                <input type="text" formControlName="digit7" maxlength="1"
+                                    (keyup)="onInputKeyUp($event, 6)" />
 
-                        </form>
-                     </div>
+                            </form>
+                        </div>
 
                         <div class="row">
                             <div class="form-group has-icon col-lg-2 col-md-3 col-6">
@@ -138,8 +137,9 @@
                             </div>
 
                         </div>
-
-                        <button (click)="onSubmit()">Verify OTP</button>
+                        <div class="w-100 central search-btn">
+                            <button (click)="onSubmit()"> جستجو</button>
+                        </div>
 
 
                     </ng-container>

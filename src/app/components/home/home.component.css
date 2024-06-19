@@ -240,7 +240,7 @@ footer {
   margin: 1rem 0;
   padding: 1rem 0;
   margin-bottom: 0;
-  background-color: #01245c;
+  background-color: #b4e4ff;
 }
 .links h3 img {
   width: 57px;
@@ -272,7 +272,7 @@ footer {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-top: 11px;
+  margin: 0;
 }
 .social a img {
   width: 50px;
@@ -370,7 +370,7 @@ a {
   color: inherit;
 }
 footer .row > div {
-  border-left: 1px solid #fff;
+  /* border-left: 1px solid #fff; */
 }
 .adds_box,
 .city_box {
@@ -478,7 +478,6 @@ footer .row > div {
 
 .signature {
   
-  padding: 8px 0 3px 0;
   
   background-color: #ffffff;
   
