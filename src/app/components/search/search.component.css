@@ -5,19 +5,18 @@ table * {
   text-align: center !important;
 }
 
-
-
 table {
   border-radius: 5px;
   width: 100%;
   border-collapse: collapse;
+  overflow: hidden;
+  background-color: #ffe9ae;
 }
 
 th,
 td {
   padding: 16px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
 }
 
 th {
@@ -25,5 +24,62 @@ th {
 }
 
 tr:hover {
-  background-color: #eaeaea;
+  background-color: #dedede;
+}
+tr {
+  border-radius: 5px;
+}
+
+.call-butt {
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #e076ad;
+  border: 0;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.modal-body option {
+}
+
+form {
+  background-color: #ffe9ae;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+/* .main-number input {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.modal-body form {
+  direction: rtl !important;
+}
+/* 
+#FFB3B3
+#FFDBA4
+#FFE9AE
+#C1EFFF
+ */
+
+.main-num {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-num input {
+  width: 50px;
+  height: 50px;
+  padding: 18px;
+  margin: 3px;
 }

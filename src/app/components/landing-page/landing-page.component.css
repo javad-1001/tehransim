@@ -96,7 +96,6 @@ main {
   padding: 8px;
 }
 
-
 @media screen and (max-width: 488px) {
   .new-ads {
     width: 38% !important;
@@ -115,8 +114,7 @@ main {
   }
 }
 
-@media screen and (max-width:818px) {
-
+@media screen and (max-width: 818px) {
   .my-chat,
   .new-ads {
     display: none;
@@ -128,12 +126,22 @@ main {
   }
 
   .user_info {
-
     border: none !important;
 
     border-radius: 0px !important;
 
     padding: 0px !important;
   }
+}
 
+.site-menu li {
+  list-style: none;
+  margin: 0 5px;
+  padding: 5px;
+  font-size: 17px;
+  cursor: pointer;
+}
+.site-menu li:hover {
+  background-color: #dedede;
+  border-radius: 5px;
 }

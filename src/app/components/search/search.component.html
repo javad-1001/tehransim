@@ -3,7 +3,153 @@
 
         <body>
 
+            <div class="form-search">
+                <form [formGroup]="reqModel" class="modal-body">
+
+                    <ng-container>
+
+                     <div class="central">
+                        <h2> شماره : </h2>
+                        <form [formGroup]="otpForm" class="main-num">
+                            <input type="text" formControlName="digit1" maxlength="1"
+                                (keyup)="onInputKeyUp($event, 0)" />
+                            <input type="text" formControlName="digit2" maxlength="1"
+                                (keyup)="onInputKeyUp($event, 1)" />
+                            <input type="text" formControlName="digit3" maxlength="1"
+                                (keyup)="onInputKeyUp($event, 2)" />
+                            <input type="text" formControlName="digit4" maxlength="1"
+                                (keyup)="onInputKeyUp($event, 3)" />
+                            <input type="text" formControlName="digit5" maxlength="1"
+                                (keyup)="onInputKeyUp($event, 4)" />
+                            <input type="text" formControlName="digit6" maxlength="1"
+                                (keyup)="onInputKeyUp($event, 5)" />
+                            <input type="text" formControlName="digit7" maxlength="1"
+                                (keyup)="onInputKeyUp($event, 6)" />
+                            <!-- Add more inputs if your OTP has more than 4 digits -->
+
+                        </form>
+                     </div>
+
+                        <div class="row">
+                            <div class="form-group has-icon col-lg-2 col-md-3 col-6">
+
+                                <span class="form-control-icon">
+
+                                    <mat-icon class="mat-18">sim_card</mat-icon>
+
+                                </span>
+
+                                <select class="w-100 mb-3" formControlName="strCityCode">
+
+                                    <option value="-1"> اپراتور </option>
+                                    <option value="1">همراه اول</option>
+                                    <option value="2"> ایرانسل</option>
+                                    <option value="3"> رایتل</option>
+
+                                </select>
+
+                            </div>
+                            <div class="form-group has-icon col-lg-2 col-md-3 col-6">
+
+                                <span class="form-control-icon">
+
+                                    <mat-icon class="mat-18">format_list_numbered</mat-icon>
+
+                                </span>
+
+                                <select class="w-100 mb-3" formControlName="strCityCode">
+
+                                    <option value="-1"> پیش شماره </option>
+                                    <option value="">0912 </option>
+                                    <option value="">0913 </option>
+                                    <option value="">0914 </option>
+                                    <option value="">0915 </option>
+                                    <option value="">0916 </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group has-icon col-lg-2 col-md-3 col-6">
+
+                                <span class="form-control-icon">
+
+                                    <mat-icon class="mat-18">settings</mat-icon>
+
+                                </span>
+
+                                <select class="w-100 mb-3" formControlName="strCityCode">
+
+                                    <option value="-1"> وضعیت </option>
+                                    <option value="">در حد صفر </option>
+                                    <option value=""> کارکرده </option>
+                                    <option value=""> صفر بی نام </option>
+                                    <option value=""> صفر به نام </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group has-icon col-lg-2 col-md-3 col-6">
+
+                                <span class="form-control-icon">
+
+                                    <mat-icon class="mat-18">sim_card_download</mat-icon>
+
+                                </span>
+
+                                <select class="w-100 mb-3" formControlName="strCityCode">
+
+                                    <option value="-1"> نوع </option>
+                                    <option value=""> اعتباری </option>
+                                    <option value=""> دائمی </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group has-icon col-lg-2 col-md-3 col-6">
+
+                                <span class="form-control-icon">
+
+                                    <mat-icon class="mat-18">attach_money</mat-icon>
+
+                                </span>
+                                <input #budget name="budget" (input)="onBudget(1)" class="mb-3 w-100 form-control"
+                                    #iPrice formControlName=""
+                                    [ngStyle]="{ direction: iPrice.value.trim() == '' ? 'rtl' : 'ltr' }"
+                                    [placeholder]="'قیمت از (تومان)'"
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'')" type="text">
+
+                            </div>
+                            <div class="form-group has-icon col-lg-2 col-md-3 col-6">
+
+                                <span class="form-control-icon">
+
+                                    <mat-icon class="mat-18">attach_money</mat-icon>
+
+                                </span>
+                                <input #budget name="budget" (input)="onBudget(1)" class="mb-3 w-100 form-control"
+                                    #iPrice1 formControlName=""
+                                    [ngStyle]="{ direction: iPrice1.value.trim() == '' ? 'rtl' : 'ltr' }"
+                                    [placeholder]="'قیمت تا (تومان)'"
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'')" type="text">
+
+                            </div>
+
+                        </div>
+
+                        <button (click)="onSubmit()">Verify OTP</button>
+
+
+                    </ng-container>
+
+                </form>
+
+            </div>
+
             <table class="my-3">
+
                 <tr>
                     <th>شماره</th>
                     <th>وضعیت</th>
@@ -11,27 +157,22 @@
                     <th>شرایط</th>
                     <th>تماس با فروشنده</th>
                 </tr>
+
+
                 <tr>
-                    <td>09121115522</td>
+                    <td class="text-bold">09121115522</td>
                     <td>در حد صفر</td>
                     <td>2.500.000</td>
                     <td>نقد،اقساط و تهاتر</td>
-                    <td>تماس</td>
+                    <td class="central">
+                        <button class="call-butt">
+
+                            <mat-icon>phone_in_talk</mat-icon>
+                        </button>
+                    </td>
                 </tr>
-                <tr>
-                    <td>09121115522</td>
-                    <td>در حد صفر</td>
-                    <td>2.500.000</td>
-                    <td>نقد،اقساط و تهاتر</td>
-                    <td>تماس</td>
-                </tr>
-                <tr>
-                    <td>09121115522</td>
-                    <td>در حد صفر</td>
-                    <td>2.500.000</td>
-                    <td>نقد،اقساط و تهاتر</td>
-                    <td>تماس</td>
-                </tr>
+
+
 
             </table>
 
