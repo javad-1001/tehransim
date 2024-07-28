@@ -16,6 +16,7 @@ import { AccountService } from 'src/app/services/account.service';
 
 import { OtherService } from 'src/app/services/other.service';
 
+
 @Component({
 
   selector: 'app-home',
@@ -130,8 +131,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    
 
     this.otherService.getAppAbility().subscribe((data) => {
 

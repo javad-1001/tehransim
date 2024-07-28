@@ -1,0 +1,13 @@
+[
+    {
+        "strMobile":"09121234567",
+        "strMobileSeller":"09392584967",
+        "strMobileSchema":"0912 123 45 67",
+        "strPreNumber":"0912",
+        "tiOperator":"0",
+        "tiStatus":"1",
+        "tiType":"1",
+        "iPrice":"125000000",
+        "tiCondition":"0"
+    }
+]

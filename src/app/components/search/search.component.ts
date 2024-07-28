@@ -28,6 +28,7 @@ import { debounceTime, distinctUntilChanged, fromEvent, pluck } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
 import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 declare var bootstrap: any;
 
@@ -37,6 +38,8 @@ declare var bootstrap: any;
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
+  posts: any;
+
   reqModel: FormGroup = this.formBuilder.group({
     strTitle: new FormControl(''),
     strCityCode: new FormControl(-1),
@@ -69,7 +72,8 @@ export class SearchComponent implements OnInit {
     private formBuilder: FormBuilder,
     private accountService: AccountService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private http: HttpClient
   ) {
     this.otpForm = new FormGroup({
       digit1: new FormControl('', Validators.required),
@@ -82,7 +86,14 @@ export class SearchComponent implements OnInit {
       // Add more digits if your OTP has more than 4 digits
     });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(1);
+
+    this.http.get('assets/numbers.json').subscribe((data) => {
+      console.log(data); // Handle the data from the JSON file
+      this.posts = data
+    });
+  }
   onBudget(type) {
     if (type === 1) {
       var number = this.budget.nativeElement.value.replace(/[^0-9]/g, '');
