@@ -23,7 +23,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { MapDialog } from '../mapDialog/mapDialog.Component';
 
-import { debounceTime, distinctUntilChanged, fromEvent, pluck } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  fromEvent,
+  pluck,
+} from 'rxjs';
 
 import { ajax } from 'rxjs/ajax';
 
@@ -39,22 +45,18 @@ declare var bootstrap: any;
 })
 export class SearchComponent implements OnInit {
   posts: any;
+  allPosts: any;
+  minPrice = 0
+  maxPrice = 0
 
   reqModel: FormGroup = this.formBuilder.group({
-    strTitle: new FormControl(''),
-    strCityCode: new FormControl(-1),
-    iSamsari_Group: new FormControl(-1),
-    iSamsari_SubGroup: new FormControl(-1),
-    tiSamsariCondiation: new FormControl(-1),
-    strAddress: new FormControl(''),
-    fPrice: new FormControl(''),
-    bFree: new FormControl(false),
-    bAgreement: new FormControl(false),
-    bActive: new FormControl(true),
-    fLat: new FormControl(),
-    fLon: new FormControl(),
-    strComment: new FormControl(),
-    strSamsariMobile: new FormControl(),
+    fMaxPrice: new FormControl(''),
+    fMinPrice: new FormControl(''),
+    // strCityCode: new FormControl(''),
+    tiOperator: new FormControl(-1),
+    tiStatus: new FormControl(-1),
+    tiType: new FormControl(-1),
+    strPreNumber: new FormControl(-1),
   });
   @ViewChild('budget', { static: false }) budget!: ElementRef<
     HTMLInputElement | any
@@ -83,16 +85,10 @@ export class SearchComponent implements OnInit {
       digit5: new FormControl('', Validators.required),
       digit6: new FormControl('', Validators.required),
       digit7: new FormControl('', Validators.required),
-      // Add more digits if your OTP has more than 4 digits
     });
   }
   ngOnInit(): void {
-    console.log(1);
-
-    this.http.get('assets/numbers.json').subscribe((data) => {
-      console.log(data); // Handle the data from the JSON file
-      this.posts = data
-    });
+    this.getPosts();
   }
   onBudget(type) {
     if (type === 1) {
@@ -110,17 +106,125 @@ export class SearchComponent implements OnInit {
         .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
   }
+  search() {
+    this.posts = this.allPosts;
+
+
+    this.otpForm.value.digit7 = this.otpForm.value.digit7 == "" ? "?" : this.otpForm.value.digit7;
+    this.otpForm.value.digit6 = this.otpForm.value.digit6 == "" ? "?" : this.otpForm.value.digit6;
+    this.otpForm.value.digit5 = this.otpForm.value.digit5 == "" ? "?" : this.otpForm.value.digit5;
+    this.otpForm.value.digit4 = this.otpForm.value.digit4 == "" ? "?" : this.otpForm.value.digit4;
+    this.otpForm.value.digit3 = this.otpForm.value.digit3 == "" ? "?" : this.otpForm.value.digit3;
+    this.otpForm.value.digit2 = this.otpForm.value.digit2 == "" ? "?" : this.otpForm.value.digit2;
+    this.otpForm.value.digit1 = this.otpForm.value.digit1 == "" ? "?" : this.otpForm.value.digit1;
+
+    const otp =
+      this.otpForm.value.digit7 +
+      this.otpForm.value.digit6 +
+      this.otpForm.value.digit5 +
+      this.otpForm.value.digit4 +
+      this.otpForm.value.digit3 +
+      this.otpForm.value.digit2 +
+      this.otpForm.value.digit1;
+    console.log(otp);
+
+    let pre = this.reqModel.value.strPreNumber
+console.log(pre);
+
+    if (pre == -1) {
+      pre 
+      = '????'
+    }
+
+    // this.reqModel.value.strMobile = pre + otp
+    // console.log(this.reqModel.value.strMobile);
+
+
+    // function createPhonePattern(userPattern) {
+    //   const regexPattern = userPattern.replace(/\?/g, '\d');
+    //   return new RegExp(`^${regexPattern}$`);
+    // }
+
+    // function searchPhoneNumbers(posts, userPattern) {
+    //   const phonePattern = createPhonePattern(userPattern);
+    //   return posts.filter(post => {
+    //     return phonePattern.test(post.strMobile);
+    //   });
+    // }
+    // const userPattern = '??????????7';
+    // const filteredPosts1 = searchPhoneNumbers(this.posts, userPattern);
+    // console.log(filteredPosts1);
+
+// filter by fileds
+
+let pMax = this.reqModel.value.fMaxPrice
+let pMin = this.reqModel.value.fMinPrice
+
+    const filters = this.reqModel.value;
+
+    delete filters.fMaxPrice;
+    delete filters.fMinPrice;
+    delete filters.strMobile;
+    
+    if (filters.tiOperator == '-1') {
+      filters.tiOperator = -1;
+    }
+    if (filters.tiStatus == '-1') {
+      filters.tiStatus = -1;
+    }
+    if (filters.tiType == '-1') {
+      filters.tiType = -1;
+    }
+    if (filters.strPreNumber == '-1') {
+      filters.strPreNumber = -1;
+    }
+
+    function filterPosts(posts, filters) {
+      return posts.filter((post) => {
+
+        return Object.keys(filters).every((field) => {
+          const filterValue = filters[field];
+
+          if (filterValue !== -1) {
+            return post[field] === filterValue;
+          }
+          return true; 
+        });
+      });
+    }
+
+    // filter by price
+    if (pMin == "" || pMin == undefined) {
+      pMin = this.minPrice
+    }
+    if (pMax == "" || pMax == undefined) {
+      pMax = this.maxPrice
+    }
+    
+    this.posts = this.posts.filter(post => {
+      return post.iPrice >= pMin && post.iPrice <= pMax;
+    });
+
+    // Usage
+    const filteredPosts = filterPosts(this.posts, filters);
+    this.posts = filteredPosts;
+    this.onSubmit();
+  }
+  getPosts() {
+    this.http.get('assets/numbers.json').subscribe((data) => {
+      this.posts = data;
+      this.allPosts = data;
+      for (let index = 0; index < this.allPosts?.length; index++) {
+        const element = this.allPosts[index];
+        if (element.iPrice > this.maxPrice) this.maxPrice = element.iPrice 
+        if (element.iPrice < this.minPrice) this.minPrice = element.iPrice 
+      }
+    });
+  }
 
   onSubmit() {
-    const otp =
-      this.otpForm.value.digit1 +
-      this.otpForm.value.digit2 +
-      this.otpForm.value.digit3 +
-      this.otpForm.value.digit4 +
-      this.otpForm.value.digit5 +
-      this.otpForm.value.digit6 +
-      this.otpForm.value.digit7;
-    console.log(otp);
+
+    
     // Process the OTP here (e.g., send it to the server for verification)
   }
 

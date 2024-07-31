@@ -68,6 +68,18 @@ form {
   height: 50px;
   padding: 18px;
   margin: 3px;
+  border: 1px solid #979797;
+  border-radius: 4px;
+
+}
+.prenumber {
+  width: 150px !important;
+  height: 50px !important;
+  padding: 0 !important;
+  padding-right: 10px !important;
+  margin:0 3px !important;
+  border: 1px solid #979797;
+
 }
 
 .search-btn button {
