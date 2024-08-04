@@ -23,21 +23,24 @@ th {
   background-color: #b4e4ff;
 }
 
-tr:hover {
-  background-color: #dedede;
+
+tr:nth-child(odd) {
+  background-color: #FFD064;
 }
 tr {
   border-radius: 5px;
 }
-
+tr:hover {
+  background-color: #dedede;
+}
 .call-butt {
-  background-color: #fff;
+  background-color: #b4e4ff;
   padding: 5px;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #e076ad;
+  /* color: #b4e4ff; */
   border: 0;
 }
 
@@ -70,16 +73,14 @@ form {
   margin: 3px;
   border: 1px solid #979797;
   border-radius: 4px;
-
 }
 .prenumber {
   width: 150px !important;
   height: 50px !important;
   padding: 0 !important;
   padding-right: 10px !important;
-  margin:0 3px !important;
+  margin: 0 3px !important;
   border: 1px solid #979797;
-
 }
 
 .search-btn button {
@@ -90,6 +91,43 @@ form {
   padding: 7px 26px;
   font-weight: bold;
 }
+table p{
+  margin: 0;
+}
+table {
+  position: relative;
+}
+/* .async_price{
+  position: absolute;
+  top: 0;
+  right: 0;
+} */
+.async_price {
+  background-color: #FFD064 ;
+  color: #000;
+  margin:0 2px ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.async_price button p{
+  margin:0 2px  !important;
+}
+@media screen and (min-width: 780px) {
+  .status-mobile {
+    display: none;
+  }
+}
+@media screen and (max-width: 780px) {
+  .status-desk {
+    display: none;
+  }
+  .text-small p{
+    font-size: 13px;
+    margin: 0;
+  }
+}
+
 /* 
 #FFB3B3
 #FFDBA4

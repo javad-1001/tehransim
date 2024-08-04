@@ -140,20 +140,18 @@ console.log(pre);
     // console.log(this.reqModel.value.strMobile);
 
 
-    // function createPhonePattern(userPattern) {
-    //   const regexPattern = userPattern.replace(/\?/g, '\d');
-    //   return new RegExp(`^${regexPattern}$`);
-    // }
+    const pattern = pre + otp;
+console.log(pattern);
 
-    // function searchPhoneNumbers(posts, userPattern) {
-    //   const phonePattern = createPhonePattern(userPattern);
-    //   return posts.filter(post => {
-    //     return phonePattern.test(post.strMobile);
-    //   });
-    // }
-    // const userPattern = '??????????7';
-    // const filteredPosts1 = searchPhoneNumbers(this.posts, userPattern);
-    // console.log(filteredPosts1);
+    const regexPattern = pattern.replace(/\?/g, '.');
+    
+    const regex = new RegExp(`^${regexPattern}$`);
+    
+    const filteredPosts1 = this.posts.filter(post => regex.test(post.strMobile));
+    
+    console.log(filteredPosts1);
+
+    this.posts = filteredPosts1
 
 // filter by fileds
 
@@ -227,6 +225,24 @@ let pMin = this.reqModel.value.fMinPrice
     
     // Process the OTP here (e.g., send it to the server for verification)
   }
+
+  sortColumn(input) {
+    this.posts.sort((x, y) => {
+      switch (input) {
+        case 0:
+          var textA = x.iPrice.toUpperCase();
+          var textB = y.iPrice.toUpperCase();
+          break;
+       
+      }
+      if (textA > textB)
+        return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
+      if (textA < textB)
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      return
+    });
+  }
+
 
   // This function is optional and can be used to automatically focus the next input field when the current one is filled
   onInputKeyUp(event: any, index: number) {
