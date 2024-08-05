@@ -6,7 +6,7 @@
         "strPreNumber":"0912",
         "tiOperator":"0",
         "tiStatus":"0",
-        "tiType":"2",
+        "tiType":"0",
         "iPrice":"15000000",
         "tiCondition":"0"
     },
@@ -17,7 +17,7 @@
         "strPreNumber":"0912",
         "tiOperator":"0",
         "tiStatus":"1",
-        "tiType":"1",
+        "tiType":"0",
         "iPrice":"25000000",
         "tiCondition":"0"
     },
@@ -28,7 +28,7 @@
         "strPreNumber":"0912",
         "tiOperator":"0",
         "tiStatus":"3",
-        "tiType":"1",
+        "tiType":"0",
         "iPrice":"35000000",
         "tiCondition":"0"
     },
@@ -61,7 +61,7 @@
         "strPreNumber":"0912",
         "tiOperator":"0",
         "tiStatus":"2",
-        "tiType":"1",
+        "tiType":"0",
         "iPrice":"80000000",
         "tiCondition":"0"
     },
@@ -72,7 +72,7 @@
         "strPreNumber":"0919",
         "tiOperator":"0",
         "tiStatus":"0",
-        "tiType":"2",
+        "tiType":"1",
         "iPrice":"95000000",
         "tiCondition":"0"
     },
@@ -83,7 +83,7 @@
         "strPreNumber":"0912",
         "tiOperator":"0",
         "tiStatus":"1",
-        "tiType":"1",
+        "tiType":"0",
         "iPrice":"120000000",
         "tiCondition":"0"
     }

@@ -46,6 +46,7 @@ declare var bootstrap: any;
 export class SearchComponent implements OnInit {
   posts: any;
   allPosts: any;
+  detail: any;
   minPrice = 0
   maxPrice = 0
 
@@ -126,10 +127,8 @@ export class SearchComponent implements OnInit {
       this.otpForm.value.digit3 +
       this.otpForm.value.digit2 +
       this.otpForm.value.digit1;
-    console.log(otp);
 
     let pre = this.reqModel.value.strPreNumber
-console.log(pre);
 
     if (pre == -1) {
       pre 
@@ -137,11 +136,10 @@ console.log(pre);
     }
 
     // this.reqModel.value.strMobile = pre + otp
-    // console.log(this.reqModel.value.strMobile);
 
 
     const pattern = pre + otp;
-console.log(pattern);
+
 
     const regexPattern = pattern.replace(/\?/g, '.');
     
@@ -149,7 +147,6 @@ console.log(pattern);
     
     const filteredPosts1 = this.posts.filter(post => regex.test(post.strMobile));
     
-    console.log(filteredPosts1);
 
     this.posts = filteredPosts1
 
@@ -206,7 +203,6 @@ let pMin = this.reqModel.value.fMinPrice
     // Usage
     const filteredPosts = filterPosts(this.posts, filters);
     this.posts = filteredPosts;
-    this.onSubmit();
   }
   getPosts() {
     this.http.get('assets/numbers.json').subscribe((data) => {
@@ -220,10 +216,15 @@ let pMin = this.reqModel.value.fMinPrice
     });
   }
 
-  onSubmit() {
-
+  openDetail(item) {
+    this.detail = item
     
-    // Process the OTP here (e.g., send it to the server for verification)
+    var myModal = new bootstrap.Modal(
+      document.getElementById('openDetail'),
+      {}
+    );
+    myModal.show();
+    
   }
 
   sortColumn(input) {

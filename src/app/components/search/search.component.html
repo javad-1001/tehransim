@@ -73,6 +73,7 @@
                                 </select>
 
                             </div>
+
                             <!-- <div class="form-group has-icon col-lg-2 col-md-3 col-6">
 
                                 <span class="form-control-icon">
@@ -105,7 +106,7 @@
                                 <select class="w-100 mb-3" formControlName="tiStatus">
 
                                     <option value="-1"> وضعیت </option>
-                                    <option value="0"> صفر بی نام </option>
+                                    <option value="0"> صفر پک </option>
                                     <option value="1"> صفر به نام </option>
                                     <option value="2">در حد صفر </option>
                                     <option value="3"> کارکرده </option>
@@ -124,8 +125,8 @@
                                 <select class="w-100 mb-3" formControlName="tiType">
 
                                     <option value="-1"> نوع </option>
-                                    <option value="0"> اعتباری </option>
-                                    <option value="1"> دائمی </option>
+                                    <option value="0"> دائمی </option>
+                                    <option value="1"> اعتباری </option>
 
                                 </select>
 
@@ -191,24 +192,24 @@
 
             </div>
 
-         
+
 
             <table class="my-3">
-           
+
 
                 <tr>
                     <th>شماره</th>
                     <th class="">وضعیت</th>
-                    <th class="central">قیمت (تومان)                     
+                    <th class="central">قیمت (تومان)
                     </th>
                     <th class="status-desk">شرایط</th>
                     <th class="status-desk">
-                     
+
                     </th>
                 </tr>
 
 
-                <tr *ngFor="let item of posts">
+                <tr *ngFor="let item of posts" (click)="openDetail(item)">
                     <td style="direction: ltr;" class="text-bold">{{item.strMobileSchema}}
                         <!-- <small class="status-mobile">
                         <p *ngIf="item.tiStatus == 0"> صفر بی نام</p>    
@@ -226,7 +227,7 @@
                     <td>{{item.iPrice | number:'1.0-0'|faNum}}</td>
                     <td class="status-desk">
                         <p *ngIf="item.tiCondition == 0"> نقد </p>
-                        <p *ngIf="item.tiCondition == 1"> اقساط </p>
+                        <p *ngIf="item.tiCondition == 1"> نقد و اقساط </p>
                     </td>
                     <td class="central status-desk">
                         <button class="call-butt">
@@ -242,4 +243,106 @@
 
         </body>
     </div>
+</div>
+
+
+
+
+
+<div class="modal fade dir " id="openDetail" tabindex="4" role="dialog" aria-hidden="true">
+    <div style="width:90%;" class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-divar">
+
+            <div class="modal-body">
+                <button type="button" class="btn-close modal-close-btn" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                <div class="container">
+                    <div class="detail_box ">
+                        <div class="central justify-content-between w-100 ">
+                            <div class="central">
+                                <img *ngIf="detail?.tiOperator == 0" src="../../../assets/imgs/Hamrahe_Aval_logo.png">
+                                <img *ngIf="detail?.tiOperator == 1" src="../../../assets/imgs/irancell.png">
+                                <h3 class="mx-1">{{detail?.strMobileSchema }}</h3>
+                            </div>
+                            <div class="central">
+                                <mat-icon>attach_money</mat-icon>
+                                <h4>{{detail?.iPrice | number:'1.0-0'|faNum}}</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price_box">
+                        <ul>
+                            <li>
+                                <p>
+                                    شماره : {{detail?.strMobile}}
+                                </p>
+                            </li>
+                            <li>
+                                <p *ngIf="detail?.tiOperator == 0">
+                                    اپراتور : همراه اول
+                                </p>
+                                <p *ngIf="detail?.tiOperator == 1">
+                                    اپراتور : ایرانسل
+                                </p>
+                            </li>
+                            <li>
+                                <p *ngIf="detail?.tiStatus == 0">
+                                    وضعیت : صفر پک
+                                </p>
+                                <p *ngIf="detail?.tiStatus == 1">
+                                    وضعیت : صفر به نام
+                                </p>
+                                <p *ngIf="detail?.tiStatus == 2">
+                                    وضعیت : در حد صفر
+                                </p>
+                                <p *ngIf="detail?.tiStatus == 3">
+                                    وضعیت : کارکرده
+                                </p>
+                            </li>
+                            <li>
+
+                                <p *ngIf="detail?.tiType == 0">
+                                    نوع : دائمی
+                                </p>
+                                <p *ngIf="detail?.tiType == 1">
+                                    نوع : اعتباری
+                                </p>
+                            </li>
+                            <li>
+                                <p *ngIf="detail?.tiCondition == 0">
+                                    شرایط فروش : نقد
+                                </p>
+                                <p *ngIf="detail?.tiCondition == 1">
+                                    شرایط فروش : نقد و اقساط
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="detail_box call_box bg-secondary">
+                        <div class="central justify-content-between w-100 ">
+                            <div class="central">
+
+                                <h3 class="mx-1">
+                                    تماس با فروشنده
+                                </h3>
+                            </div>
+                            <div class="central">
+                                <button class="central">
+                                    <h4>{{detail?.strMobileSeller |faNum}}</h4>
+                                    <span>
+                                        <mat-icon>call</mat-icon>
+                                    </span>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
