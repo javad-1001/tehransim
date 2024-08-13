@@ -967,7 +967,10 @@ select:-moz-focusring {
   text-align: justify;
 }
 
-
+body > app-root > app-landing-page > main > app-search{
+  display: block;
+  min-height: 57vh;
+}
 
 @media screen and (max-width: 991px) {
   .header_image img{

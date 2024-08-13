@@ -107,7 +107,7 @@ export class NewsComponent implements OnInit {
 
   openDetail(item: any, index: number) {
 
-    window.open(`dyar/News/${item.iJournal}`, '_blank');
+    window.open(`qrond/News/${item.iJournal}`);
 
   }
 

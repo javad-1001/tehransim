@@ -26,8 +26,11 @@ export class GuidePagesComponent implements OnInit {
       if (router === 'about') {
         this.fetchHTMLFile(1);
       }
-      if (router === 'general') {
+      if (router === 'rules') {
         this.fetchHTMLFile(2);
+      }
+      if (router === 'contact') {
+        this.fetchHTMLFile(3);
       }
     });
   }
@@ -43,6 +46,15 @@ export class GuidePagesComponent implements OnInit {
     if (mode == 2) {
       this.http
         .get('../../../assets/basic/tehransim_GeneralConditions.html', {
+          responseType: 'text',
+        })
+        .subscribe((data) => {
+          this.htmlContent = data;
+        });
+    }
+    if (mode == 3) {
+      this.http
+        .get('../../../assets/basic/contact_us.html', {
           responseType: 'text',
         })
         .subscribe((data) => {

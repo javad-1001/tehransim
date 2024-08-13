@@ -95,6 +95,12 @@ main {
   border-radius: 8px;
   padding: 8px;
 }
+@media screen and (max-width: 780px) {
+  .status-desk {
+    display: none;
+  }
+
+}
 
 @media screen and (max-width: 488px) {
   .new-ads {
@@ -189,7 +195,7 @@ footer {
   margin: 0;
 }
 .social a img {
-  width: 30px;
+  width: 55px;
 }
 .social1 {
   text-align: center;
@@ -437,7 +443,7 @@ footer .row > div {
 }
 .adresses mat-icon{
   margin: 0 3px;
-  color: #FFB3B3;
+  color: #FFD064;
 }
 
 .enamd img{

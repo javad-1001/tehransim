@@ -160,16 +160,16 @@ export class LandingPageComponent implements OnInit {
   }
 
   stepBackToHome() {
-    this.router.navigate(['/dyar/home']);
+    this.router.navigate(['/qrond/home']);
   }
 
   changeRoute(path: string) {
 
-    if (!this.isLogin && path != 'home' && path != 'search') return this.login(path);
+    // if (!this.isLogin && path != 'home' && path != 'search') return this.login(path);
 
-    if (path == 'search') return this.router.navigate([`dyar/search/${this.accountService.tiType_Stored ? this.accountService.tiType_Stored : -1}`])
+    // if (path == 'search') return this.router.navigate([`dyar/search/${this.accountService.tiType_Stored ? this.accountService.tiType_Stored : -1}`])
 
-    this.router.navigate([`/dyar/${path}`]);
+    this.router.navigate([`/qrond/${path}`]);
 
   }
 
@@ -269,14 +269,14 @@ export class LandingPageComponent implements OnInit {
 
   openAdd() {
     window.open(
-      `dyar/general`,
+      `qrond/general`,
 
       '_blank'
     );
   }
   openAbout() {
     window.open(
-      `dyar/about`,
+      `qrond/about`,
 
       '_blank'
     );

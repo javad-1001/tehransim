@@ -23,9 +23,8 @@ th {
   background-color: #b4e4ff;
 }
 
-
 tr:nth-child(odd) {
-  background-color: #FFD064;
+  background-color: #ffd064;
 }
 tr {
   border-radius: 5px;
@@ -92,7 +91,7 @@ form {
   padding: 7px 26px;
   font-weight: bold;
 }
-table p{
+table p {
   margin: 0;
 }
 table {
@@ -104,18 +103,18 @@ table {
   right: 0;
 } */
 .async_price {
-  background-color: #FFD064 ;
+  background-color: #ffd064;
   color: #000;
-  margin:0 2px ;
+  margin: 0 2px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.async_price button p{
-  margin:0 2px  !important;
+.async_price button p {
+  margin: 0 2px !important;
 }
 .detail_box h3,
-.detail_box h4{
+.detail_box h4 {
   font-family: inherit;
   font-size: 24px;
   margin: 0;
@@ -133,58 +132,72 @@ table {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-.detail_box{
-  background-color: #FFD064 !important;
+.detail_box {
+  background-color: #ffd064 !important;
   padding: 5px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
-.price_box ul{
+.price_box ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.price_box ul li{
+.price_box ul li {
   padding: 10px;
   background-color: #fff;
   margin: 5px 0;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
 }
-.price_box ul li p{
-  margin:  0;
+.price_box ul li p {
+  margin: 0;
 }
 
-.detail_box img{
+.detail_box img {
   background-color: #fff;
   border-radius: 10px;
   width: 50px;
   height: 50px;
   padding: 5px;
 }
-.call_box{
+.call_box {
   background-color: var(--secondary) !important;
 }
-.call_box button{
+.call_box button {
   padding: 5px;
   margin: 5px;
   border: 0;
   border-radius: 10px;
   background-color: var(--divar);
   background-color: #fff;
-  
 }
-.call_box button span{
+.call_box button span {
   padding: 5px;
-  background-color: #FFD064 !important;
+  background-color: #ffd064 !important;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  margin-right:10px;
+  margin-right: 10px;
 }
-
+.selectt {
+  width: auto;
+}
+.form-search > form {
+  position: relative;
+}
+.close_butt {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  padding: 5px;
+}
+@media screen and (min-width: 992px) {
+  .close_butt{
+    display: none;
+  }
+}
 @media screen and (min-width: 780px) {
   .status-mobile {
     display: none;
@@ -194,9 +207,50 @@ table {
   .status-desk {
     display: none;
   }
-  .text-small p{
+  .text-small p {
     font-size: 13px;
     margin: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .main-num input {
+    width: 40px;
+    height: 40px;
+    padding: 14px;
+    margin: 2px;
+  }
+  .prenumber {
+    width: 150px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    padding-right: 10px !important;
+    margin: 0 2px !important;
+    border: 1px solid #979797;
+  }
+}
+@media screen and (max-width: 520px) {
+  .search-form {
+    flex-direction: column-reverse;
+  }
+  .detail_box > div{
+    flex-direction: column; 
+    align-items: flex-start;
+  }
+}
+@media screen and (max-width: 991px) {
+
+  .form-search {
+    position: absolute;
+    z-index: 10000000;
+    width: 100%;
+    padding: 0px 10px;
+    left: 0;
+    top: 50px;
+  }
+  .form-search > form {
+    box-shadow: 0 10px 20px hsl(0deg 0% 0% / 0.3),
+      0 15px 30px hsl(0deg 0% 0% / 0.2), 0 20px 40px hsl(0deg 0% 0% / 0.1),
+      0 25px 50px hsl(0deg 0% 0% / 0.1);
   }
 }
 

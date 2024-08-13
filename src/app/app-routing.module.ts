@@ -26,52 +26,54 @@ import { SearchComponent } from './components/search/search.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dyar/search', pathMatch: 'full' },
+  { path: '', redirectTo: 'qrond/search', pathMatch: 'full' },
 
-  { path: 'dyar', redirectTo: 'dyar/search', pathMatch: 'full' },
+  { path: 'qrond', redirectTo: 'qrond/search', pathMatch: 'full' },
 
   {
-    path: 'dyar',
+    path: 'qrond',
     component: LandingPageComponent,
     children: [
       // { path: 'search', component: BusinessMainComponent },
 
-      { path: 'search/:tiType', component: BusinessMainComponent },
+      // { path: 'search/:tiType', component: BusinessMainComponent },
 
-      { path: 'home', component: HomeComponent },
+      // { path: 'home', component: HomeComponent },
 
       { path: 'search', component: SearchComponent},
 
-      { path: 'bookmarks', component: BusinessMainComponent },
+      // { path: 'bookmarks', component: BusinessMainComponent },
 
-      { path: 'business-bookmarks', component: BusinessMainComponent },
+      // { path: 'business-bookmarks', component: BusinessMainComponent },
 
-      { path: 'recent-visits', component: BusinessMainComponent },
+      // { path: 'recent-visits', component: BusinessMainComponent },
 
-      { path: 'business-recent-visits', component: BusinessMainComponent },
+      // { path: 'business-recent-visits', component: BusinessMainComponent },
 
-      { path: 'chat', component: BusinessChatComponent },
+      // { path: 'chat', component: BusinessChatComponent },
 
-      {
-        path: 'ads/:iAdvertising/:id/:type',
-        component: BusinessDetailComponent,
-      },
+      // {
+      //   path: 'ads/:iAdvertising/:id/:type',
+      //   component: BusinessDetailComponent,
+      // },
 
-      // { path: 'adsDetail/:iAdvertising/:id/:type', component: MyadsDetailComponent },
+      // // { path: 'adsDetail/:iAdvertising/:id/:type', component: MyadsDetailComponent },
 
-      { path: 'login/:redirectTo', component: BusinessDetailComponent },
+      // { path: 'login/:redirectTo', component: BusinessDetailComponent },
 
-      { path: 'login/:redirectTo/:id', component: BusinessDetailComponent },
+      // { path: 'login/:redirectTo/:id', component: BusinessDetailComponent },
 
-      { path: 'BusinessDetail-myads', component: BusinessDetailComponent },
+      // { path: 'BusinessDetail-myads', component: BusinessDetailComponent },
 
-      { path: 'dyar', component: DiarMainComponent },
+      // { path: 'dyar', component: DiarMainComponent },
 
-      { path: 'support', component: SupportComponent },
+      // { path: 'support', component: SupportComponent },
 
       { path: 'about', component: GuidePagesComponent },
 
-      { path: 'general', component: GuidePagesComponent },
+      { path: 'rules', component: GuidePagesComponent },
+
+      { path: 'contact', component: GuidePagesComponent },
 
       { path: 'news', component: NewsComponent },
 

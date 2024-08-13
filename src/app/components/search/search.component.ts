@@ -47,8 +47,10 @@ export class SearchComponent implements OnInit {
   posts: any;
   allPosts: any;
   detail: any;
-  minPrice = 0
-  maxPrice = 0
+  screenWidth: any;
+  minPrice = 0;
+  maxPrice = 0;
+  filterShow: boolean = false;
 
   reqModel: FormGroup = this.formBuilder.group({
     fMaxPrice: new FormControl(''),
@@ -89,6 +91,12 @@ export class SearchComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+     this.screenWidth = screen.width;
+    if (this.screenWidth > 991) {
+      this.filterShow = true;
+    } else {
+      this.filterShow = false;
+    }
     this.getPosts();
   }
   onBudget(type) {
@@ -110,14 +118,20 @@ export class SearchComponent implements OnInit {
   search() {
     this.posts = this.allPosts;
 
-
-    this.otpForm.value.digit7 = this.otpForm.value.digit7 == "" ? "?" : this.otpForm.value.digit7;
-    this.otpForm.value.digit6 = this.otpForm.value.digit6 == "" ? "?" : this.otpForm.value.digit6;
-    this.otpForm.value.digit5 = this.otpForm.value.digit5 == "" ? "?" : this.otpForm.value.digit5;
-    this.otpForm.value.digit4 = this.otpForm.value.digit4 == "" ? "?" : this.otpForm.value.digit4;
-    this.otpForm.value.digit3 = this.otpForm.value.digit3 == "" ? "?" : this.otpForm.value.digit3;
-    this.otpForm.value.digit2 = this.otpForm.value.digit2 == "" ? "?" : this.otpForm.value.digit2;
-    this.otpForm.value.digit1 = this.otpForm.value.digit1 == "" ? "?" : this.otpForm.value.digit1;
+    this.otpForm.value.digit7 =
+      this.otpForm.value.digit7 == '' ? '?' : this.otpForm.value.digit7;
+    this.otpForm.value.digit6 =
+      this.otpForm.value.digit6 == '' ? '?' : this.otpForm.value.digit6;
+    this.otpForm.value.digit5 =
+      this.otpForm.value.digit5 == '' ? '?' : this.otpForm.value.digit5;
+    this.otpForm.value.digit4 =
+      this.otpForm.value.digit4 == '' ? '?' : this.otpForm.value.digit4;
+    this.otpForm.value.digit3 =
+      this.otpForm.value.digit3 == '' ? '?' : this.otpForm.value.digit3;
+    this.otpForm.value.digit2 =
+      this.otpForm.value.digit2 == '' ? '?' : this.otpForm.value.digit2;
+    this.otpForm.value.digit1 =
+      this.otpForm.value.digit1 == '' ? '?' : this.otpForm.value.digit1;
 
     const otp =
       this.otpForm.value.digit7 +
@@ -128,39 +142,37 @@ export class SearchComponent implements OnInit {
       this.otpForm.value.digit2 +
       this.otpForm.value.digit1;
 
-    let pre = this.reqModel.value.strPreNumber
+    let pre = this.reqModel.value.strPreNumber;
 
     if (pre == -1) {
-      pre 
-      = '????'
+      pre = '????';
     }
 
     // this.reqModel.value.strMobile = pre + otp
 
-
     const pattern = pre + otp;
 
-
     const regexPattern = pattern.replace(/\?/g, '.');
-    
+
     const regex = new RegExp(`^${regexPattern}$`);
-    
-    const filteredPosts1 = this.posts.filter(post => regex.test(post.strMobile));
-    
 
-    this.posts = filteredPosts1
+    const filteredPosts1 = this.posts.filter((post) =>
+      regex.test(post.strMobile)
+    );
 
-// filter by fileds
+    this.posts = filteredPosts1;
 
-let pMax = this.reqModel.value.fMaxPrice
-let pMin = this.reqModel.value.fMinPrice
+    // filter by fileds
+
+    let pMax = this.reqModel.value.fMaxPrice;
+    let pMin = this.reqModel.value.fMinPrice;
 
     const filters = this.reqModel.value;
 
     delete filters.fMaxPrice;
     delete filters.fMinPrice;
     delete filters.strMobile;
-    
+
     if (filters.tiOperator == '-1') {
       filters.tiOperator = -1;
     }
@@ -176,33 +188,36 @@ let pMin = this.reqModel.value.fMinPrice
 
     function filterPosts(posts, filters) {
       return posts.filter((post) => {
-
         return Object.keys(filters).every((field) => {
           const filterValue = filters[field];
 
           if (filterValue !== -1) {
             return post[field] === filterValue;
           }
-          return true; 
+          return true;
         });
       });
     }
 
     // filter by price
-    if (pMin == "" || pMin == undefined) {
-      pMin = this.minPrice
+    if (pMin == '' || pMin == undefined) {
+      pMin = this.minPrice;
     }
-    if (pMax == "" || pMax == undefined) {
-      pMax = this.maxPrice
+    if (pMax == '' || pMax == undefined) {
+      pMax = this.maxPrice;
     }
-    
-    this.posts = this.posts.filter(post => {
+
+    this.posts = this.posts.filter((post) => {
       return post.iPrice >= pMin && post.iPrice <= pMax;
     });
 
     // Usage
     const filteredPosts = filterPosts(this.posts, filters);
     this.posts = filteredPosts;
+
+    if (this.screenWidth < 991) {
+      this.changeFilter(0)
+    } 
   }
   getPosts() {
     this.http.get('assets/numbers.json').subscribe((data) => {
@@ -210,21 +225,28 @@ let pMin = this.reqModel.value.fMinPrice
       this.allPosts = data;
       for (let index = 0; index < this.allPosts?.length; index++) {
         const element = this.allPosts[index];
-        if (element.iPrice > this.maxPrice) this.maxPrice = element.iPrice 
-        if (element.iPrice < this.minPrice) this.minPrice = element.iPrice 
+        if (element.iPrice > this.maxPrice) this.maxPrice = element.iPrice;
+        if (element.iPrice < this.minPrice) this.minPrice = element.iPrice;
       }
     });
   }
 
+  changeFilter(mode) {
+    if (mode == 1) {
+      this.filterShow = true;
+    } else {
+      this.filterShow = false;
+    }
+  }
+
   openDetail(item) {
-    this.detail = item
-    
+    this.detail = item;
+
     var myModal = new bootstrap.Modal(
       document.getElementById('openDetail'),
       {}
     );
     myModal.show();
-    
   }
 
   sortColumn(input) {
@@ -234,16 +256,12 @@ let pMin = this.reqModel.value.fMinPrice
           var textA = x.iPrice.toUpperCase();
           var textB = y.iPrice.toUpperCase();
           break;
-       
       }
-      if (textA > textB)
-        return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
-      if (textA < textB)
-        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-      return
+      if (textA > textB) return textA < textB ? 1 : textA > textB ? -1 : 0;
+      if (textA < textB) return textA < textB ? -1 : textA > textB ? 1 : 0;
+      return;
     });
   }
-
 
   // This function is optional and can be used to automatically focus the next input field when the current one is filled
   onInputKeyUp(event: any, index: number) {

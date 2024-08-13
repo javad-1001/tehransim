@@ -3,12 +3,16 @@
 
         <body>
 
-            <div class="form-search">
-                <form class="modal-body">
+            <div *ngIf="filterShow" class="form-search">
+                <form class="modal-body ">
+
+                    <button class="central btn btn-danger close_butt" (click)="changeFilter(0)">
+                        <mat-icon class="">clear</mat-icon>
+                    </button>
 
                     <ng-container>
 
-                        <div class="central">
+                        <div class="central search-form">
                             <form style="direction: ltr;" style="direction: rtl;" [formGroup]="otpForm"
                                 class="main-num">
                                 <input type="text" formControlName="digit1" maxlength="1"
@@ -28,7 +32,7 @@
 
                             </form>
 
-                            <div [formGroup]="reqModel" class="form-group has-icon col-lg-2 col-md-3 col-6">
+                            <div [formGroup]="reqModel" class="form-group has-icon selectt col-lg-2 col-md-3 col-6">
 
                                 <!-- <span class="form-control-icon">
 
@@ -193,7 +197,17 @@
             </div>
 
 
+            <div *ngIf="!filterShow" class="central justify-content-between search-btn mt-2">
+                <button (click)="changeFilter(1)" class="central">
+                    <span class="mx-2">فیلتر</span>
+                    <mat-icon class="mx-2">filter_list</mat-icon>
 
+                </button>
+                <!-- <button class="central">
+                    <span class="mx-2">بیشترین قیمت</span>
+                    <mat-icon class="mx-2">sort</mat-icon>
+                </button> -->
+            </div>
             <table class="my-3">
 
 
@@ -208,18 +222,23 @@
                     </th>
                 </tr>
 
+                <tr *ngIf="posts?.length == 0">
+                    <h3 class="p-3 m-0">
+                        موردی یافت نشد !
+                    </h3>
+                </tr>
 
                 <tr *ngFor="let item of posts" (click)="openDetail(item)">
                     <td style="direction: ltr;" class="text-bold">{{item.strMobileSchema}}
                         <!-- <small class="status-mobile">
-                        <p *ngIf="item.tiStatus == 0"> صفر بی نام</p>    
+                        <p *ngIf="item.tiStatus == 0"> صفر پک</p>    
                         <p *ngIf="item.tiStatus == 1"> صفر به نام</p>    
                         <p *ngIf="item.tiStatus == 2">در حد صفر </p>    
                         <p *ngIf="item.tiStatus == 3"> کارکرده </p>  
                     </small> -->
                     </td>
                     <td class="text-small">
-                        <p *ngIf="item.tiStatus == 0"> صفر بی نام</p>
+                        <p *ngIf="item.tiStatus == 0"> صفر پک</p>
                         <p *ngIf="item.tiStatus == 1"> صفر به نام</p>
                         <p *ngIf="item.tiStatus == 2">در حد صفر </p>
                         <p *ngIf="item.tiStatus == 3"> کارکرده </p>
@@ -265,8 +284,8 @@
                                 <h3 class="mx-1">{{detail?.strMobileSchema }}</h3>
                             </div>
                             <div class="central">
-                                <mat-icon>attach_money</mat-icon>
-                                <h4>{{detail?.iPrice | number:'1.0-0'|faNum}}</h4>
+                                <!-- <mat-icon>attach_money</mat-icon> -->
+                                <h4 class="my-2">{{detail?.iPrice | number:'1.0-0'|faNum}}</h4>
 
                             </div>
                         </div>
@@ -329,7 +348,7 @@
                             </div>
                             <div class="central">
                                 <button class="central">
-                                    <h4>{{detail?.strMobileSeller |faNum}}</h4>
+                                    <h4 class="my-2">{{detail?.strMobileSeller |faNum}}</h4>
                                     <span>
                                         <mat-icon>call</mat-icon>
                                     </span>

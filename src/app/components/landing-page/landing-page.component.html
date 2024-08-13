@@ -6,16 +6,24 @@
 
         <div class="d-flex justify-content-start align-items-center flex-row-reverse col-11 col-md-5">
 
-            <div class="app-logo col-12 col-md-6 pointer" (click)="changeRoute('home')">
+            <div class="app-logo col-12 col-md-6 pointer" (click)="changeRoute('search')">
 
                 <img class="w-100 h-100" src="../../../assets/imgs/Shahrnik_Logo_Public_new.png" alt="">
 
             </div>
 
-            <div class="p-0">
+            <div class="p-0  ">
 
                 <div class=" h-100 central ">
-
+                    <div class="site-menu">
+                        <ul class="d-flex justify-content-center align-items-center m-0">
+                            <li class="status-desk" (click)="changeRoute('about')">درباره ما</li>
+                            <li class="status-desk" (click)="changeRoute('contact')">ارتباط با ما</li>
+                            <li (click)="changeRoute('news')">اخبار</li>
+                            <li (click)="changeRoute('search')">جستجو</li>
+                            <li (click)="changeRoute('search')">خانه</li>
+                        </ul>
+                    </div>
 
 
                 </div>
@@ -26,21 +34,13 @@
 
         <div class="app-header-buttons col-1 col-md-4 d-flex flex-row-reverse justify-content-end align-items-center">
 
-            <div class="site-menu">
-                <ul class="d-flex justify-content-center align-items-center m-0">
-                    <li>درباره ما</li>
-                    <li>ارتباط با ما</li>
-                    <li>اخبار</li>
-                    <li>جستجو</li>
-                    <li>خانه</li>
-                </ul>
-            </div>
+       
 
             <div class="my-diar p-1 rounded-md dropdown">
 
                 <!-- dropdown-toggle -->
 
-                <button class="d-flex align-items-center w-100 text-primary justify-content-between " type="button"
+                <button class="d-flex align-items-center w-100 justify-content-between " type="button"
                     id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 
                     <mat-icon>menu</mat-icon>
@@ -49,9 +49,10 @@
 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 
+                  
                     <li>
 
-                        <a (click)="openAbout()" class="dropdown-item"> درباره ما
+                        <a (click)="changeRoute('search')" class="dropdown-item"> صفحه اصلی 
 
                             <mat-icon class="text-muted"> info </mat-icon>
 
@@ -60,7 +61,77 @@
                     </li>
 
                     <li>
-                        <a (click)="openAdd()" class="dropdown-item">
+
+                        <a (click)="changeRoute('search')" class="dropdown-item"> جستجو 
+
+                            <mat-icon class="text-muted"> info </mat-icon>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a (click)="changeRoute('search')" class="dropdown-item"> صفحه خرید   
+
+                            <mat-icon class="text-muted"> info </mat-icon>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a (click)="changeRoute('rules')" class="dropdown-item"> همکاری 
+
+                            <mat-icon class="text-muted"> info </mat-icon>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a (click)="changeRoute('rules')" class="dropdown-item"> ثبت آگهی
+
+                            <mat-icon class="text-muted"> info </mat-icon>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a (click)="changeRoute('news')" class="dropdown-item"> اخبار 
+
+                            <mat-icon class="text-muted"> info </mat-icon>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a (click)="changeRoute('about')" class="dropdown-item"> درباره ما
+
+                            <mat-icon class="text-muted"> info </mat-icon>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a (click)="changeRoute('contact')" class="dropdown-item">  ارتباط با ما
+
+                            <mat-icon class="text-muted"> info </mat-icon>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+                        <a (click)="changeRoute('rules')" class="dropdown-item">
 
                             قوانین و مقررات
 
@@ -102,54 +173,49 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="links">
-                        <h3><img src="../../../assets/imgs/Shahrnik_Logo_Public_new.png" alt=""> کیو رند</h3>
-                        <p class=" py-1">« کیو رند » یک پلتفرم چند رسانه ای برای تمامی ایرانیان و پارسی
-                            زبانان خارج
-                            از ایران است. این پلتفرم برای دسترسی به اطلاعات ضروری و مفید در هر یک از شهرهای مهاجر پذیر و
-                            همچنین توسعه روابط اجتماعی و اقتصادی مابین ایرانیان و پارسی زبانان طراحی و پیاده سازی شده
-                            است.
+                        <h3><img src="../../../assets/imgs/Shahrnik_Logo_Public_new.png" alt="">
+                            کیو رند</h3>
+                        <p class=" py-1">
+                            سایت کیو رند اصلاحاً یک Market Place است و فروشندگان سیم‌کارت ، تلفن ثابت و دامنه می‌توانند
+                            محصولات خود را در این بازار برای ارایه به سایرین، آگهی کرده و به فروش برسانند. در این میان
+                            وب‌سایت Qrond.ir هیچ دخالتی در خرید و فروش نداشته و از محل خرید یا فروش نیز مبلغی دریافت
+                            نمی‌نماید و خریدار و فروشنده مستیماً با یکدیگر در تعامل وارتباط خواهند بود.
                         </p>
                     </div>
                 </div>
 
                 <div class="col-md-4 adresses central justify-content-start">
-                 <div>
                     <div>
-                        <button>
-                            <mat-icon>location_on</mat-icon>
-                            <span>تهران، بلوار کوهک، مجتمع طوبی 2 ، طبقه چهارم </span>
-                        </button>
+                        <div>
+                            <button>
+                                <mat-icon>location_on</mat-icon>
+                                <span>ایران ، تهران</span>
+                            </button>
+                        </div>
+                        <div>
+                            <button>
+                                <mat-icon>call</mat-icon>
+                                <span> 09392584967</span>
+                            </button>
+                        </div>
+                        <div>
+                            <button>
+                                <mat-icon>call</mat-icon>
+                                <span> 09991790969</span>
+                            </button>
+                        </div>
+                        <div>
+                            <button>
+                                <mat-icon>email</mat-icon>
+                                <span> javadbabaei1001@gmail.com</span>
+                            </button>
+                        </div>
+
                     </div>
-                    <div>
-                        <button>
-                            <mat-icon>call</mat-icon>
-                            <span> 09121818959</span>
-                        </button>
-                    </div>
-                    <div>
-                        <button>
-                            <mat-icon>call</mat-icon>
-                            <span> 09392584967</span>
-                        </button>
-                    </div>
-                    <div>
-                        <button>
-                            <mat-icon>call</mat-icon>
-                            <span> 02188556699</span>
-                        </button>
-                    </div>
-                    <div>
-                        <button>
-                            <mat-icon>email</mat-icon>
-                            <span> javadbabaei1001@gmail.com</span>
-                        </button>
-                    </div>
-                 
-                 </div>
                 </div>
 
                 <div class="col-md-4 social">
-                    <div class="central ">
+                    <div class="central flex-column">
                         <div>
                             <h3>ما را در شبکه‌های اجتماعی دنبال کنید :</h3>
                         </div>
@@ -166,8 +232,9 @@
                     </div>
 
                     <div class="w-100 central">
-                        <span >
-                            کلیه حقوق مادی و معنوی این وبسایت متعلق به مجموعه کیو رند میباشد و هرگونه کپی برداری موجب پیگرد قانونی می گردد.
+                        <span>
+                            کلیه حقوق مادی و معنوی این وبسایت متعلق به مجموعه کیو رند میباشد و هرگونه کپی برداری موجب
+                            پیگرد قانونی می گردد.
                         </span>
                     </div>
 
