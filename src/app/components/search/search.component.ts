@@ -52,6 +52,14 @@ export class SearchComponent implements OnInit {
   maxPrice = 0;
   filterShow: boolean = false;
 
+  page: number = 1;
+
+  count: number = 0;
+
+  tableSize: number = 20;
+
+  tableSizes: any = [3, 6, 9, 12];
+
   reqModel: FormGroup = this.formBuilder.group({
     fMaxPrice: new FormControl(''),
     fMinPrice: new FormControl(''),
@@ -231,6 +239,8 @@ export class SearchComponent implements OnInit {
     });
   }
 
+
+
   changeFilter(mode) {
     if (mode == 1) {
       this.filterShow = true;
@@ -273,5 +283,16 @@ export class SearchComponent implements OnInit {
         }
       }
     }
+  }
+
+
+  onTableDataChanges(event: any) {
+    this.page = event;
+  }
+
+  onTableSizeCahnge(event: any): void {
+    this.tableSize = event.target.value;
+
+    this.page = 1;
   }
 }

@@ -62,6 +62,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { GuidePagesComponent } from './components/guide-pages/guide-pages.component';
 import { NewsComponent } from './components/news/news.component';
 import { SearchComponent } from './components/search/search.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -92,6 +93,7 @@ import { SearchComponent } from './components/search/search.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    NgxPaginationModule,
     CarouselModule,
     HttpClientModule,
     MatDatepickerModule,

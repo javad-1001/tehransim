@@ -228,7 +228,8 @@
                     </h3>
                 </tr>
 
-                <tr *ngFor="let item of posts" (click)="openDetail(item)">
+                <tr *ngFor="let item of posts | paginate:{itemsPerPage:tableSize,currentPage:page,totalItems:count};"
+                    (click)="openDetail(item)">
                     <td style="direction: ltr;" class="text-bold">{{item.strMobileSchema}}
                         <!-- <small class="status-mobile">
                         <p *ngIf="item.tiStatus == 0"> صفر پک</p>    
@@ -259,6 +260,16 @@
 
 
             </table>
+
+            <div class="container central">
+                <div class="paginationContainer ">
+
+                    <pagination-controls previousLabel="قبلی" nextLabel="بعدی"
+                        (pageChange)="onTableDataChanges($event)">
+                    </pagination-controls>
+
+                </div>
+            </div>
 
         </body>
     </div>
