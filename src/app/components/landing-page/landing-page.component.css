@@ -33,8 +33,8 @@
 
 main {
   /* header : 77px :  4.813rem */
-  height: calc(100vh - 4.813rem);
-  overflow: auto;
+  /* height: calc(100vh - 4.813rem); */
+  /* overflow: auto; */
 }
 
 .dropdown-menu {

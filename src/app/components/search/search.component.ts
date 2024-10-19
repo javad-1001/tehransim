@@ -36,6 +36,7 @@ import { ajax } from 'rxjs/ajax';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
+
 declare var bootstrap: any;
 
 @Component({

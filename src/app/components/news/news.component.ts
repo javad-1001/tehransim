@@ -22,6 +22,7 @@ import { DatePipe } from '@angular/common';
 
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 
+
 declare var bootstrap: any;
 @Component({
 
@@ -104,6 +105,7 @@ export class NewsComponent implements OnInit {
     });
 
   }
+
 
   openDetail(item: any, index: number) {
 
