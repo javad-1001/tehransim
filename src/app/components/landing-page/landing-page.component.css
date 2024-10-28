@@ -4,10 +4,13 @@
   justify-content: center;
 
   align-items: center;
+  max-width: 120px;
 
-  max-width: 58px;
+}
+.app-logo img{
+width: 120px !important;
+border-radius: 10px;
 
-  max-height: 53px;
 }
 
 .app-header-buttons button {
@@ -165,9 +168,9 @@ footer {
   color: #6e6e6e;
 }
 .links h3 img {
-  width: 57px;
-  height: 57px;
-  border-radius: 15px;
+  width: 160px;
+  /* height: 57px; */
+  border-radius: 10px;
   flex-shrink: 0;
 }
 .links h3 {
